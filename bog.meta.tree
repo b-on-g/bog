@@ -2,3 +2,4 @@ pack horrorgamelanding git \https://github.com/best-online-games/horrorgamelandi
 pack theme git \https://github.com/best-online-games/theme.git
 pack game git \https://github.com/best-online-games/game.git
 pack pay git \https://github.com/best-online-games/pay.git
+pack prof git \https://github.com/best-online-games/prof.git
