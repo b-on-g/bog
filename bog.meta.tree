@@ -5,3 +5,5 @@ pack pay git \https://github.com/best-online-games/pay.git
 pack prof git \https://github.com/best-online-games/prof.git
 pack ainews git \https://github.com/best-online-games/ainews.git
 pack favicon git \https://github.com/best-online-games/favicon.git
+pack bhelper git\https://github.com/best-online-games/bhelper
+pack dobro git\https://github.com/best-online-games/bhelper
