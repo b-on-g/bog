@@ -8,3 +8,5 @@ pack favicon git \https://github.com/best-online-games/favicon.git
 pack bhelper git\https://github.com/best-online-games/bhelper
 pack dobro git\https://github.com/best-online-games/bhelper
 pack lk git\https://github.com/best-online-games/lk.git
+pack pazzle git\https://github.com/best-online-games/pazzle.git
+pack pay_server git\https://github.com/best-online-games/pay_server.git
