@@ -12,3 +12,4 @@ pack pazzle git\https://github.com/best-online-games/pazzle.git
 pack pay_server git\https://github.com/best-online-games/pay_server.git
 pack card git\https://github.com/best-online-games/card.git
 pack calculator git\https://github.com/b-on-g/calculator.git
+pack bzrl git\https://github.com/b-on-g/bzrl.git
