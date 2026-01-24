@@ -5,10 +5,11 @@ pack pay git \https://github.com/best-online-games/pay.git
 pack prof git \https://github.com/best-online-games/prof.git
 pack ainews git \https://github.com/best-online-games/ainews.git
 pack favicon git \https://github.com/best-online-games/favicon.git
-pack bhelper git\https://github.com/best-online-games/bhelper
-pack dobro git\https://github.com/best-online-games/bhelper
-pack lk git\https://github.com/best-online-games/lk.git
-pack pazzle git\https://github.com/best-online-games/pazzle.git
-pack pay_server git\https://github.com/best-online-games/pay_server.git
-pack card git\https://github.com/best-online-games/card.git
-pack calculator git\https://github.com/b-on-g/calculator.git
+pack bhelper git \https://github.com/best-online-games/bhelper
+pack dobro git \https://github.com/best-online-games/bhelper
+pack lk git \https://github.com/best-online-games/lk.git
+pack pazzle git \https://github.com/best-online-games/pazzle.git
+pack pay_server git \https://github.com/best-online-games/pay_server.git
+pack card git \https://github.com/best-online-games/card.git
+pack calculator git \https://github.com/b-on-g/calculator.git
+pack bzrl git \https://github.com/BezRieltora/bzrl.git
