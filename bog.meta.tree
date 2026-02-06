@@ -15,3 +15,4 @@ pack calculator git \https://github.com/b-on-g/calculator.git
 pack bzrl git \https://github.com/BezRieltora/bzrl.git
 pack slider git \https://github.com/b-on-g/slider.git
 pack snow git \https://github.com/b-on-g/snow.git
+pack mol_skill git \https://github.com/b-on-g/mol_skill.git
