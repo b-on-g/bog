@@ -16,3 +16,4 @@ pack bzrl git \https://github.com/BezRieltora/bzrl.git
 pack slider git \https://github.com/b-on-g/slider.git
 pack snow git \https://github.com/b-on-g/snow.git
 pack mol_skill git \https://github.com/b-on-g/mol_skill.git
+pack tauri_mol_workflow_template git \https://github.com/b-on-g/tauri-mol-workflow-template.git
