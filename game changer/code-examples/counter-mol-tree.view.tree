@@ -1,0 +1,8 @@
+$my_counter $mol_page
+    title <= count_title \Count: 0
+    body /
+        <= Count $mol_view
+            sub / <= count_text \0
+        <= Increment $mol_button_major
+            click? <=> increment? null
+            sub / \+

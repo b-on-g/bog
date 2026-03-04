@@ -1,0 +1,10 @@
+{
+	"$bog_notebookllm_app_Notebook_add_hint": "New notebook",
+	"$bog_notebookllm_app_Notebooks_page_title": "Notebooks",
+	"$bog_notebookllm_app_dialog_title": "NotebookLLM",
+	"$bog_notebookllm_app_Doc_upload_hint": "Upload document",
+	"$bog_notebookllm_app_Prompt_text_hint": "Ask about your documents...",
+	"$bog_notebookllm_app_Prompt_submit_hint": "Send",
+	"$bog_notebookllm_app_Reset_hint": "Reset chat",
+	"$bog_notebookllm_app_Sources_page_title": "Sources"
+}
