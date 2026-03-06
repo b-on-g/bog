@@ -62,9 +62,13 @@ rm -rf /Users/cmyser/code/mam/bog/docs/{mol,node,bog,.git,.editorconfig,.gitattr
 
 5. **КОММИТ** — ТОЛЬКО ПОСЛЕ Audit passed:
 
+    ВАЖНО: `bog/` — это ОТДЕЛЬНЫЙ git-репозиторий! Коммиты делай ИЗ bog/:
+
     ```
-    cd /Users/cmyser/code/mam && git add bog/docs/ && git commit -m "..."
+    cd /Users/cmyser/code/mam/bog && git add docs/ && git commit -m "..."
     ```
+
+    НЕ из `/Users/cmyser/code/mam` — оттуда `git add bog/docs/` не работает!
 
     Push БЕЗ Audit passed = КРИТИЧЕСКАЯ ОШИБКА.
 
