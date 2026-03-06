@@ -104,7 +104,8 @@
 			"dependencies": [
 				"TASK-002"
 			],
-			"status": "pending"
+			"status": "done",
+			"attempts": 2
 		},
 		{
 			"id": "TASK-004",

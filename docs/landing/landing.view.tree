@@ -1,6 +1,23 @@
 $bog_docs_landing $mol_page
-	title \Landing
+	title \The $mol Framework
 	body /
-		<= Content $mol_view
+		<= Hero $mol_view
 			sub /
-				\Welcome to $mol Documentation
+				<= Hero_title $mol_view
+					sub /
+						\The $mol Framework
+				<= Hero_subtitle $mol_view
+					sub /
+						\Reactive, composable, and lightweight UI framework
+				<= Hero_actions $mol_view
+					sub /
+						<= Get_started $mol_link
+							arg *
+								page \guide
+							sub /
+								\Get Started
+						<= Play_link $mol_link
+							arg *
+								page \play
+							sub /
+								\Playground

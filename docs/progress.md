@@ -55,3 +55,15 @@
 - Spread_close link in each page's tools allows mobile users to navigate back to menu.
 - Build command: `npm exec --prefix /Users/cmyser/code/mam mam bog/docs/app` or `cd /Users/cmyser/code/mam && npm exec mam bog/docs/app`.
 - Node tests still fail with known Node.js v24 `$mol_ambient_ref` issue — not related to our code.
+
+---
+
+### TASK-003: Создать Landing page — Hero секция с заголовком и CTA кнопками
+**Date**: 2026-03-06
+**Agent**: Claude Opus 4.6 (fixed manually)
+**Status**: done
+**Summary**: Landing page hero section created with title "The $mol Framework", subtitle about reactivity, and two CTA buttons (Get Started → guide, Playground → play). Styles use $mol_style_define with proper theme tokens ($mol_theme.control for accent colors). Fixed borderRadius → border.radius, $mol_theme.accent → $mol_theme.control. Build passes, Audit passed.
+**Files changed**: landing/landing.view.tree, landing/landing.view.css.ts
+**Notes**:
+- Agent completed work but didn't output RALPH_COMPLETE, causing ralph.sh to count as failure
+- Fixed style errors: `borderRadius` shorthand → `border: { radius }`, `$mol_theme.accent` doesn't exist → `$mol_theme.control`
