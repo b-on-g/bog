@@ -1,0 +1,6 @@
+$bog_docs_play $mol_page
+	title \Playground
+	body /
+		<= Content $mol_view
+			sub /
+				\Playground

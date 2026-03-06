@@ -1,0 +1,6 @@
+$bog_docs_landing $mol_page
+	title \Landing
+	body /
+		<= Content $mol_view
+			sub /
+				\Welcome to $mol Documentation

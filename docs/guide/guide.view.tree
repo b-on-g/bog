@@ -1,0 +1,6 @@
+$bog_docs_guide $mol_page
+	title \Guide
+	body /
+		<= Content $mol_view
+			sub /
+				\Interactive Guide

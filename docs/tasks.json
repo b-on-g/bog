@@ -1,0 +1,778 @@
+{
+	"project": "$mol Documentation Website",
+	"prd": "PRD-mol-docs-2026-03-06.md",
+	"agent_instructions": {
+		"before_start": [
+			"Прочитай этот файл и git log --oneline -20",
+			"Выбери ОДНУ задачу со статусом pending и наивысшим приоритетом",
+			"Проверь, что все dependencies этой задачи имеют статус done"
+		],
+		"during_work": [
+			"Работай только над выбранной задачей",
+			"Делай коммиты после каждого логического изменения",
+			"Не трогай код, не связанный с текущей задачей"
+		],
+		"before_finish": [
+			"Выполни ВСЕ test_steps из задачи",
+			"Меняй status на done ТОЛЬКО после успешного прохождения всех тестов",
+			"Напиши summary в progress.md",
+			"ЗАПРЕЩЕНО удалять или редактировать задачи — только менять status"
+		]
+	},
+	"tasks": [
+		{
+			"id": "TASK-001",
+			"category": "infrastructure",
+			"priority": "critical",
+			"description": "Создать meta.tree и базовую структуру модулей bog/docs",
+			"acceptance_criteria": [
+				"Файл bog/docs/docs.meta.tree создан с зависимостями: $mol_book2, $mol_page, $mol_text, $mol_locale, $mol_link",
+				"Директории app/, landing/, guide/, play/ созданы",
+				"Файл bog/docs/app/index.html создан с корректным подключением"
+			],
+			"test_steps": [
+				"Шаг 1: Проверить что все файлы существуют (ls -R bog/docs/)",
+				"Шаг 2: Запустить npx mam bog/docs — билд проходит без ошибок",
+				"Шаг 3: Открыть http://localhost:9080/bog/docs/app/ — страница загружается"
+			],
+			"dependencies": [],
+			"status": "done"
+		},
+		{
+			"id": "TASK-001a",
+			"category": "infrastructure",
+			"priority": "critical",
+			"description": "Перейти с $mol_book2 на $mol_book2_catalog в app shell",
+			"acceptance_criteria": [
+				"app.view.tree использует $mol_book2_catalog вместо $mol_book2",
+				"Каталог страниц (menu) с пунктами: Landing, Guide, Playground",
+				"Выбор пункта меню открывает соответствующую страницу в content-панели",
+				"$mol_book2_catalog корректно работает: menu слева, content справа (или overlay на мобильных)",
+				"docs.meta.tree обновлён — включает зависимость $mol_book2_catalog"
+			],
+			"test_steps": [
+				"Шаг 1: Запустить билд (npx mam bog/docs/app) — без ошибок",
+				"Шаг 2: Открыть /bog/docs/app/ — виден каталог с пунктами меню",
+				"Шаг 3: Клик на пункт меню — открывается содержимое страницы",
+				"Шаг 4: На мобильном — меню отображается как overlay, контент на полный экран",
+				"Шаг 5: web.audit.js содержит Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-002",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Создать App shell с $mol_book2_catalog навигацией между страницами",
+			"acceptance_criteria": [
+				"bog/docs/app/app.view.tree — корневой компонент на $mol_book2_catalog",
+				"bog/docs/app/app.view.ts — логика роутинга через $mol_state_arg",
+				"bog/docs/app/app.view.css.ts — базовые стили app shell",
+				"Роутинг: arg page=landing|guide|play переключает страницы",
+				"По умолчанию (без arg) показывается Landing"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть /bog/docs/app/ — видна пустая страница без ошибок в консоли",
+				"Шаг 2: Добавить ?page=guide в URL — содержимое переключается",
+				"Шаг 3: Добавить ?page=play — содержимое переключается",
+				"Шаг 4: Проверить что навигация назад/вперед в браузере работает"
+			],
+			"dependencies": [
+				"TASK-001a"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-003",
+			"category": "ui",
+			"priority": "critical",
+			"description": "Создать Landing page — Hero секция с заголовком и CTA кнопками",
+			"acceptance_criteria": [
+				"bog/docs/landing/landing.view.tree создан",
+				"Заголовок 'The $mol Framework' и подзаголовок о реактивности",
+				"Две CTA кнопки: 'Get Started' (→ guide) и 'Playground' (→ play)",
+				"CTA кнопки переключают arg page и открывают соответствующую страницу"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть Landing — виден заголовок и 2 кнопки",
+				"Шаг 2: Клик 'Get Started' — переход на Guide страницу",
+				"Шаг 3: Клик 'Playground' — переход на Play страницу"
+			],
+			"dependencies": [
+				"TASK-002"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-004",
+			"category": "ui",
+			"priority": "high",
+			"description": "Создать Landing page — Value Propositions секция (3 карточки)",
+			"acceptance_criteria": [
+				"3 карточки с иконками/заголовками: Reactive, Composable, Lightweight",
+				"Каждая карточка содержит краткое описание преимущества",
+				"Карточки расположены в ряд (горизонтально на десктопе)"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть Landing — видны 3 карточки ниже Hero",
+				"Шаг 2: Проверить текст в каждой карточке — соответствует PRD",
+				"Шаг 3: Уменьшить ширину окна — карточки переносятся (responsive)"
+			],
+			"dependencies": [
+				"TASK-003"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-005",
+			"category": "ui",
+			"priority": "high",
+			"description": "Создать Landing page — Ecosystem секция и Footer",
+			"acceptance_criteria": [
+				"Ecosystem секция с ссылками: MAM, Giper Baza, Components, Tauri",
+				"Footer с ссылками: GitHub repo, Docs, Community",
+				"Ссылки ведут на корректные URL (внешние — target=_blank)"
+			],
+			"test_steps": [
+				"Шаг 1: Прокрутить Landing вниз — видны Ecosystem и Footer",
+				"Шаг 2: Кликнуть по ссылке GitHub — открывается репозиторий",
+				"Шаг 3: Кликнуть Docs — переход на Guide"
+			],
+			"dependencies": [
+				"TASK-004"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-006",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Стилизация Landing page — приятный внешний вид на дефолтных $mol компонентах",
+			"acceptance_criteria": [
+				"Hero секция с достаточными отступами и центрированием",
+				"Карточки Value Props с рамками/фоном, визуально отделены",
+				"Цветовые акценты для CTA кнопок",
+				"Адаптивность: корректно выглядит на 320px-1920px"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть Landing на десктопе (1280px) — визуально приятно",
+				"Шаг 2: Открыть на мобильном (375px) — всё читаемо, нет горизонтального скролла",
+				"Шаг 3: Проверить в тёмной теме $mol — не ломается"
+			],
+			"dependencies": [
+				"TASK-005"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-007",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Создать базовый Playground — textarea редактор view.tree кода",
+			"acceptance_criteria": [
+				"bog/docs/play/play.view.tree — страница Playground",
+				"Textarea (или $mol_textarea) для ввода view.tree кода",
+				"Начальный код — простой Hello World пример",
+				"Код сохраняется реактивно при вводе"
+			],
+			"test_steps": [
+				"Шаг 1: Перейти на ?page=play — видна textarea с кодом",
+				"Шаг 2: Изменить текст в textarea — изменения сохраняются (не теряются при переключении страниц)"
+			],
+			"dependencies": [
+				"TASK-002"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-008",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Playground — транспиляция view.tree → JS через $mol_view_tree2_to_js",
+			"acceptance_criteria": [
+				"При изменении view.tree кода — вызывается транспилятор",
+				"Результат JS кода отображается (или передаётся в preview)",
+				"Ошибки парсинга отображаются пользователю (не крашат страницу)"
+			],
+			"test_steps": [
+				"Шаг 1: Ввести корректный view.tree — видна транспиляция без ошибок",
+				"Шаг 2: Ввести некорректный view.tree — видно сообщение об ошибке",
+				"Шаг 3: Исправить ошибку — транспиляция снова работает"
+			],
+			"dependencies": [
+				"TASK-007"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-009",
+			"category": "functional",
+			"priority": "high",
+			"description": "Playground — панель preview с рендерингом результата",
+			"acceptance_criteria": [
+				"Рядом с редактором — панель preview (split view)",
+				"После транспиляции JS → компонент рендерится в preview",
+				"Preview обновляется реактивно при изменении кода",
+				"Ошибки рендера не крашат основное приложение (изоляция)"
+			],
+			"test_steps": [
+				"Шаг 1: Ввести Hello World view.tree — в preview видна отрисовка",
+				"Шаг 2: Изменить текст — preview обновляется",
+				"Шаг 3: Ввести ошибочный код — preview показывает ошибку, не крашит страницу"
+			],
+			"dependencies": [
+				"TASK-008"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-010",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Playground — стилизация split-view (editor | preview)",
+			"acceptance_criteria": [
+				"Editor и Preview расположены бок о бок (50/50)",
+				"Визуальный разделитель между панелями",
+				"На мобильных — панели стакаются вертикально",
+				"Заголовки панелей: 'Editor' и 'Preview'"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть Playground на десктопе — две панели бок о бок",
+				"Шаг 2: Открыть на мобильном — панели вертикально",
+				"Шаг 3: Проверить что обе панели прокручиваются независимо"
+			],
+			"dependencies": [
+				"TASK-009"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-011",
+			"category": "functional",
+			"priority": "medium",
+			"description": "Playground — preset-примеры (Hello World, Counter, Todo List)",
+			"acceptance_criteria": [
+				"Выпадающий список / кнопки с preset-примерами",
+				"Минимум 3 пресета: Hello World, Counter, Todo List",
+				"Выбор пресета загружает соответствующий view.tree код в editor",
+				"Текущий пользовательский код заменяется (с подтверждением, если изменён)"
+			],
+			"test_steps": [
+				"Шаг 1: Кликнуть пресет 'Counter' — код загрузился в editor",
+				"Шаг 2: Preview показывает рабочий счётчик",
+				"Шаг 3: Кликнуть другой пресет — код заменился"
+			],
+			"dependencies": [
+				"TASK-009"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-012",
+			"category": "functional",
+			"priority": "low",
+			"description": "Playground — sharing кода через URL query params",
+			"acceptance_criteria": [
+				"Кнопка 'Share' — копирует URL с закодированным кодом в буфер",
+				"Открытие URL с ?code=... — загружает код в editor",
+				"Код кодируется через base64 или LZ-string для компактности"
+			],
+			"test_steps": [
+				"Шаг 1: Написать код → нажать Share → URL скопирован",
+				"Шаг 2: Открыть скопированный URL в новом окне — тот же код в editor",
+				"Шаг 3: Проверить что длинный код не ломает URL"
+			],
+			"dependencies": [
+				"TASK-009"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-013",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Создать компонент Lesson — layout с explanation, editor, preview, task",
+			"acceptance_criteria": [
+				"bog/docs/guide/lesson/ — компонент урока",
+				"Верхняя часть: текст объяснения (markdown через $mol_text)",
+				"Средняя часть: editor (textarea) + preview (split view)",
+				"Нижняя часть: текст задания + кнопки Check/Hint/Solution/Next",
+				"Свойства: lesson data object (title, explanation, task, initial_code, etc.)"
+			],
+			"test_steps": [
+				"Шаг 1: Отрисовать Lesson с тестовыми данными — все секции видны",
+				"Шаг 2: Editor содержит initial_code из данных урока",
+				"Шаг 3: Explanation рендерится как markdown"
+			],
+			"dependencies": [
+				"TASK-002"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-014",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Lesson — кнопка Check с валидацией ответа через tree-парсинг",
+			"acceptance_criteria": [
+				"Кнопка 'Check' сравнивает текущий код с ожидаемым через парсинг tree",
+				"При правильном ответе — визуальная индикация успеха (зелёный)",
+				"При неправильном — сообщение 'Try again' без показа правильного ответа",
+				"Проверка структурная (не строковое сравнение) — пробелы/порядок не критичны"
+			],
+			"test_steps": [
+				"Шаг 1: Ввести правильный ответ → Check → зелёная индикация",
+				"Шаг 2: Ввести неправильный ответ → Check → 'Try again'",
+				"Шаг 3: Ввести правильный ответ с другими пробелами → Check → принимает"
+			],
+			"dependencies": [
+				"TASK-013"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-015",
+			"category": "functional",
+			"priority": "high",
+			"description": "Lesson — кнопки Hint и Solution",
+			"acceptance_criteria": [
+				"Кнопка 'Hint' показывает подсказки по одной (первую, потом вторую, etc.)",
+				"Кнопка 'Solution' показывает правильный ответ в editor",
+				"После показа Solution — кнопка Check автоматически отмечает урок пройденным"
+			],
+			"test_steps": [
+				"Шаг 1: Нажать Hint — видна первая подсказка",
+				"Шаг 2: Нажать Hint снова — видна вторая подсказка",
+				"Шаг 3: Нажать Solution — код заменился на правильный ответ"
+			],
+			"dependencies": [
+				"TASK-014"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-016",
+			"category": "functional",
+			"priority": "high",
+			"description": "Guide — навигация между уроками и progress tracking",
+			"acceptance_criteria": [
+				"bog/docs/guide/guide.view.tree — оболочка Guide со списком уроков",
+				"Навигация: arg lesson=1..11 переключает уроки",
+				"Кнопки 'Prev' / 'Next' для перехода между уроками",
+				"Индикатор прогресса: 'Lesson 3/11' в header",
+				"Список уроков в sidebar с отметками пройденных"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть Guide — виден список уроков",
+				"Шаг 2: Кликнуть урок 1 — открывается содержимое урока",
+				"Шаг 3: Нажать Next — переход к уроку 2",
+				"Шаг 4: Пройти урок (Check) → в sidebar отметка пройденного"
+			],
+			"dependencies": [
+				"TASK-013"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-017",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Контент урока 1: Setup & First App",
+			"acceptance_criteria": [
+				"Текст объяснения: установка mam, npm start, структура модуля",
+				"Начальный код: пустой шаблон $mol_view",
+				"Задание: создать простейший компонент с заголовком",
+				"Решение: рабочий view.tree с $mol_view и title",
+				"2-3 подсказки на случай затруднений"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть урок 1 — текст объяснения про setup понятен",
+				"Шаг 2: В editor виден начальный код",
+				"Шаг 3: Выполнить задание → Check → проходит"
+			],
+			"dependencies": [
+				"TASK-014",
+				"TASK-016"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-018",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Контент урока 2: view.tree Syntax",
+			"acceptance_criteria": [
+				"Объяснение: компоненты, вложенность, свойства в view.tree",
+				"Начальный код: простой компонент без вложенности",
+				"Задание: добавить вложенный компонент ($mol_button_minor внутри $mol_view)",
+				"Решение: корректный view.tree с вложенностью",
+				"2-3 подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Прочитать объяснение — синтаксис view.tree понятен",
+				"Шаг 2: Выполнить задание → Check → проходит",
+				"Шаг 3: Preview показывает вложенный компонент"
+			],
+			"dependencies": [
+				"TASK-017"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-019",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Контент урока 3: Bindings (<=, <=>, =>)",
+			"acceptance_criteria": [
+				"Объяснение: one-way, two-way, output bindings с примерами",
+				"Начальный код: компонент без привязок",
+				"Задание: связать input с output через two-way binding",
+				"Решение: view.tree с <=> привязкой",
+				"2-3 подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Прочитать объяснение — разница между <=, <=>, => понятна",
+				"Шаг 2: Выполнить задание → Check → проходит"
+			],
+			"dependencies": [
+				"TASK-018"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-020",
+			"category": "functional",
+			"priority": "critical",
+			"description": "Контент урока 4: Reactivity (@$mol_mem)",
+			"acceptance_criteria": [
+				"Объяснение: @$mol_mem, автотрекинг зависимостей, ленивые вычисления",
+				"Начальный код: компонент с не-реактивным свойством",
+				"Задание: сделать свойство реактивным через @$mol_mem",
+				"Решение: view.ts с @$mol_mem декоратором",
+				"2-3 подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Прочитать объяснение — концепция реактивности понятна",
+				"Шаг 2: Выполнить задание → Check → проходит"
+			],
+			"dependencies": [
+				"TASK-019"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-021",
+			"category": "integration",
+			"priority": "high",
+			"description": "Локализация — $mol_locale для EN/RU UI strings",
+			"acceptance_criteria": [
+				"bog/docs/locale/en.locale.json — английские строки UI",
+				"bog/docs/locale/ru.locale.json — русские переводы",
+				"Все UI strings (кнопки, заголовки, placeholders) через $mol_locale",
+				"Контент уроков — двуязычные поля в данных (title_en/title_ru, etc.)",
+				"Переключение языка работает через $mol_locale стандартный механизм"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть сайт — UI на английском (default)",
+				"Шаг 2: Переключить язык на RU — UI переводится",
+				"Шаг 3: Текст уроков меняется на русский"
+			],
+			"dependencies": [
+				"TASK-016"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-022",
+			"category": "functional",
+			"priority": "high",
+			"description": "Контент урока 5: Built-in Components",
+			"acceptance_criteria": [
+				"Объяснение: $mol_page, $mol_list, $mol_button, $mol_form — что и когда использовать",
+				"Начальный код: пустая страница",
+				"Задание: собрать страницу из built-in компонентов",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение охватывает основные компоненты",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-020"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-023",
+			"category": "functional",
+			"priority": "high",
+			"description": "Контент урока 6: Styling (view.css.ts)",
+			"acceptance_criteria": [
+				"Объяснение: $mol_style_define, view.css.ts, темы, правила (no as any, shorthand rules)",
+				"Начальный код: компонент без стилей",
+				"Задание: добавить стили через view.css.ts",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение покрывает ключевые правила стилизации",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-022"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-024",
+			"category": "functional",
+			"priority": "high",
+			"description": "Контент урока 7: Lists & Collections (* свойства)",
+			"acceptance_criteria": [
+				"Объяснение: * синтаксис для списков, динамические коллекции",
+				"Начальный код: статический компонент",
+				"Задание: сделать динамический список через * свойство",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение понятно объясняет * синтаксис",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-023"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-025",
+			"category": "functional",
+			"priority": "high",
+			"description": "Контент урока 8: Navigation ($mol_book2, arg routing)",
+			"acceptance_criteria": [
+				"Объяснение: $mol_book2, $mol_link, $mol_state_arg, routing",
+				"Начальный код: приложение с одной страницей",
+				"Задание: добавить навигацию между страницами через $mol_book2",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение покрывает навигацию в $mol",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-024"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-026",
+			"category": "functional",
+			"priority": "medium",
+			"description": "Контент урока 9: State Management ($mol_mem deep)",
+			"acceptance_criteria": [
+				"Объяснение: $mol_mem подробно, $mol_store, реактивные деревья",
+				"Начальный код: компонент с простым состоянием",
+				"Задание: организовать сложное состояние с несколькими зависимостями",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение глубже раскрывает state management",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-025"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-027",
+			"category": "functional",
+			"priority": "medium",
+			"description": "Контент урока 10: Testing (test.ts, $mol_assert)",
+			"acceptance_criteria": [
+				"Объяснение: test.ts файлы, $mol_assert, запуск тестов",
+				"Начальный код: компонент без тестов",
+				"Задание: написать тест для компонента",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение покрывает тестирование в $mol",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-026"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-028",
+			"category": "functional",
+			"priority": "medium",
+			"description": "Контент урока 11: Project Architecture (namespace, meta.tree)",
+			"acceptance_criteria": [
+				"Объяснение: namespace → folder mapping, meta.tree зависимости, MAM структура",
+				"Начальный код: неструктурированный проект",
+				"Задание: правильно организовать структуру модулей",
+				"Решение + подсказки"
+			],
+			"test_steps": [
+				"Шаг 1: Объяснение покрывает архитектуру MAM",
+				"Шаг 2: Задание выполнимо и Check проходит"
+			],
+			"dependencies": [
+				"TASK-027"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-029",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Landing page — Live Demo секция (интерактивный пример)",
+			"acceptance_criteria": [
+				"Между Value Props и Ecosystem — секция Live Demo",
+				"Маленький editor с view.tree кодом (read-only или editable)",
+				"Рядом — preview с результатом рендера",
+				"Пример: простой Counter или Hello World"
+			],
+			"test_steps": [
+				"Шаг 1: На Landing видна секция Live Demo",
+				"Шаг 2: В editor виден код, в preview — результат",
+				"Шаг 3: Если editable — изменение кода обновляет preview"
+			],
+			"dependencies": [
+				"TASK-009",
+				"TASK-006"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-030",
+			"category": "infrastructure",
+			"priority": "high",
+			"description": "GitHub Actions — автоматический деплой на GitHub Pages",
+			"acceptance_criteria": [
+				"Workflow файл .github/workflows/docs-deploy.yml создан",
+				"Триггер: push в master (или вручную workflow_dispatch)",
+				"Шаги: checkout → npm install → npx mam bog/docs → deploy to gh-pages",
+				"Используется mol_prerender_action или стандартный gh-pages deploy"
+			],
+			"test_steps": [
+				"Шаг 1: Push в master — workflow запускается",
+				"Шаг 2: Workflow проходит без ошибок",
+				"Шаг 3: Сайт доступен по GitHub Pages URL"
+			],
+			"dependencies": [
+				"TASK-002"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-031",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Навигационный header — лого, ссылки, переключатель языка",
+			"acceptance_criteria": [
+				"Header с лого '$mol' слева",
+				"Ссылки навигации: Docs, Playground, GitHub",
+				"Переключатель языка EN/RU справа",
+				"Header видим на всех страницах"
+			],
+			"test_steps": [
+				"Шаг 1: Header видим на Landing, Guide, Playground",
+				"Шаг 2: Клик 'Docs' → переход на Guide",
+				"Шаг 3: Клик EN/RU → язык переключается"
+			],
+			"dependencies": [
+				"TASK-002",
+				"TASK-021"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-032",
+			"category": "ui",
+			"priority": "low",
+			"description": "Guide — стилизация lesson component (приятный UX)",
+			"acceptance_criteria": [
+				"Чёткое визуальное разделение: explanation / editor+preview / task",
+				"Кнопки Check/Hint/Solution стилизованы (цветовые акценты)",
+				"Индикатор прогресса (progress bar или шаги)",
+				"Плавные переходы между уроками"
+			],
+			"test_steps": [
+				"Шаг 1: Открыть урок — визуально чётко видны все секции",
+				"Шаг 2: Кнопки различимы и интуитивны",
+				"Шаг 3: Переход между уроками плавный"
+			],
+			"dependencies": [
+				"TASK-016"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-033",
+			"category": "integration",
+			"priority": "high",
+			"description": "Lesson editor — переиспользование Playground editor/preview компонентов",
+			"acceptance_criteria": [
+				"Guide lesson editor использует тот же компонент, что и Playground",
+				"Preview в уроке использует тот же компонент preview из Playground",
+				"Общий код editor/preview вынесен в shared компоненты",
+				"Нет дублирования кода транспиляции"
+			],
+			"test_steps": [
+				"Шаг 1: Editor в уроке работает так же, как в Playground",
+				"Шаг 2: Preview в уроке работает так же, как в Playground",
+				"Шаг 3: Изменение shared компонента влияет на оба места"
+			],
+			"dependencies": [
+				"TASK-009",
+				"TASK-013"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-034",
+			"category": "functional",
+			"priority": "low",
+			"description": "Guide — сохранение прогресса пользователя в localStorage",
+			"acceptance_criteria": [
+				"Пройденные уроки сохраняются в localStorage",
+				"При повторном открытии — прогресс восстанавливается",
+				"Код пользователя в каждом уроке тоже сохраняется",
+				"Кнопка 'Reset progress' — сброс всего прогресса"
+			],
+			"test_steps": [
+				"Шаг 1: Пройти урок 1 → закрыть браузер → открыть снова → урок 1 отмечен",
+				"Шаг 2: Код, введённый в уроке, сохранился",
+				"Шаг 3: Нажать Reset → прогресс сброшен"
+			],
+			"dependencies": [
+				"TASK-016"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-035",
+			"category": "infrastructure",
+			"priority": "low",
+			"description": "SEO — meta tags, OpenGraph, title для каждой страницы",
+			"acceptance_criteria": [
+				"Каждая страница имеет корректный <title>",
+				"OpenGraph meta tags: og:title, og:description, og:image",
+				"Twitter card meta tags",
+				"Description для Landing отличается от Guide и Playground"
+			],
+			"test_steps": [
+				"Шаг 1: Проверить <title> на каждой странице — разный",
+				"Шаг 2: Вставить URL в Telegram/Twitter — preview отображается корректно"
+			],
+			"dependencies": [
+				"TASK-006"
+			],
+			"status": "pending"
+		}
+	]
+}
