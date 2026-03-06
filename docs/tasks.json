@@ -26,7 +26,7 @@
 			"priority": "critical",
 			"description": "Создать meta.tree и базовую структуру модулей bog/docs",
 			"acceptance_criteria": [
-				"Файл bog/docs/docs.meta.tree создан с зависимостями: $mol_book2, $mol_page, $mol_text, $mol_locale, $mol_link",
+				"Зависимости подключены через app/app.meta.tree: $mol_book2_catalog, $mol_page, $mol_text, $mol_locale, $mol_link",
 				"Директории app/, landing/, guide/, play/ созданы",
 				"Файл bog/docs/app/index.html создан с корректным подключением"
 			],
@@ -48,7 +48,7 @@
 				"Каталог страниц (menu) с пунктами: Landing, Guide, Playground",
 				"Выбор пункта меню открывает соответствующую страницу в content-панели",
 				"$mol_book2_catalog корректно работает: menu слева, content справа (или overlay на мобильных)",
-				"docs.meta.tree обновлён — включает зависимость $mol_book2_catalog"
+				"Зависимости обновлены — включают $mol_book2_catalog"
 			],
 			"test_steps": [
 				"Шаг 1: Запустить билд (npx mam bog/docs/app) — без ошибок",

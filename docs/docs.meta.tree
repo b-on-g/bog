@@ -1,5 +1,0 @@
-include \/mol/book2/catalog
-include \/mol/page
-include \/mol/text
-include \/mol/locale
-include \/mol/link
