@@ -1,7 +1,0 @@
-$bog_docs_editor $mol_view
-	sub /
-		<= Code $mol_textarea
-			hint \Write your view.tree code here...
-			value? <=> source? \
-		<= Preview $mol_text
-			text <= preview_text \
