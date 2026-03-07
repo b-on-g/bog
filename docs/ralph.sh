@@ -9,7 +9,6 @@ cleanup() {
         kill -TERM "$CHILD_PID" 2>/dev/null
         wait "$CHILD_PID" 2>/dev/null
     fi
-    # Удалить временный файл если есть
     [[ -n "${RESULT_FILE:-}" ]] && rm -f "$RESULT_FILE"
     exit 130
 }
@@ -18,11 +17,8 @@ trap cleanup INT TERM
 
 TASKS_FILE="tasks.json"
 PROMPT_FILE="prompt.md"
-COOLDOWN=14400          # 4 часа в секундах — пауза при rate limit
+COOLDOWN=14400
 
-# Agent selection:
-# - Set RALPH_AGENT=claude or RALPH_AGENT=codex to force.
-# - Otherwise auto-detect (prefers Claude if available).
 resolve_agent() {
     if [[ -n "${RALPH_AGENT:-}" ]]; then
         echo "$RALPH_AGENT"
@@ -72,20 +68,18 @@ run_agent() {
     esac
 }
 
-# Функция проверки наличия pending задач
 has_pending_tasks() {
     pending_count=$(grep -c '"status": "pending"' "$TASKS_FILE" 2>/dev/null) || pending_count=0
     [ "$pending_count" -gt 0 ]
 }
 
-# Получить ID следующей pending задачи по приоритету (пропускает задачи с attempts >= MAX_ATTEMPTS)
 get_next_task_id() {
     python3 -c "
 import json
 with open('$TASKS_FILE') as f:
     data = json.load(f)
 priority_order = {'critical': 0, 'high': 1, 'medium': 2, 'low': 3}
-pending = [t for t in data['tasks'] if t['status'] == 'pending' and t.get('attempts', 0) < $MAX_ATTEMPTS]
+pending = [t for t in data['tasks'] if t['status'] == 'pending']
 pending.sort(key=lambda t: priority_order.get(t.get('priority','low'), 4))
 if pending:
     print(pending[0]['id'])
@@ -110,29 +104,11 @@ build_prompt() {
     sed "s/__TASK_ID__/${task_id}/g" "$PROMPT_FILE"
 }
 
-# Увеличить счётчик попыток (задача остаётся pending)
-bump_attempts() {
-    local task_id="$1"
-    python3 -c "
-import json
-with open('$TASKS_FILE') as f:
-    data = json.load(f)
-for t in data['tasks']:
-    if t['id'] == '${task_id}':
-        t['attempts'] = t.get('attempts', 0) + 1
-        break
-with open('$TASKS_FILE', 'w') as f:
-    json.dump(data, f, ensure_ascii=False, indent='\t')
-" 2>/dev/null
-}
-
-MAX_ATTEMPTS=2
-
 iteration=1
 completed_tasks=""
 completed_count=0
-failed_tasks=""
-failed_count=0
+skipped_tasks=""
+skipped_count=0
 
 while has_pending_tasks; do
     next_id=$(get_next_task_id)
@@ -153,7 +129,6 @@ while has_pending_tasks; do
 
     prompt=$(build_prompt "$next_id")
 
-    # Запуск агента с обработкой rate limit
     RESULT_FILE="$(mktemp -t ralph_result.XXXXXX)"
     if ! run_agent "$agent" "$prompt" "$RESULT_FILE"; then
         result=$(cat "$RESULT_FILE")
@@ -163,12 +138,14 @@ while has_pending_tasks; do
             echo "  -> Rate limit! Жду ${COOLDOWN}с (4 часа)..."
             echo "  -> Пауза до: $(date -v+${COOLDOWN}S '+%H:%M:%S' 2>/dev/null || date -d "+${COOLDOWN} seconds" '+%H:%M:%S' 2>/dev/null || echo '~4ч')"
             sleep "$COOLDOWN"
-            echo "  -> Пауза окончена, продолжаю задачу $next_id"
+            echo "  -> Пауза окончена, продолжаю"
             ((iteration++))
             continue
         else
             echo "  -> Агент упал с ошибкой"
             echo "  -> $result" | head -5
+            skipped_tasks="${skipped_tasks}  - ${next_info}\n"
+            ((skipped_count++))
         fi
     else
         result=$(cat "$RESULT_FILE")
@@ -177,7 +154,7 @@ while has_pending_tasks; do
     fi
 
     if [[ "$result" == *"RALPH_COMPLETE"* ]]; then
-        # Ensure task is marked done (agent may have failed to update JSON)
+        # Подстраховка: пометить done если агент забыл
         python3 -c "
 import json
 with open('$TASKS_FILE') as f:
@@ -190,30 +167,17 @@ with open('$TASKS_FILE', 'w') as f:
     json.dump(data, f, ensure_ascii=False, indent='\t')
     f.write('\n')
 " 2>/dev/null
-        completed_tasks="${completed_tasks}  + ${next_info}
-"
+        completed_tasks="${completed_tasks}  + ${next_info}\n"
         ((completed_count++))
         echo "  -> done"
     elif [[ "$result" == *"RALPH_PARTIAL"* ]]; then
         echo "  -> partial (прогресс записан)"
+        skipped_tasks="${skipped_tasks}  ~ ${next_info} (partial)\n"
+        ((skipped_count++))
     else
-        bump_attempts "$next_id"
-        attempts=$(python3 -c "
-import json
-with open('$TASKS_FILE') as f:
-    data = json.load(f)
-for t in data['tasks']:
-    if t['id'] == '${next_id}':
-        print(t.get('attempts', 0))
-        break
-" 2>/dev/null)
-        echo "  -> нет результата, попытка ${attempts}/${MAX_ATTEMPTS}"
-        if [ "${attempts:-0}" -ge "$MAX_ATTEMPTS" ]; then
-            echo "  -> исчерпаны попытки, пропускаю"
-            failed_tasks="${failed_tasks}  - ${next_info}
-"
-            ((failed_count++))
-        fi
+        echo "  -> нет RALPH_COMPLETE, пропускаю"
+        skipped_tasks="${skipped_tasks}  - ${next_info}\n"
+        ((skipped_count++))
     fi
 
     ((iteration++))
@@ -228,13 +192,13 @@ echo "==========================================="
 if [ "$completed_count" -gt 0 ]; then
     echo ""
     echo "Выполнено ($completed_count):"
-    printf "%s" "$completed_tasks"
+    printf "$completed_tasks"
 fi
 
-if [ "$failed_count" -gt 0 ]; then
+if [ "$skipped_count" -gt 0 ]; then
     echo ""
-    echo "Не удалось завершить ($failed_count):"
-    printf "%s" "$failed_tasks"
+    echo "Пропущено ($skipped_count):"
+    printf "$skipped_tasks"
 fi
 
 remaining=$(grep -c '"status": "pending"' "$TASKS_FILE" 2>/dev/null) || remaining=0
@@ -246,5 +210,5 @@ echo "==========================================="
 if [ "$remaining" -eq 0 ]; then
     say -v Milena "Хозяин, я всё сделалъ!"
 else
-    say -v Milena "Хозяин, я закончилъ. Выполнено $completed_count, не удалось $failed_count, осталось $remaining."
+    say -v Milena "Хозяин, я закончилъ. Выполнено $completed_count, пропущено $skipped_count, осталось $remaining."
 fi
