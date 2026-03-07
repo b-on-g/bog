@@ -1,1 +1,8 @@
--view.tree
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!bog.meta.tree
+!.gitattributes
+!README.md
