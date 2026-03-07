@@ -1,60 +1,23 @@
-name: Deploy Docs to GitHub Pages
+name: $bog_docs
+
+permissions: write-all
 
 on:
-  push:
-    branches: [master]
-    paths: [docs/**]
   workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
+  push:
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+    - uses: hyoo-ru/mam_build@master2
+      with:
+        package: 'bog/docs/app'
 
-      - name: Install MAM
-        run: npm install mam
-
-      - name: Build docs
-        run: npx mam docs/app
-
-      - name: Prepare deploy directory
-        run: |
-          mkdir -p _site
-          cp docs/app/-/index.html _site/
-          cp docs/app/-/web.js _site/web.js
-          cp docs/app/-/web.js.map _site/web.js.map
-          cp docs/app/-/web.css _site/web.css
-          cp docs/app/-/web.css.map _site/web.css.map
-          cp docs/app/-/web.locale=en.json _site/
-          cp docs/app/-/web.locale=ru.json _site/
-          cp docs/app/og-image.svg _site/ 2>/dev/null || true
-          # SPA fallback: copy index.html as 404.html
-          cp _site/index.html _site/404.html
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+    - uses: hyoo-ru/gh-deploy@v4.4.1
+      if: github.ref == 'refs/heads/master'
+      with:
+        folder: 'bog/docs/app/-'
