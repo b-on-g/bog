@@ -991,3 +991,24 @@
 - Label commands: text-overflow ellipsis with overflow hidden and whiteSpace nowrap (from TASK-030)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-048: Adaptive Data Table Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/table/table.view.css.ts` — Root has `overflow: { x: 'auto' }` and `width: '100%'`; Col_head/Cell_text: `minWidth: '100px'`; Cell_number: `minWidth: '80px'`; Select_all/Select_row: fixed `width: '3rem'`, `flex: { shrink: 0, grow: 0 }` (from TASK-031)
+- `bog/ui/table/table.view.css` — Checkbox column `[mol_grid_col_id="__select"]` fixed at 3rem with flex-shrink: 0 (from TASK-031)
+- `bog/ui/app/table/table.view.css.ts` — Table container: `flex: { shrink: 1 }`, `overflow: { x: 'auto' }`, `minWidth: 0` (from TASK-037)
+- No `@media` queries in any table-related files
+
+**All acceptance criteria met:**
+- No @media queries — only overflow, min-width, flex, width %
+- Table container: overflow-x: auto (both component and demo page levels)
+- Columns have min-width (100px text, 80px number) — don't collapse
+- Wide screen: table width: 100% on root component
+- Selected counter and info don't break layout (flex column stacking via $mol_page body)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
