@@ -3,6 +3,10 @@ $bog_ui_table $mol_grid
 	data /
 	sort_column? \
 	sort_dir? \asc
+	selectable false
+	selected? /
+	all_selected? false
+	row_checked*? false
 	Row* $mol_grid_row
 		minimal_height <= row_height
 		minimal_width <= minimal_width
@@ -10,6 +14,11 @@ $bog_ui_table $mol_grid
 		attr *
 			^
 			bog_ui_table_row_even <= row_even* false
+			bog_ui_table_row_selected <= row_selected* false
 	Head_button* $mol_button_minor
 		click? <=> col_head_click*? null
 		sub / <= head_button_content* /
+	Select_all $mol_check_box
+		checked? <=> all_selected? false
+	Select_row* $mol_check_box
+		checked? <=> row_checked*? false

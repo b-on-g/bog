@@ -2,6 +2,10 @@
 	background: var(--mol_theme_card);
 }
 
+[bog_ui_table_row_selected="true"] {
+	background: var(--mol_theme_current);
+}
+
 [bog_ui_table] [mol_grid_row]:hover {
 	background: var(--mol_theme_current);
 }

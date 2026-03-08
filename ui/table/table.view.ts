@@ -6,11 +6,51 @@ namespace $.$$ {
 		col_ids() {
 			const columns = this.columns()
 			if( !columns.length ) return [] as readonly string[]
-			return columns.map( ( col: any ) => String( col.id ) )
+			const ids = columns.map( ( col: any ) => String( col.id ) )
+			if( this.selectable() ) return [ '__select' , ...ids ]
+			return ids
 		}
 
 		col_head_content( colId: string ) {
+			if( colId === '__select' ) return [ this.Select_all() ]
 			return [ this.Head_button( colId ) ]
+		}
+
+		cells( id: string[] ) {
+			const base = super.cells( id )
+			if( !this.selectable() ) return base
+			return [ this.Select_row( id[0] ) , ...base.slice( 1 ) ]
+		}
+
+		@ $mol_mem_key
+		row_checked( rowId: string , next?: boolean ) {
+			if( next !== undefined ) {
+				const sel = this.selected() as string[]
+				if( next ) {
+					if( sel.indexOf( rowId ) < 0 ) this.selected( [ ...sel , rowId ] )
+				} else {
+					this.selected( sel.filter( id => id !== rowId ) )
+				}
+			}
+			return ( this.selected() as string[] ).indexOf( rowId ) >= 0
+		}
+
+		@ $mol_mem
+		all_selected( next?: boolean ) {
+			if( next !== undefined ) {
+				if( next ) {
+					this.selected( this.row_ids().map( id => id[0] ) )
+				} else {
+					this.selected( [] )
+				}
+			}
+			const sel = this.selected() as string[]
+			const rows = this.row_ids()
+			return rows.length > 0 && sel.length >= rows.length
+		}
+
+		row_selected( rowId: string[] ) {
+			return ( this.selected() as string[] ).indexOf( rowId[0] ) >= 0
 		}
 
 		head_button_content( colId: string ) {

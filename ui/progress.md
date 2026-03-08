@@ -241,3 +241,25 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-014: Data Table Row Selection Checkboxes — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/table/table.view.tree` — Added selectable, selected?, all_selected?, row_checked*? properties; bog_ui_table_row_selected attr on Row; Select_all and Select_row* $mol_check_box components
+- `bog/ui/table/table.view.ts` — col_ids() prepends __select column when selectable; col_head_content() returns Select_all for __select; cells() replaces __select cell with Select_row checkbox; row_checked() manages selected list; all_selected() selects/deselects all; row_selected() checks selection state
+- `bog/ui/table/table.view.css` — Added [bog_ui_table_row_selected="true"] styling with $mol_theme.current
+
+**Features:**
+- API: selectable false (opt-in), selected? / (list of selected row indices), all_selected? false, row_checked*? false
+- When selectable=true: checkbox column prepended to table
+- Select All checkbox in header toggles all rows
+- Individual row checkboxes toggle selection
+- selected / stores row indices as strings
+- Selected rows visually highlighted via bog_ui_table_row_selected attr + $mol_theme.current
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
