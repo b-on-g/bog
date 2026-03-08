@@ -13,6 +13,7 @@ $bog_ui_app $mol_book2
 	Skeleton_page $bog_ui_app_skeleton
 	Breadcrumb_page $bog_ui_app_breadcrumb
 	Sidebar_page $bog_ui_app_sidebar
+	Sheet_page $bog_ui_app_sheet
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock

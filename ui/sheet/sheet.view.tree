@@ -4,7 +4,8 @@ $bog_ui_sheet $mol_view
 	content /
 	sub /
 		<= Backdrop $mol_view
-			click? <=> backdrop_click? null
+			event *
+				click? <=> backdrop_click? null
 		<= Panel $mol_view
 			sub /
 				<= Content $mol_list

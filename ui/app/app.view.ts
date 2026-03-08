@@ -122,6 +122,7 @@ namespace $.$$ {
 				case 'skeleton': content = this.Skeleton_page(); break
 				case 'breadcrumb': content = this.Breadcrumb_page(); break
 				case 'sidebar': content = this.Sidebar_page(); break
+				case 'sheet': content = this.Sheet_page(); break
 				default: content = this.Content_page()
 			}
 			return [
