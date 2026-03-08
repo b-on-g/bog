@@ -335,3 +335,55 @@
 - Integrated into app router via switch/case in pages()
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-019: Demo Breadcrumb Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/breadcrumb/breadcrumb.view.tree` — $mol_page with 2 Breadcrumb demo variants (short path, long path)
+- `bog/ui/app/breadcrumb/breadcrumb.view.ts` — Configures breadcrumb data (crumb_title, crumb_uri) for both variants via TS overrides
+- `bog/ui/app/breadcrumb/breadcrumb.view.css.ts` — Styled with padding, shade description, bold section titles
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Breadcrumb_page $bog_ui_app_breadcrumb declaration
+- `bog/ui/app/app.view.ts` — Updated pages() to route to Breadcrumb_page when component==='breadcrumb'
+- `bog/ui/breadcrumb/breadcrumb.view.ts` — Fixed namespace: `namespace $` → `namespace $$` (fixes TS2300 Duplicate identifier)
+
+**Features:**
+- 2 demo variants: Short Path (2 levels: Home > Products), Long Path (5 levels: Home > Catalog > Electronics > Phones > iPhone 15 Pro)
+- Each variant has a section title
+- Multiproperty defaults (crumb_title, crumb_uri) configured via TS to avoid MAM codegen issue with per-key multiproperty defaults in view.tree
+- Component description at top
+- Integrated into app router via switch/case in pages()
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `bbe20ab` pushed to origin/master
+
+---
+
+### TASK-020: Demo Sidebar Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/app/sidebar/sidebar.view.tree` — $mol_page with mode switching buttons and live sidebar preview
+- `bog/ui/app/sidebar/sidebar.view.ts` — set_dock/set_rail/set_hidden actions + current_mode_text computed
+- `bog/ui/app/sidebar/sidebar.view.css.ts` — Styled with padding, description, mode buttons flex layout, preview container with border
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Sidebar_page $bog_ui_app_sidebar declaration
+- `bog/ui/app/app.view.ts` — Updated pages() to route to Sidebar_page when component==='sidebar'
+
+**Features:**
+- 3 mode switching buttons: Dock, Rail, Hidden
+- Current mode indicator text
+- Live preview container with bordered area containing:
+  - $bog_ui_sidebar instance with 3 demo items (Home, Users, Settings)
+  - Main content area placeholder
+- Sidebar transitions between modes in real-time
+- All 3 modes demonstrated: dock (240px with labels), rail (56px icons only), hidden (0px collapsed)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
