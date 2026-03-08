@@ -811,3 +811,40 @@
 - Body content scrolls vertically (overflow-y: auto)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-039: Adaptive Overview Page Grid — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/app/overview/overview.view.css.ts` — Grid template changed from `clamp(200px, 30%, 320px)` to `min(100%, 280px)`; added `overflowWrap: 'break-word'` to Title and Card_desc
+
+**Features:**
+- No @media queries — only CSS grid with min(), overflowWrap
+- Grid: `repeat(auto-fill, minmax(min(100%, 280px), 1fr))` — single column at 320px, 3-4 columns at 1200px+
+- Cards constrained to container (overflow hidden already existed, gap 1rem)
+- Text inside cards wraps via overflowWrap: break-word — never clipped
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `f2fbe55` pushed to origin/master
+
+---
+
+### TASK-040: Adaptive Badge Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/app/badge/badge.view.css.ts` — Variants container already has `flex: { wrap: 'wrap' }` and `gap: '.75rem'` with `align: { items: 'center' }`
+- `bog/ui/app/badge/badge.view.tree` — Sections (Description, Variants_title, Variants) in `body /` list stack vertically via $mol_page's default flex column
+
+**All acceptance criteria met:**
+- No @media queries — only flex-wrap, gap
+- Badge container has flex-wrap + gap — badges wrap to new lines
+- Badges don't get clipped (inline-flex + maxWidth from TASK-033)
+- Sections stack vertically via $mol_page body flex column
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
