@@ -10,6 +10,8 @@ namespace $ {
 		justify: {
 			content: 'center',
 		},
+		width: '100%',
+		height: '100%',
 		gap: '1rem',
 		padding: {
 			top: '2rem',
@@ -17,10 +19,8 @@ namespace $ {
 			left: '2rem',
 			right: '2rem',
 		},
+		boxSizing: 'border-box',
 		Icon: {
-			font: {
-				size: '3rem',
-			},
 			color: $mol_theme.shade,
 		},
 		Title: {
@@ -36,6 +36,8 @@ namespace $ {
 				size: '.875rem',
 			},
 			textAlign: 'center',
+			maxWidth: '400px',
+			width: '100%',
 		},
 	} )
 }
