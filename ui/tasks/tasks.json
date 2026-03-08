@@ -616,7 +616,9 @@
 				"Шаг 2: Проверить отсутствие TS ошибок и @media в .css.ts файлах",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-015"],
+			"dependencies": [
+				"TASK-015"
+			],
 			"status": "done"
 		},
 		{
@@ -637,8 +639,10 @@
 				"Шаг 2: Проверить отсутствие @media в sidebar/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-007"],
-			"status": "pending"
+			"dependencies": [
+				"TASK-007"
+			],
+			"status": "done"
 		},
 		{
 			"id": "TASK-029",
@@ -658,7 +662,9 @@
 				"Шаг 2: Проверить отсутствие @media в sheet/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-008"],
+			"dependencies": [
+				"TASK-008"
+			],
 			"status": "pending"
 		},
 		{
@@ -678,7 +684,9 @@
 				"Шаг 2: Проверить отсутствие @media в command/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-011"],
+			"dependencies": [
+				"TASK-011"
+			],
 			"status": "pending"
 		},
 		{
@@ -699,7 +707,9 @@
 				"Шаг 2: Проверить отсутствие @media в table/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-013"],
+			"dependencies": [
+				"TASK-013"
+			],
 			"status": "pending"
 		},
 		{
@@ -719,7 +729,9 @@
 				"Шаг 2: Проверить отсутствие @media в toast/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-010"],
+			"dependencies": [
+				"TASK-010"
+			],
 			"status": "pending"
 		},
 		{
@@ -737,7 +749,9 @@
 				"Шаг 1: Собрать проект npx mam bog/ui/app",
 				"Шаг 2: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-002"],
+			"dependencies": [
+				"TASK-002"
+			],
 			"status": "pending"
 		},
 		{
@@ -756,7 +770,9 @@
 				"Шаг 1: Собрать проект npx mam bog/ui/app",
 				"Шаг 2: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-003"],
+			"dependencies": [
+				"TASK-003"
+			],
 			"status": "pending"
 		},
 		{
@@ -775,7 +791,9 @@
 				"Шаг 1: Собрать проект npx mam bog/ui/app",
 				"Шаг 2: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-005"],
+			"dependencies": [
+				"TASK-005"
+			],
 			"status": "pending"
 		},
 		{
@@ -793,7 +811,9 @@
 				"Шаг 1: Собрать проект npx mam bog/ui/app",
 				"Шаг 2: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-004"],
+			"dependencies": [
+				"TASK-004"
+			],
 			"status": "pending"
 		},
 		{
@@ -813,7 +833,9 @@
 				"Шаг 2: Проверить отсутствие @media во всех app/*.css.ts",
 				"Шаг 3: Проверить web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-025"],
+			"dependencies": [
+				"TASK-025"
+			],
 			"status": "pending"
 		}
 	]

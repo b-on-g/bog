@@ -50,6 +50,9 @@ namespace $ {
 		},
 
 		Toggle: {
+			flex: {
+				shrink: 0,
+			},
 			align: {
 				self: 'flex-start',
 			},

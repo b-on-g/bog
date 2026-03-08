@@ -564,3 +564,26 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-028: Adaptive Sidebar ($bog_ui_sidebar) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/sidebar/sidebar.view.css` — dock mode width changed from fixed `240px` to `clamp(180px, 20%, 280px)` for fluid scaling
+- `bog/ui/sidebar/sidebar.view.css.ts` — Added `flex: { shrink: 0 }` to Toggle button to ensure it's always visible
+- `bog/ui/sidebar/item/item.view.css.ts` — Added `flex: { shrink: 1 }` to items, `overflow: 'hidden'` on item, `textOverflow: 'ellipsis'` and `flex: { shrink: 1 }` on Label for text truncation
+- `bog/ui/sidebar/item/item.view.css` — Changed collapsed label from `display: none` to `width: 0; overflow: hidden; opacity: 0` with CSS transitions for smooth animation
+
+**Features:**
+- No @media queries — only flex, clamp(), overflow, transitions
+- dock mode: fluid width `clamp(180px, 20%, 280px)` — grows/shrinks with container
+- rail mode: fixed 56px min-width, labels hidden via width: 0 + overflow: hidden (smooth transition)
+- Items use flex-shrink: 1 and text-overflow: ellipsis when narrowing
+- Toggle button always visible (flex-shrink: 0)
+- Smooth CSS transitions on width, opacity when switching modes
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"

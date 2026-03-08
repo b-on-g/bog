@@ -1,6 +1,9 @@
 namespace $ {
 	$mol_style_define( $bog_ui_sidebar_item, {
 		display: 'flex',
+		flex: {
+			shrink: 1,
+		},
 		align: {
 			items: 'center',
 		},
@@ -15,6 +18,7 @@ namespace $ {
 			radius: $mol_gap.round,
 		},
 		color: $mol_theme.text,
+		overflow: 'hidden',
 		Icon: {
 			flex: {
 				shrink: 0,
@@ -23,6 +27,10 @@ namespace $ {
 		Label: {
 			whiteSpace: 'nowrap',
 			overflow: 'hidden',
+			textOverflow: 'ellipsis',
+			flex: {
+				shrink: 1,
+			},
 		},
 		'@': {
 			bog_ui_sidebar_item_active: {

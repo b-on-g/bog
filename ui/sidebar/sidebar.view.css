@@ -3,8 +3,8 @@
 }
 
 [bog_ui_sidebar_mode="dock"] {
-	width: 240px;
-	min-width: 240px;
+	width: clamp(180px, 20%, 280px);
+	min-width: clamp(180px, 20%, 280px);
 }
 
 [bog_ui_sidebar_mode="rail"] {

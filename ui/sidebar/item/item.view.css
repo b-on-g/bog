@@ -2,6 +2,12 @@
 	background: var(--mol_theme_card);
 }
 
+[bog_ui_sidebar_item_label] {
+	transition: width 0.2s ease, opacity 0.15s ease;
+}
+
 [bog_ui_sidebar_item_collapsed="true"] [bog_ui_sidebar_item_label] {
-	display: none;
+	width: 0;
+	overflow: hidden;
+	opacity: 0;
 }
