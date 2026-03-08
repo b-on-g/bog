@@ -1038,6 +1038,7 @@
 	padding-right: 1rem;
 	background-color: var(--mol_theme_card);
 	border-radius: 0.5rem;
+	max-width: 100%;
 }
 [bog_ui_app_skeleton_card_avatar] {
 	width: 3rem;
@@ -1157,6 +1158,7 @@
 [bog_ui_app_sidebar_mode_buttons] {
 	display: flex;
 	gap: .75rem;
+	flex-wrap: wrap;
 	padding-bottom: .5rem;
 }
 [bog_ui_app_sidebar_current_mode] {
@@ -1166,12 +1168,13 @@
 }
 [bog_ui_app_sidebar_preview] {
 	display: flex;
+	flex-wrap: wrap;
 	border-width: 1px;
 	border-style: solid;
 	border-color: var(--mol_theme_line);
 	border-radius: 0.5rem;
 	overflow: hidden;
-	min-height: 300px;
+	min-height: 200px;
 }
 [bog_ui_app_sidebar_preview_content] {
 	flex-grow: 1;
@@ -1477,6 +1480,7 @@
 [bog_ui_app_command_open_row] {
 	display: flex;
 	gap: .75rem;
+	flex-wrap: wrap;
 	align-items: center;
 	padding-bottom: 1.5rem;
 }
@@ -1725,7 +1729,9 @@
 	padding-bottom: 0.75rem;
 }
 [bog_ui_app_table_table] {
-	flex-shrink: 0;
+	flex-shrink: 1;
+	overflow-x: auto;
+	min-width: 0;
 }
 </style><style id="$mol_style_attach:bog/ui/app/overview/overview.view.css">[bog_ui_app_overview_card] {
 	border: 1px solid var(--mol_theme_line);
@@ -1877,7 +1883,7 @@
 }
 [bog_ui_app_overview_grid] {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr));
 	gap: 1rem;
 	padding-top: 0.5rem;
 }

@@ -8302,6 +8302,7 @@ var $;
                 color: $mol_theme.card,
             },
             borderRadius: '0.5rem',
+            maxWidth: '100%',
         },
         Card_avatar: {
             width: '3rem',
@@ -9070,6 +9071,9 @@ var $;
         Mode_buttons: {
             display: 'flex',
             gap: '.75rem',
+            flex: {
+                wrap: 'wrap',
+            },
             padding: {
                 bottom: '.5rem',
             },
@@ -9085,6 +9089,9 @@ var $;
         },
         Preview: {
             display: 'flex',
+            flex: {
+                wrap: 'wrap',
+            },
             border: {
                 width: '1px',
                 style: 'solid',
@@ -9092,7 +9099,7 @@ var $;
             },
             borderRadius: '0.5rem',
             overflow: 'hidden',
-            minHeight: '300px',
+            minHeight: '200px',
         },
         Preview_content: {
             flex: {
@@ -10483,6 +10490,9 @@ var $;
         Open_row: {
             display: 'flex',
             gap: '.75rem',
+            flex: {
+                wrap: 'wrap',
+            },
             align: {
                 items: 'center',
             },
@@ -11905,8 +11915,12 @@ var $;
         },
         Table: {
             flex: {
-                shrink: 0,
+                shrink: 1,
             },
+            overflow: {
+                x: 'auto',
+            },
+            minWidth: 0,
         },
     });
 })($ || ($ = {}));
@@ -12486,7 +12500,7 @@ var $;
         },
         Grid: {
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr))',
             gap: '1rem',
             padding: {
                 top: '0.5rem',
