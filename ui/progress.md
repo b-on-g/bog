@@ -1012,3 +1012,25 @@
 - Selected counter and info don't break layout (flex column stacking via $mol_page body)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-050: Fix Sitemap and Prerender — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, committed & pushed.
+
+**Modified files:**
+- `bog/.github/workflows/deploy.yml` — Added `route-key: 'component'` and `screens` parameter with all 9 component screens to `b-on-g/mol-prerender-action@main` step
+
+**Changes (diff from committed version):**
+- Added `route-key: 'component'` (matches app's `?component=badge` URL routing)
+- Added `screens` multiline parameter listing all 9 components: badge, empty, skeleton, breadcrumb, sidebar, sheet, toast, command, table
+- `base-url: 'https://b-on-g.github.io/bog/'` was already present and correct
+
+**What mol-prerender-action will generate on CI:**
+- `sitemap.xml` with 10 URLs (index + 9 component pages), priority 1.0 for index, 0.7 for others
+- `robots.txt` with `Sitemap: https://b-on-g.github.io/bog/sitemap.xml`
+- Individual `.html` files per screen: `badge.html`, `empty.html`, `skeleton.html`, `breadcrumb.html`, `sidebar.html`, `sheet.html`, `toast.html`, `command.html`, `table.html`
+- All files output to `bog/ui/app/-/` before gh-deploy pushes to GitHub Pages
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
