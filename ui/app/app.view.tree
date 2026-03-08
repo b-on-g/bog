@@ -11,6 +11,7 @@ $bog_ui_app $mol_book2
 	Badge_page $bog_ui_app_badge
 	Empty_page $bog_ui_app_empty
 	Skeleton_page $bog_ui_app_skeleton
+	Breadcrumb_page $bog_ui_app_breadcrumb
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock

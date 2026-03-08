@@ -120,6 +120,7 @@ namespace $.$$ {
 				case 'badge': content = this.Badge_page(); break
 				case 'empty': content = this.Empty_page(); break
 				case 'skeleton': content = this.Skeleton_page(); break
+				case 'breadcrumb': content = this.Breadcrumb_page(); break
 				default: content = this.Content_page()
 			}
 			return [

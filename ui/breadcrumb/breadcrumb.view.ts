@@ -1,4 +1,4 @@
-namespace $ {
+namespace $.$$ {
 	export class $bog_ui_breadcrumb extends $.$bog_ui_breadcrumb {
 
 		items() {
