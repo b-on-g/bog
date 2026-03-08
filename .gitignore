@@ -24,6 +24,11 @@
 **/-node/
 **/-css/
 
+# Allow GitHub Actions
+!.github/
+!.github/**/
+!.github/**/*.yml
+
 # Allow version component
 !version/
 !version/**/*.tree
