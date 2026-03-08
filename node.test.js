@@ -13226,6 +13226,9 @@ var $;
 })($ || ($ = {}));
 
 ;
+var $node = $node || {} ; $node[ "/bog/ui/app/favicon.svg" ] = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHN0eWxlPgogICAgLmJnIHsgZmlsbDogIzFhMWEyZTsgfQogICAgLmZnIHsgZmlsbDogI2UwZTBlMDsgfQogICAgQG1lZGlhIChwcmVmZXJzLWNvbG9yLXNjaGVtZTogbGlnaHQpIHsKICAgICAgLmJnIHsgZmlsbDogI2YwZjBmNTsgfQogICAgICAuZmcgeyBmaWxsOiAjMWExYTJlOyB9CiAgICB9CiAgPC9zdHlsZT4KICA8cmVjdCBjbGFzcz0iYmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgcng9IjYiLz4KICA8dGV4dCBjbGFzcz0iZmciIHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5CPC90ZXh0Pgo8L3N2Zz4K"
+
+;
 "use strict";
 var $;
 (function ($) {
