@@ -678,3 +678,43 @@
 - All readable and clickable from 320px to 2560px width
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-032: Adaptive Toast Manager ($bog_ui_toast_manager) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/toast/manager/manager.view.css.ts` — Removed `maxWidth: '400px'` + `width: '100%'`, added `maxHeight: '100vh'`
+- `bog/ui/toast/manager/manager.view.css` — Created raw CSS with `width: clamp(250px, 90vw, 420px)`
+- `bog/ui/toast/toast.view.css.ts` — Body: added `flex: { shrink: 1 }`, `overflow: 'hidden'`, `overflowWrap: 'break-word'`, `minWidth: 0`
+
+**Features:**
+- No @media queries — only clamp(), vw, maxHeight
+- Toast width: clamp(250px, 90vw, 420px) — on narrow screens ~90vw, capped at 420px
+- Stack constrained by maxHeight: 100vh
+- Toast text wraps (overflowWrap: break-word)
+- Close button always visible (flex-shrink: 0)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `c4f0a08` pushed to origin/master
+
+---
+
+### TASK-033: Adaptive Badge ($bog_ui_badge) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/badge/badge.view.css.ts` — Added `maxWidth: '100%'`, `overflow: 'hidden'` on root badge; added Label sub-component styles with `overflow: 'hidden'`, `textOverflow: 'ellipsis'`
+
+**Features:**
+- No @media queries — only inline-flex, maxWidth, overflow, textOverflow
+- Badge uses inline-flex (already existed), doesn't break line flow
+- maxWidth: 100% constrains badge to container width
+- Label text truncates with text-overflow: ellipsis when container is narrow
+- Badge groups wrap via flex-wrap (already in demo page Variants container)
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
