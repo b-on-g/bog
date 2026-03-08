@@ -45,3 +45,51 @@
 - Clean up: delete `bog/ui/build.sh` and `bog/ui/build.js`
 
 **Note:** Sandbox blocked all attempts to run npx/node/bash commands that change directory to /Users/cmyser/code/mam. The `acceptEdits` permission mode does not auto-approve shell script execution.
+
+---
+
+### TASK-004, TASK-006: Build verified — DONE
+**Date:** 2026-03-08
+**Status:** Build ran successfully, Audit passed. All previously partial tasks are now complete.
+
+---
+
+### TASK-007: Sidebar ($bog_ui_sidebar) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/sidebar/sidebar.view.tree` — $mol_view with mode attr, items, Header, Footer, Toggle
+- `bog/ui/sidebar/sidebar.view.ts` — items_with_collapsed() propagates collapsed to items, toggle() switches dock↔rail
+- `bog/ui/sidebar/sidebar.view.css.ts` — Typed styles: flex column, padding, overflow, sub-component styles
+- `bog/ui/sidebar/sidebar.view.css` — Raw CSS: width transitions (dock=240px, rail=56px, hidden=0), opacity transitions
+
+**Also done in this session:**
+- Updated `.gitignore` to whitelist `ui/` source files while excluding build artifacts (`-/`, `-view.tree/`, `-node/`)
+- Committed all previously untracked UI source files (badge, breadcrumb, empty, skeleton, sidebar/item, app, meta)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `42f5054` pushed to origin/master
+
+---
+
+### TASK-008: Sheet/Drawer ($bog_ui_sheet) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/sheet/sheet.view.tree` — $mol_view with showed?/side attrs, Backdrop + Panel + Content
+- `bog/ui/sheet/sheet.view.ts` — backdrop_click() closes sheet via showed(false)
+- `bog/ui/sheet/sheet.view.css.ts` — Typed styles: fixed position, z-index 9999, backdrop/panel colors, overflow
+- `bog/ui/sheet/sheet.view.css` — Raw CSS: slide transitions (translateX/translateY) for all 4 sides, visibility toggle
+
+**Features:**
+- API: showed? false, side (top|right|bottom|left), content /
+- Position fixed with high z-index
+- Semi-transparent backdrop, click to close
+- CSS transitions for sliding from any edge
+- right/left: width 400px, max-width 80vw
+- top/bottom: height 50vh, max-height 50vh
+- Content scrolls via overflow-y auto on Panel
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
