@@ -596,6 +596,225 @@
 				"TASK-025"
 			],
 			"status": "done"
+		},
+		{
+			"id": "TASK-027",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: $bog_ui_app — резиновый layout демо-приложения",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex/grid, %, rem, min/max/clamp, container queries",
+				"$mol_book pages адаптируется: sidebar схлопывается в rail при малой ширине контейнера",
+				"Content_page растягивается на всю оставшуюся ширину (flex: 1)",
+				"На узком экране (~320px) sidebar скрыт, контент занимает 100%",
+				"На среднем (~768px) sidebar в режиме rail + контент",
+				"На широком (1200px+) sidebar dock + контент",
+				"Toolbar tools переносятся при нехватке места (flex-wrap)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок и @media в .css.ts файлах",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-015"],
+			"status": "done"
+		},
+		{
+			"id": "TASK-028",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: $bog_ui_sidebar — плавное масштабирование по ширине контейнера",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex, min/max-width, clamp(), overflow",
+				"dock mode: ширина clamp(180px, 20%, 280px) — растёт/сжимается с контейнером",
+				"rail mode: фиксированная min-width, label скрыт через overflow: hidden + width: 0",
+				"Items используют flex-shrink и text-overflow: ellipsis при сужении",
+				"Toggle кнопка всегда видна и доступна",
+				"Плавные CSS transitions при смене ширины"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media в sidebar/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-007"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-029",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: $bog_ui_sheet — drawer подстраивается под размер экрана",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только %, vw/vh, min/max, clamp()",
+				"right/left sheet: width clamp(280px, 80%, 480px) — не вылезает за экран",
+				"top/bottom sheet: height clamp(200px, 50vh, 70vh)",
+				"Контент внутри sheet скроллится если не помещается",
+				"Backdrop занимает 100vw × 100vh без overflow",
+				"На узких экранах sheet занимает почти всю ширину (80%)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media в sheet/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-008"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-030",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: $bog_ui_command — command palette подстраивается под экран",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только %, vw, min/max, clamp()",
+				"Ширина палитры: clamp(280px, 90%, 640px) — на узком экране почти на всю ширину",
+				"Max-height результатов: clamp(200px, 50vh, 400px) со скроллом",
+				"Search input занимает всю ширину палитры",
+				"Элементы списка не обрезаются, label truncate при нехватке места"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media в command/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-011"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-031",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: $bog_ui_table — таблица данных на любой ширине",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только %, min/max-width, overflow-x: auto",
+				"Таблица скроллится горизонтально при нехватке места (overflow-x: auto на контейнере)",
+				"Колонки имеют min-width чтобы не схлопывались до нуля",
+				"Заголовки sticky при горизонтальном скролле",
+				"Чекбокс-колонка фиксированной ширины, не сжимается",
+				"На широком экране таблица растягивается (width: 100%)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media в table/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-013"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-032",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Адаптивность: $bog_ui_toast_manager — тосты не вылезают за экран",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только %, vw, max-width, clamp()",
+				"Ширина тоста: clamp(250px, 90vw, 420px) — на узком экране почти вся ширина",
+				"Стак тостов не выходит за viewport",
+				"Текст тоста переносится (word-wrap: break-word)",
+				"Кнопка закрытия всегда видна, не обрезается"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media в toast/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-010"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-033",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Адаптивность: $bog_ui_badge — badge не ломается на узком контейнере",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Badge использует inline-flex, не ломает строку",
+				"Текст truncate (text-overflow: ellipsis) при max-width контейнера",
+				"Группа badge'ей переносится через flex-wrap"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-002"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-034",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Адаптивность: $bog_ui_empty — empty state центрируется на любом размере",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex, %, padding clamp()",
+				"Контейнер flex column center, занимает 100% родителя",
+				"Padding: clamp(1rem, 5%, 3rem) — сжимается на маленьком контейнере",
+				"Иконка масштабируется: clamp(2rem, 8vw, 4rem)",
+				"Текст message переносится, max-width: min(100%, 400px)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-003"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-035",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Адаптивность: $bog_ui_breadcrumb — хлебные крошки на узком экране",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex-wrap, overflow, text-overflow",
+				"На широком контейнере — одна строка",
+				"При нехватке места — последние крошки видны, начальные скрыты через overflow: hidden + flex-direction: row-reverse визуально",
+				"Или: горизонтальный скролл (overflow-x: auto, white-space: nowrap)",
+				"Разделители не обрезаются пополам"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-005"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-036",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Адаптивность: $bog_ui_skeleton — скелетон подстраивается под контейнер",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Ширина 100% родителя по умолчанию",
+				"Высота через min/max — не схлопывается и не раздувается",
+				"Группа скелетонов использует flex с gap, переносится при нехватке места"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-004"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-037",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: демо-страницы Overview и все demo pages — резиновый layout",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex-wrap, grid auto-fill/auto-fit, clamp()",
+				"Overview grid: grid-template-columns repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr))",
+				"Карточки компонентов растягиваются по сетке, не вылезают за контейнер",
+				"Демо-страницы каждого компонента: секции стакаются вертикально, примеры flex-wrap",
+				"Всё читаемо и кликабельно при ширине от 320px до 2560px"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие @media во всех app/*.css.ts",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-025"],
+			"status": "pending"
 		}
 	]
 }

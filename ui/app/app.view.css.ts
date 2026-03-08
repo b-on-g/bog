@@ -5,7 +5,9 @@ namespace $ {
 		Content_page: {
 			flex: {
 				grow: 1,
+				shrink: 1,
 			},
+			minWidth: 0,
 		},
 
 		Page_body: {

@@ -541,3 +541,26 @@
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
 **Commit:** `d6ca2d3` pushed to origin/master
+
+---
+
+### TASK-027: Adaptive Layout for $bog_ui_app — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/app/app.view.ts` — Added `size_watcher()` with ResizeObserver: auto-switches sidebar mode (hidden < 500px, rail < 900px, dock >= 900px); called from `sub()` with proper destructor cleanup
+- `bog/ui/app/app.view.css.ts` — Added `flex: { shrink: 1 }` and `minWidth: 0` to Content_page for flex overflow handling
+
+**Created files:**
+- `bog/ui/app/app.view.css` — Raw CSS: overrides $mol_book2's `flex-shrink: 0` on `[mol_page]` children to allow content to fill remaining width; adds `flex-wrap: wrap` on `[mol_page_head]` for toolbar tools wrapping
+
+**Features:**
+- No @media queries used — only ResizeObserver (DOM API), flex layout, and min-width
+- Sidebar auto-collapses: hidden on narrow (~320px), rail on medium (~768px), dock on wide (1200px+)
+- Content pages stretch to fill remaining width (flex-grow: 1, flex-shrink: 1, min-width: 0)
+- Toolbar tools wrap on narrow containers (flex-wrap: wrap on page head)
+- ResizeObserver properly cleaned up via $mol_mem destructor pattern
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"

@@ -31,5 +31,3 @@
 
 # Allow version component
 !version/
-!version/**/*.tree
-!version/**/*.ts

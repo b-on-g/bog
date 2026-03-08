@@ -2,7 +2,26 @@ namespace $.$$ {
 
 	export class $bog_ui_app extends $.$bog_ui_app {
 
+		@ $mol_mem
+		size_watcher() {
+			const node = this.dom_node()
+			const observer = new ResizeObserver( entries => {
+				const width = entries[0]?.contentRect.width ?? 0
+				if( width <= 0 ) return
+				if( width < 500 ) {
+					this.sidebar_mode( 'hidden' )
+				} else if( width < 900 ) {
+					this.sidebar_mode( 'rail' )
+				} else {
+					this.sidebar_mode( 'dock' )
+				}
+			} )
+			observer.observe( node )
+			return { destructor: () => observer.disconnect() }
+		}
+
 		sub() {
+			this.size_watcher()
 			return [
 				...this.pages(),
 				this.Command(),
