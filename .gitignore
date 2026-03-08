@@ -7,3 +7,18 @@
 !.gitattributes
 !README.md
 !LICENSE
+
+# Allow ui source code
+!ui/
+!ui/**/
+!ui/**/*.tree
+!ui/**/*.ts
+!ui/**/*.css
+!ui/**/*.html
+!ui/**/*.json
+!ui/**/*.md
+
+# But ignore build output
+ui/**/-/
+ui/**/-view.tree/
+ui/**/-node/

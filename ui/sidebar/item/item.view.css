@@ -1,0 +1,7 @@
+[bog_ui_sidebar_item]:not([bog_ui_sidebar_item_active="true"]):hover {
+	background: var(--mol_theme_card);
+}
+
+[bog_ui_sidebar_item_collapsed="true"] [bog_ui_sidebar_item_label] {
+	display: none;
+}

@@ -1,0 +1,14 @@
+$bog_ui_breadcrumb $mol_view
+	crumbs /
+	crumb_title* \
+	crumb_uri* \
+	Crumb* $mol_link
+		title <= crumb_title*
+		uri <= crumb_uri*
+	Sep* $mol_view
+		sub /
+			\›
+	Last $mol_view
+		sub /
+			<= last_title \
+	sub <= items /

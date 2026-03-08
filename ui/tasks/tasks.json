@@ -1,0 +1,578 @@
+{
+	"agent_instructions": {
+		"before_start": [
+			"Прочитай этот файл и git log --oneline -20",
+			"Выбери ОДНУ задачу со статусом pending и наивысшим приоритетом",
+			"Проверь, что все dependencies этой задачи имеют статус done"
+		],
+		"during_work": [
+			"Работай только над выбранной задачей",
+			"Делай коммиты после каждого логического изменения",
+			"Не трогай код, не связанный с текущей задачей"
+		],
+		"before_finish": [
+			"Выполни ВСЕ test_steps из задачи",
+			"Меняй status на done ТОЛЬКО после успешного прохождения всех тестов",
+			"Напиши summary в progress.md",
+			"ЗАПРЕЩЕНО удалять или редактировать задачи — только менять status"
+		]
+	},
+	"tasks": [
+		{
+			"id": "TASK-001",
+			"category": "infrastructure",
+			"priority": "critical",
+			"description": "Инициализация проекта bog/ui: meta.tree, index.html, корневой app компонент",
+			"acceptance_criteria": [
+				"Создан bog/ui/ui.meta.tree с namespace bog ui",
+				"Создан bog/ui/app/ с index.html, app.view.tree, app.view.ts, app.view.css.ts",
+				"app.view.tree: $bog_ui_app extends $mol_book с пустым pages",
+				"Проект собирается без ошибок: npx mam bog/ui/app",
+				"Страница открывается в браузере по адресу /bog/ui/app/"
+			],
+			"test_steps": [
+				"Шаг 1: cd /Users/cmyser/code/mam && npx mam bog/ui/app",
+				"Шаг 2: Проверить что нет error TS в выводе",
+				"Шаг 3: cat bog/ui/app/-/web.audit.js — должен содержать Audit passed"
+			],
+			"dependencies": [],
+			"status": "done"
+		},
+		{
+			"id": "TASK-002",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Badge ($bog_ui_badge) — метка с 5 цветовыми вариантами",
+			"acceptance_criteria": [
+				"Создан bog/ui/badge/ с badge.view.tree, badge.view.css.ts",
+				"API: label (текст), type (default|success|warning|error|info)",
+				"Стили через $mol_style_define, цвета через атрибут bog_ui_badge_type",
+				"Pill-форма (borderRadius: 9999px), inline-flex display",
+				"Default вариант использует $mol_theme.card/$mol_theme.text",
+				"Цветные варианты: hex цвета с альфа-каналом для фона и бордера"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-003",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Empty State ($bog_ui_empty) — placeholder для пустых страниц",
+			"acceptance_criteria": [
+				"Создан bog/ui/empty/ с empty.view.tree, empty.view.css.ts",
+				"API: Icon ($mol_icon_magnify по умолчанию), title, message, Action (null)",
+				"Flex column layout, center-aligned",
+				"Иконка 3rem, цвет $mol_theme.shade",
+				"Title bold, message shade цвет",
+				"Action slot — null по умолчанию (не показывается)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-004",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Skeleton ($bog_ui_skeleton) — loading placeholder с shimmer-анимацией",
+			"acceptance_criteria": [
+				"Создан bog/ui/skeleton/ с skeleton.view.tree, skeleton.view.css (raw CSS для @keyframes), skeleton.view.css.ts",
+				"Shimmer-анимация через CSS @keyframes (gradient slide)",
+				"Высота 1rem, ширина 100% по умолчанию",
+				"Скруглённые углы через $mol_gap.round",
+				"Фон $mol_theme.card"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-005",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Breadcrumb ($bog_ui_breadcrumb) — навигационные хлебные крошки",
+			"acceptance_criteria": [
+				"Создан bog/ui/breadcrumb/ с breadcrumb.view.tree, breadcrumb.view.ts, breadcrumb.view.css.ts",
+				"API: crumbs / (список), Crumb* $mol_link (мультисвойство)",
+				"Horizontal flex с gap",
+				"Разделитель › между элементами, цвет $mol_theme.shade",
+				"Последний элемент — текст (не ссылка), цвет $mol_theme.text"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-006",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Sidebar Item ($bog_ui_sidebar_item) — элемент навигации для sidebar",
+			"acceptance_criteria": [
+				"Создан bog/ui/sidebar/item/ с item.view.tree, item.view.css.ts",
+				"API: Icon $mol_icon, label (текст), active false, click?",
+				"Horizontal flex: иконка + label",
+				"Активный элемент выделен $mol_theme.current",
+				"Hover эффект через raw .view.css",
+				"Label скрывается через attr bog_ui_sidebar_item_collapsed"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "done"
+		},
+		{
+			"id": "TASK-007",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Sidebar ($bog_ui_sidebar) — боковая панель с 3 режимами",
+			"acceptance_criteria": [
+				"Создан bog/ui/sidebar/ с sidebar.view.tree, sidebar.view.ts, sidebar.view.css.ts, sidebar.view.css",
+				"API: mode? (dock|rail|hidden), items /, Header, Footer, Toggle",
+				"dock mode: 240px, иконки + текст",
+				"rail mode: 56px, только иконки",
+				"hidden mode: 0px, полностью скрыт",
+				"CSS transition при смене режимов (width, opacity)",
+				"Toggle кнопка переключает dock↔rail"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-006"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-008",
+			"category": "ui",
+			"priority": "high",
+			"description": "Компонент Sheet/Drawer ($bog_ui_sheet) — overlay-панель от края экрана",
+			"acceptance_criteria": [
+				"Создан bog/ui/sheet/ с sheet.view.tree, sheet.view.ts, sheet.view.css.ts, sheet.view.css",
+				"API: showed? false, side (top|right|bottom|left), content /",
+				"Position fixed, z-index высокий",
+				"Backdrop — полупрозрачный тёмный фон, click закрывает",
+				"CSS transition для выезжания (transform: translateX/translateY)",
+				"right/left: width 400px max 80vw; top/bottom: height 50vh max",
+				"Контент скроллится если не помещается"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-009",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Компонент Toast ($bog_ui_toast) — один тост-уведомление",
+			"acceptance_criteria": [
+				"Создан bog/ui/toast/ с toast.view.tree, toast.view.css.ts, toast.view.css",
+				"API: message, type (info|success|warning|error), closeable true",
+				"4 цветовых варианта через атрибут bog_ui_toast_type",
+				"Иконка слева по типу, текст, кнопка закрытия (×)",
+				"Анимация появления через raw CSS (slide-in)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-010",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Компонент Toast Manager ($bog_ui_toast_manager) — менеджер стака тостов",
+			"acceptance_criteria": [
+				"Создан bog/ui/toast/manager/ с manager.view.tree, manager.view.ts, manager.view.css.ts",
+				"API: toasts / (список активных), add(message, type), remove(id)",
+				"Position fixed, bottom-right",
+				"Тосты стакаются вертикально",
+				"Тосты закрываются ТОЛЬКО по кнопке × (БЕЗ auto-dismiss, БЕЗ setTimeout/setInterval!)",
+				"Максимум 5 видимых тостов"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-009"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-011",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Компонент Command Palette ($bog_ui_command) — поиск и выбор команд (⌘K)",
+			"acceptance_criteria": [
+				"Создан bog/ui/command/ с command.view.tree, command.view.ts, command.view.css.ts, command.view.css",
+				"API: showed? false, query?, commands /, filtered / (computed)",
+				"Overlay с backdrop, Search поле с автофокусом",
+				"Fuzzy-фильтрация по label команд",
+				"Группировка команд с заголовками секций",
+				"Keyboard: Esc закрывает, стрелки навигация, Enter выполняет",
+				"Текущий выделенный элемент подсвечен $mol_theme.current",
+				"Shortcut отображается справа (приглушённый)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-008"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-012",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Глобальный keyboard listener для Command Palette (Cmd+K / Ctrl+K)",
+			"acceptance_criteria": [
+				"В $bog_ui_app добавлен глобальный обработчик keydown",
+				"Cmd+K (Mac) / Ctrl+K (Windows) открывает Command Palette",
+				"Повторное нажатие закрывает",
+				"Не мешает другим обработчикам (preventDefault только при открытии)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-011"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-013",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Компонент Data Table ($bog_ui_table) — таблица данных с сортировкой",
+			"acceptance_criteria": [
+				"Создан bog/ui/table/ с table.view.tree, table.view.ts, table.view.css.ts",
+				"Extends $mol_grid для виртуализации",
+				"API: columns /, data /, sort_column?, sort_dir? (asc|desc)",
+				"Кликабельные заголовки для сортировки (если sortable)",
+				"Индикатор направления ▲/▼ в заголовке",
+				"Zebra striping через $mol_theme.card",
+				"Hover эффект на строках"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-001"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-014",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Data Table — чекбоксы для выбора строк",
+			"acceptance_criteria": [
+				"Добавлено свойство selectable false в $bog_ui_table",
+				"Когда selectable=true: чекбокс в каждой строке",
+				"Чекбокс Select All в заголовке",
+				"selected / — массив выбранных строк",
+				"Выбранные строки визуально подсвечены $mol_theme.current"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-013"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-015",
+			"category": "ui",
+			"priority": "high",
+			"description": "Demo App: навигация sidebar + router по компонентам",
+			"acceptance_criteria": [
+				"$bog_ui_app использует $mol_book для layout",
+				"Левая панель: $bog_ui_sidebar с элементами навигации для каждого компонента",
+				"URL-параметр ?component=badge для выбора компонента",
+				"Правая панель: демо выбранного компонента",
+				"Переключатель темы light/dark в toolbar (tools)"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-007"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-016",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Badge с вариациями",
+			"acceptance_criteria": [
+				"Создан bog/ui/app/badge/ (или секция в demo) для демо Badge",
+				"Показаны все 5 вариантов: default, success, warning, error, info",
+				"Заголовок секции и описание компонента"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-002",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-017",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Empty State с вариациями",
+			"acceptance_criteria": [
+				"Демо Empty State: стандартный, с кастомной иконкой, с Action кнопкой",
+				"Минимум 3 варианта"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-003",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-018",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Skeleton с вариациями",
+			"acceptance_criteria": [
+				"Демо Skeleton: одиночный, группа (имитация карточки), разные размеры",
+				"Минимум 3 варианта"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-004",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-019",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Breadcrumb с вариациями",
+			"acceptance_criteria": [
+				"Демо Breadcrumb: короткий путь (2 уровня), длинный (5 уровней)",
+				"Минимум 2 варианта"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-005",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-020",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Sidebar с переключением режимов",
+			"acceptance_criteria": [
+				"Демо Sidebar: кнопки для переключения dock/rail/hidden",
+				"Live-preview внутри ограниченного контейнера",
+				"Показаны все 3 режима"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-007",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-021",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Sheet/Drawer с кнопками открытия со всех сторон",
+			"acceptance_criteria": [
+				"Демо Sheet: 4 кнопки (top, right, bottom, left) для открытия",
+				"Каждая открывает Sheet с соответствующей стороны",
+				"Контент внутри Sheet — пример формы или текст"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-008",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-022",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Toast с кнопками для триггера разных типов",
+			"acceptance_criteria": [
+				"Демо Toast: 4 кнопки (info, success, warning, error)",
+				"Каждая добавляет тост соответствующего типа",
+				"Тосты стакаются и auto-dismiss"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-010",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-023",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Command Palette с примерами команд",
+			"acceptance_criteria": [
+				"Демо Command: кнопка 'Open Command Palette' и подсказка ⌘K",
+				"Набор демо-команд в 3 группах (Navigation, Actions, Settings)",
+				"Поиск фильтрует команды в реальном времени"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-012",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-024",
+			"category": "ui",
+			"priority": "medium",
+			"description": "Demo: страница Data Table с примером данных и сортировкой",
+			"acceptance_criteria": [
+				"Демо Table: таблица с 5 колонками, 20+ строк данных",
+				"Сортировка по клику на заголовок",
+				"Чекбоксы для выбора строк включены",
+				"Показан счётчик выбранных"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-014",
+				"TASK-015"
+			],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-025",
+			"category": "ui",
+			"priority": "low",
+			"description": "Demo: Overview страница со всеми компонентами в компактном виде",
+			"acceptance_criteria": [
+				"Overview — страница по умолчанию (без ?component=)",
+				"Grid layout с карточками для каждого компонента",
+				"Каждая карточка: миниатюрный пример + название + короткое описание",
+				"Клик по карточке переходит на страницу компонента"
+			],
+			"test_steps": [
+				"Шаг 1: Собрать проект npx mam bog/ui/app",
+				"Шаг 2: Проверить отсутствие TS ошибок",
+				"Шаг 3: Проверить web.audit.js — Audit passed"
+			],
+			"dependencies": [
+				"TASK-016",
+				"TASK-017",
+				"TASK-018",
+				"TASK-019",
+				"TASK-020",
+				"TASK-021",
+				"TASK-022",
+				"TASK-023",
+				"TASK-024"
+			],
+			"status": "pending"
+		}
+	]
+}
