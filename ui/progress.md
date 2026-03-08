@@ -952,3 +952,22 @@
 - Content inside sheet scrolls via overflow-y: auto on Panel
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-046: Adaptive Toast Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/app/toast/toast.view.css.ts` — Buttons container already has `flex: { wrap: 'wrap' }` and `gap: '.75rem'` (lines 26-30)
+- `bog/ui/toast/manager/manager.view.css` — Toast manager already uses `width: clamp(250px, 90vw, 420px)` (from TASK-032)
+- `bog/ui/toast/toast.view.css.ts` — Body already has `overflowWrap: 'break-word'`, `overflow: 'hidden'`, `minWidth: 0`, `flex: { shrink: 1 }` (from TASK-032)
+
+**All acceptance criteria met:**
+- No @media queries — only flex-wrap, clamp(), overflowWrap
+- Trigger buttons flex-wrap with gap for wrapping on narrow screens
+- Toast width: clamp(250px, 90vw, 420px) via raw CSS on manager
+- Toast text wraps via overflowWrap: break-word on Body
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
