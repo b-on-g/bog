@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"sources": [
-		"bog/version/version.view.tree"
-	],
-	"mappings": "AAAA;AAAA;AAAA,AAAA,0BAAa,uBAAb;AACU,AAAA,cAAS;AAAlB,AAAA,YAAS,YADV,YACU;AADV;AAAA;AAAA;",
-	"file": "version.view.tree.d.ts",
-	"sourceRoot": "../../.."
-}

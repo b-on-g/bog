@@ -23,3 +23,11 @@ ui/**/-/
 ui/**/-view.tree/
 ui/**/-node/
 ui/**/-css/
+
+# Allow version component
+!version/
+!version/**/*.tree
+!version/**/*.ts
+
+# But ignore build output
+version/**/-view.tree/
