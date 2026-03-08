@@ -21,9 +21,7 @@ namespace $ {
 			},
 		},
 		Label: {
-			white: {
-				space: 'nowrap',
-			},
+			whiteSpace: 'nowrap',
 			overflow: 'hidden',
 		},
 		'@': {

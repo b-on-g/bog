@@ -1,0 +1,98 @@
+namespace $.$$ {
+
+	export class $bog_ui_app extends $.$bog_ui_app {
+
+		@ $mol_mem
+		component( next?: string ) {
+			return $mol_state_arg.value( 'component', next ) ?? ''
+		}
+
+		@ $mol_mem
+		badge_active() {
+			return this.component() === 'badge'
+		}
+
+		@ $mol_mem
+		empty_active() {
+			return this.component() === 'empty'
+		}
+
+		@ $mol_mem
+		skeleton_active() {
+			return this.component() === 'skeleton'
+		}
+
+		@ $mol_mem
+		breadcrumb_active() {
+			return this.component() === 'breadcrumb'
+		}
+
+		@ $mol_mem
+		sidebar_active() {
+			return this.component() === 'sidebar'
+		}
+
+		@ $mol_mem
+		sheet_active() {
+			return this.component() === 'sheet'
+		}
+
+		@ $mol_action
+		nav_badge( next?: any ) {
+			if( next !== undefined ) this.component( 'badge' )
+			return null
+		}
+
+		@ $mol_action
+		nav_empty( next?: any ) {
+			if( next !== undefined ) this.component( 'empty' )
+			return null
+		}
+
+		@ $mol_action
+		nav_skeleton( next?: any ) {
+			if( next !== undefined ) this.component( 'skeleton' )
+			return null
+		}
+
+		@ $mol_action
+		nav_breadcrumb( next?: any ) {
+			if( next !== undefined ) this.component( 'breadcrumb' )
+			return null
+		}
+
+		@ $mol_action
+		nav_sidebar( next?: any ) {
+			if( next !== undefined ) this.component( 'sidebar' )
+			return null
+		}
+
+		@ $mol_action
+		nav_sheet( next?: any ) {
+			if( next !== undefined ) this.component( 'sheet' )
+			return null
+		}
+
+		@ $mol_mem
+		page_title() {
+			const titles: Record<string, string> = {
+				badge: 'Badge',
+				empty: 'Empty State',
+				skeleton: 'Skeleton',
+				breadcrumb: 'Breadcrumb',
+				sidebar: 'Sidebar',
+				sheet: 'Sheet',
+			}
+			return titles[ this.component() ] ?? 'Components'
+		}
+
+		@ $mol_mem
+		page_text() {
+			const comp = this.component()
+			if( !comp ) return 'Select a component from the sidebar'
+			return `Demo for ${ this.page_title() } component`
+		}
+
+	}
+
+}

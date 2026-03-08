@@ -1,2 +1,46 @@
 $bog_ui_app $mol_book2
+	plugins /
+		^
+		<= Theme $mol_theme_auto
 	pages /
+		<= Nav $bog_ui_sidebar
+			mode? <=> sidebar_mode? \dock
+			items /
+				<= Badge_nav $bog_ui_sidebar_item
+					Icon <= Badge_icon $mol_icon_tag
+					label \Badge
+					active <= badge_active false
+					click? <=> nav_badge? null
+				<= Empty_nav $bog_ui_sidebar_item
+					Icon <= Empty_icon $mol_icon_file
+					label \Empty State
+					active <= empty_active false
+					click? <=> nav_empty? null
+				<= Skeleton_nav $bog_ui_sidebar_item
+					Icon <= Skeleton_icon $mol_icon_rectangle
+					label \Skeleton
+					active <= skeleton_active false
+					click? <=> nav_skeleton? null
+				<= Breadcrumb_nav $bog_ui_sidebar_item
+					Icon <= Breadcrumb_icon $mol_icon_navigation
+					label \Breadcrumb
+					active <= breadcrumb_active false
+					click? <=> nav_breadcrumb? null
+				<= Sidebar_nav $bog_ui_sidebar_item
+					Icon <= Sidebar_icon $mol_icon_dock_left
+					label \Sidebar
+					active <= sidebar_active false
+					click? <=> nav_sidebar? null
+				<= Sheet_nav $bog_ui_sidebar_item
+					Icon <= Sheet_icon $mol_icon_card
+					label \Sheet
+					active <= sheet_active false
+					click? <=> nav_sheet? null
+		<= Content_page $mol_page
+			title <= page_title \Components
+			tools /
+				<= Theme_toggle $mol_lights_toggle
+			body /
+				<= Page_body $mol_view
+					sub /
+						<= page_text \Select a component from the sidebar
