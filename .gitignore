@@ -15,6 +15,7 @@
 !ui/**/*.ts
 !ui/**/*.css
 !ui/**/*.html
+!ui/**/*.svg
 !ui/**/*.json
 !ui/**/*.md
 
