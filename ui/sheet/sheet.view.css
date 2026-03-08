@@ -19,8 +19,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	width: 400px;
-	max-width: 80vw;
+	width: clamp(280px, 80%, 480px);
 	transform: translateX(100%);
 }
 
@@ -33,8 +32,7 @@
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 400px;
-	max-width: 80vw;
+	width: clamp(280px, 80%, 480px);
 	transform: translateX(-100%);
 }
 
@@ -47,8 +45,7 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 50vh;
-	max-height: 50vh;
+	height: clamp(200px, 50vh, 70vh);
 	transform: translateY(-100%);
 }
 
@@ -61,8 +58,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	height: 50vh;
-	max-height: 50vh;
+	height: clamp(200px, 50vh, 70vh);
 	transform: translateY(100%);
 }
 
