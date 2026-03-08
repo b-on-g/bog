@@ -1022,9 +1022,12 @@
 }
 </style><style id="$mol_style_attach:$bog_ui_skeleton">[bog_ui_skeleton] {
 	height: 1rem;
+	min-height: 0.25rem;
+	max-height: 4rem;
 	width: 100%;
 	border-radius: 0.5rem;
 	background-color: var(--mol_theme_card);
+	flex-shrink: 0;
 }
 </style><style id="$mol_style_attach:$bog_ui_app_skeleton">[bog_ui_app_skeleton] {
 	padding: var(--mol_gap_block);
@@ -1084,6 +1087,7 @@
 [bog_ui_app_skeleton_sizes] {
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 	gap: .75rem;
 }
 [bog_ui_app_skeleton_size_small] {
