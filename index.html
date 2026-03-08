@@ -948,6 +948,10 @@
 [bog_ui_empty] > [bog_ui_empty_icon] {
 	font-size: clamp(2rem, 8vw, 4rem);
 }
+
+[bog_ui_empty] > [bog_ui_empty_message] {
+	max-width: min(100%, 400px);
+}
 </style><style id="$mol_style_attach:$bog_ui_empty">[bog_ui_empty] {
 	display: flex;
 	flex-direction: column;
@@ -974,8 +978,6 @@
 	color: var(--mol_theme_shade);
 	font-size: .875rem;
 	text-align: center;
-	max-width: 400px;
-	width: 100%;
 }
 </style><style id="$mol_style_attach:mol/button/major/major.view.css">[mol_button_major] {
 	background-color: var(--mol_theme_back);
@@ -983,28 +985,22 @@
 }
 </style><style id="$mol_style_attach:$bog_ui_app_empty">[bog_ui_app_empty] {
 	padding: var(--mol_gap_block);
+	gap: 1.5rem;
 }
 [bog_ui_app_empty_description] {
 	color: var(--mol_theme_shade);
-	padding-bottom: 1rem;
 }
 [bog_ui_app_empty_section_default] {
 	font-size: 1.125rem;
 	font-weight: bold;
-	padding-top: .5rem;
-	padding-bottom: .75rem;
 }
 [bog_ui_app_empty_section_custom] {
 	font-size: 1.125rem;
 	font-weight: bold;
-	padding-top: 1.5rem;
-	padding-bottom: .75rem;
 }
 [bog_ui_app_empty_section_action] {
 	font-size: 1.125rem;
 	font-weight: bold;
-	padding-top: 1.5rem;
-	padding-bottom: .75rem;
 }
 </style><style id="$mol_style_attach:bog/ui/skeleton/skeleton.view.css">@keyframes bog_ui_skeleton_shimmer {
 	0% {

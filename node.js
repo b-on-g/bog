@@ -7868,7 +7868,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/empty/empty.view.css", "[bog_ui_empty] {\n\tpadding: clamp(1rem, 5%, 3rem);\n}\n\n[bog_ui_empty] > [bog_ui_empty_icon] {\n\tfont-size: clamp(2rem, 8vw, 4rem);\n}\n");
+    $mol_style_attach("bog/ui/empty/empty.view.css", "[bog_ui_empty] {\n\tpadding: clamp(1rem, 5%, 3rem);\n}\n\n[bog_ui_empty] > [bog_ui_empty_icon] {\n\tfont-size: clamp(2rem, 8vw, 4rem);\n}\n\n[bog_ui_empty] > [bog_ui_empty_message] {\n\tmax-width: min(100%, 400px);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -7915,8 +7915,6 @@ var $;
                 size: '.875rem',
             },
             textAlign: 'center',
-            maxWidth: '400px',
-            width: '100%',
         },
     });
 })($ || ($ = {}));
@@ -8077,20 +8075,14 @@ var $;
 (function ($) {
     $mol_style_define($bog_ui_app_empty, {
         padding: $mol_gap.block,
+        gap: '1.5rem',
         Description: {
             color: $mol_theme.shade,
-            padding: {
-                bottom: '1rem',
-            },
         },
         Section_default: {
             font: {
                 size: '1.125rem',
                 weight: 'bold',
-            },
-            padding: {
-                top: '.5rem',
-                bottom: '.75rem',
             },
         },
         Section_custom: {
@@ -8098,19 +8090,11 @@ var $;
                 size: '1.125rem',
                 weight: 'bold',
             },
-            padding: {
-                top: '1.5rem',
-                bottom: '.75rem',
-            },
         },
         Section_action: {
             font: {
                 size: '1.125rem',
                 weight: 'bold',
-            },
-            padding: {
-                top: '1.5rem',
-                bottom: '.75rem',
             },
         },
     });
