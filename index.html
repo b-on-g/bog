@@ -1922,7 +1922,7 @@
 }
 [bog_ui_app_overview_grid] {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
 	gap: 1rem;
 	padding-top: 0.5rem;
 }
@@ -1955,6 +1955,7 @@
 	padding-top: 0.75rem;
 	padding-left: 1rem;
 	padding-right: 1rem;
+	overflow-wrap: break-word;
 }
 [bog_ui_app_overview_card_card_desc] {
 	font-size: 0.8125rem;
@@ -1963,6 +1964,7 @@
 	padding-bottom: 0.75rem;
 	padding-left: 1rem;
 	padding-right: 1rem;
+	overflow-wrap: break-word;
 }
 </style><style id="$mol_style_attach:bog/ui/app/app.view.css">/* Content pages fill remaining space (override $mol_book2 flex-shrink: 0) */
 [bog_ui_app] > [mol_page] {

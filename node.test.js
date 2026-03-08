@@ -12542,7 +12542,7 @@ var $;
         },
         Grid: {
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
             gap: '1rem',
             padding: {
                 top: '0.5rem',
@@ -12597,6 +12597,7 @@ var $;
                 left: '1rem',
                 right: '1rem',
             },
+            overflowWrap: 'break-word',
         },
         Card_desc: {
             font: {
@@ -12609,6 +12610,7 @@ var $;
                 left: '1rem',
                 right: '1rem',
             },
+            overflowWrap: 'break-word',
         },
     });
 })($ || ($ = {}));
