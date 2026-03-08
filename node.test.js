@@ -5880,7 +5880,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/sidebar/item/item.view.css", "[bog_ui_sidebar_item]:not([bog_ui_sidebar_item_active=\"true\"]):hover {\n\tbackground: var(--mol_theme_card);\n}\n\n[bog_ui_sidebar_item_collapsed=\"true\"] [bog_ui_sidebar_item_label] {\n\tdisplay: none;\n}\n");
+    $mol_style_attach("bog/ui/sidebar/item/item.view.css", "[bog_ui_sidebar_item]:not([bog_ui_sidebar_item_active=\"true\"]):hover {\n\tbackground: var(--mol_theme_card);\n}\n\n[bog_ui_sidebar_item_label] {\n\ttransition: width 0.2s ease, opacity 0.15s ease;\n}\n\n[bog_ui_sidebar_item_collapsed=\"true\"] [bog_ui_sidebar_item_label] {\n\twidth: 0;\n\toverflow: hidden;\n\topacity: 0;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -5892,6 +5892,9 @@ var $;
 (function ($) {
     $mol_style_define($bog_ui_sidebar_item, {
         display: 'flex',
+        flex: {
+            shrink: 1,
+        },
         align: {
             items: 'center',
         },
@@ -5906,6 +5909,7 @@ var $;
             radius: $mol_gap.round,
         },
         color: $mol_theme.text,
+        overflow: 'hidden',
         Icon: {
             flex: {
                 shrink: 0,
@@ -5914,6 +5918,10 @@ var $;
         Label: {
             whiteSpace: 'nowrap',
             overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            flex: {
+                shrink: 1,
+            },
         },
         '@': {
             bog_ui_sidebar_item_active: {
@@ -6393,7 +6401,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/sidebar/sidebar.view.css", "[bog_ui_sidebar] {\n\ttransition: width 0.2s ease, min-width 0.2s ease;\n}\n\n[bog_ui_sidebar_mode=\"dock\"] {\n\twidth: 240px;\n\tmin-width: 240px;\n}\n\n[bog_ui_sidebar_mode=\"rail\"] {\n\twidth: 56px;\n\tmin-width: 56px;\n}\n\n[bog_ui_sidebar_mode=\"hidden\"] {\n\twidth: 0;\n\tmin-width: 0;\n\tpadding: 0;\n\toverflow: hidden;\n}\n\n[bog_ui_sidebar_mode=\"hidden\"] > * {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n[bog_ui_sidebar_mode] > * {\n\ttransition: opacity 0.15s ease;\n}\n");
+    $mol_style_attach("bog/ui/sidebar/sidebar.view.css", "[bog_ui_sidebar] {\n\ttransition: width 0.2s ease, min-width 0.2s ease;\n}\n\n[bog_ui_sidebar_mode=\"dock\"] {\n\twidth: clamp(180px, 20%, 280px);\n\tmin-width: clamp(180px, 20%, 280px);\n}\n\n[bog_ui_sidebar_mode=\"rail\"] {\n\twidth: 56px;\n\tmin-width: 56px;\n}\n\n[bog_ui_sidebar_mode=\"hidden\"] {\n\twidth: 0;\n\tmin-width: 0;\n\tpadding: 0;\n\toverflow: hidden;\n}\n\n[bog_ui_sidebar_mode=\"hidden\"] > * {\n\topacity: 0;\n\tpointer-events: none;\n}\n\n[bog_ui_sidebar_mode] > * {\n\ttransition: opacity 0.15s ease;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -6445,6 +6453,9 @@ var $;
             },
         },
         Toggle: {
+            flex: {
+                shrink: 0,
+            },
             align: {
                 self: 'flex-start',
             },

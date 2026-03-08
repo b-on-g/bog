@@ -464,11 +464,18 @@
 	background: var(--mol_theme_card);
 }
 
+[bog_ui_sidebar_item_label] {
+	transition: width 0.2s ease, opacity 0.15s ease;
+}
+
 [bog_ui_sidebar_item_collapsed="true"] [bog_ui_sidebar_item_label] {
-	display: none;
+	width: 0;
+	overflow: hidden;
+	opacity: 0;
 }
 </style><style id="$mol_style_attach:$bog_ui_sidebar_item">[bog_ui_sidebar_item] {
 	display: flex;
+	flex-shrink: 1;
 	align-items: center;
 	gap: .75rem;
 	padding-top: .5rem;
@@ -477,6 +484,7 @@
 	padding-right: .75rem;
 	border-radius: var(--mol_gap_round);
 	color: var(--mol_theme_text);
+	overflow: hidden;
 }
 [bog_ui_sidebar_item_icon] {
 	flex-shrink: 0;
@@ -484,6 +492,8 @@
 [bog_ui_sidebar_item_label] {
 	white-space: nowrap;
 	overflow: hidden;
+	text-overflow: ellipsis;
+	flex-shrink: 1;
 }
 [bog_ui_sidebar_item]:where([bog_ui_sidebar_item_active="true"]) {
 	background-color: var(--mol_theme_current);
@@ -514,8 +524,8 @@
 }
 
 [bog_ui_sidebar_mode="dock"] {
-	width: 240px;
-	min-width: 240px;
+	width: clamp(180px, 20%, 280px);
+	min-width: clamp(180px, 20%, 280px);
 }
 
 [bog_ui_sidebar_mode="rail"] {
@@ -568,6 +578,7 @@
 	padding-right: .75rem;
 }
 [bog_ui_sidebar_toggle] {
+	flex-shrink: 0;
 	align-self: flex-start;
 	padding-top: .5rem;
 	padding-bottom: .5rem;
