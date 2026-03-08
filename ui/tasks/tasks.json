@@ -710,7 +710,7 @@
 			"dependencies": [
 				"TASK-013"
 			],
-			"status": "pending"
+			"status": "done"
 		},
 		{
 			"id": "TASK-032",
@@ -836,7 +836,7 @@
 			"dependencies": [
 				"TASK-025"
 			],
-			"status": "pending"
+			"status": "done"
 		}
 	]
 }

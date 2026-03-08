@@ -25,6 +25,9 @@ namespace $ {
 		Open_row: {
 			display: 'flex',
 			gap: '.75rem',
+			flex: {
+				wrap: 'wrap',
+			},
 			align: {
 				items: 'center',
 			},

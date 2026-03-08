@@ -49,6 +49,7 @@ namespace $ {
 				color: $mol_theme.card,
 			},
 			borderRadius: '0.5rem',
+			maxWidth: '100%',
 		},
 
 		Card_avatar: {

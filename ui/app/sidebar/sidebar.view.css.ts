@@ -25,6 +25,9 @@ namespace $ {
 		Mode_buttons: {
 			display: 'flex',
 			gap: '.75rem',
+			flex: {
+				wrap: 'wrap',
+			},
 			padding: {
 				bottom: '.5rem',
 			},
@@ -42,6 +45,9 @@ namespace $ {
 
 		Preview: {
 			display: 'flex',
+			flex: {
+				wrap: 'wrap',
+			},
 			border: {
 				width: '1px',
 				style: 'solid',
@@ -49,7 +55,7 @@ namespace $ {
 			},
 			borderRadius: '0.5rem',
 			overflow: 'hidden',
-			minHeight: '300px',
+			minHeight: '200px',
 		},
 
 		Preview_content: {

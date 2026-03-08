@@ -632,3 +632,49 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-031: Adaptive Table ($bog_ui_table) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/table/table.view.css.ts` — Added `overflow: { x: 'auto' }`, `width: '100%'` on root; `minWidth: '100px'` on Col_head and Cell_text; `minWidth: '80px'` on Cell_number; fixed `width: '3rem'` + `flex: { shrink: 0, grow: 0 }` on Select_all and Select_row
+- `bog/ui/table/table.view.css` — Added `[mol_grid_col_id="__select"]` selector with fixed 3rem width and flex-shrink: 0 for checkbox column header
+
+**Features:**
+- No @media queries — only overflow, min-width, %, flex
+- Horizontal scroll via `overflow-x: auto` when table exceeds container width
+- Column min-widths prevent collapse: 100px for text, 80px for numbers
+- Sticky header preserved (position: sticky, top: 0) — scrolls with content horizontally
+- Checkbox column fixed at 3rem width, never shrinks (flex-shrink: 0)
+- On wide screens table stretches to 100% (width: 100%)
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `8588a53` pushed to origin/master
+
+---
+
+### TASK-037: Adaptive Demo Pages & Overview — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/app/overview/overview.view.css.ts` — Grid: `minmax(260px, 1fr)` → `minmax(clamp(200px, 30%, 320px), 1fr)` for fluid card sizing
+- `bog/ui/app/command/command.view.css.ts` — Added `flex: { wrap: 'wrap' }` to Open_row
+- `bog/ui/app/sidebar/sidebar.view.css.ts` — Added `flex: { wrap: 'wrap' }` to Mode_buttons and Preview; Preview minHeight reduced to 200px
+- `bog/ui/app/skeleton/skeleton.view.css.ts` — Added `maxWidth: '100%'` to Card to prevent overflow
+- `bog/ui/app/table/table.view.css.ts` — Changed Table `flex: { shrink: 0 }` → `{ shrink: 1 }`, added `overflow: { x: 'auto' }` and `minWidth: 0`
+
+**Features:**
+- No @media queries — only flex-wrap, grid auto-fill with clamp(), overflow
+- Overview grid: `repeat(auto-fill, minmax(clamp(200px, 30%, 320px), 1fr))` — cards adapt from 200px to 320px
+- Cards don't overflow container (overflow: hidden on cards)
+- Demo pages: button rows flex-wrap (command, sidebar, sheet, toast all have wrap)
+- Table demo allows shrinking with horizontal scroll overflow
+- Skeleton card constrained by maxWidth: 100%
+- All readable and clickable from 320px to 2560px width
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"

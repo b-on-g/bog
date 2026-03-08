@@ -24,8 +24,12 @@ namespace $ {
 
 		Table: {
 			flex: {
-				shrink: 0,
+				shrink: 1,
 			},
+			overflow: {
+				x: 'auto',
+			},
+			minWidth: 0,
 		},
 
 	} )
