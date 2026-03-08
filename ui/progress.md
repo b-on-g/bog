@@ -848,3 +848,44 @@
 - Sections stack vertically via $mol_page body flex column
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-041: Adaptive Empty State Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/app/empty/empty.view.css.ts` — Replaced individual section paddings with `gap: '1.5rem'` on root for consistent vertical stacking between variants
+- `bog/ui/empty/empty.view.css.ts` — Removed `maxWidth: '400px'` and `width: '100%'` from Message (moved to raw CSS)
+- `bog/ui/empty/empty.view.css` — Added `max-width: min(100%, 400px)` on Message via raw CSS (typed styles don't accept CSS `min()` function)
+
+**Features:**
+- No @media queries — only flex, gap, min() in raw CSS
+- Empty state centered in container (component flex column center — from TASK-034)
+- Padding: clamp(1rem, 5%, 3rem) via raw CSS (from TASK-034)
+- Message text wraps with max-width: min(100%, 400px) — constrains to 400px or container width
+- Multiple variants stack vertically with gap: 1.5rem
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `d8f6c72` pushed to origin/master
+
+---
+
+### TASK-042: Adaptive Skeleton Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/skeleton/skeleton.view.css.ts` — width: 100%, minHeight: 0.25rem, maxHeight: 4rem, flex-shrink: 0 (from TASK-036)
+- `bog/ui/app/skeleton/skeleton.view.css.ts` — Card: maxWidth 100%, flex column with gap; Sizes: flex column with wrap; individual size heights (0.5/1/2rem)
+- `bog/ui/app/skeleton/skeleton.view.tree` — 3 sections stacking vertically via $mol_page body: Single Line, Card Placeholder, Different Sizes
+
+**All acceptance criteria met:**
+- No @media queries — only flex, width %, maxWidth, minHeight/maxHeight
+- Skeletons width: 100% of container (skeleton component default)
+- Groups stack vertically (Card: flex column, Sizes: flex column, $mol_page body: flex column)
+- Different sizes (0.5rem, 1rem, 2rem) display correctly at 320px — width 100% scales to container
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
