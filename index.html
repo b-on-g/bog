@@ -1128,17 +1128,29 @@
 </style><style id="$mol_style_attach:$bog_ui_breadcrumb">[bog_ui_breadcrumb] {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
+	flex-shrink: 1;
 	align-items: center;
 	gap: .5rem;
 	font-size: .875rem;
+	overflow-x: auto;
+	white-space: nowrap;
+	min-width: 0;
+}
+[bog_ui_breadcrumb_crumb] {
+	flex-shrink: 0;
+	white-space: nowrap;
 }
 [bog_ui_breadcrumb_sep] {
 	color: var(--mol_theme_shade);
+	flex-shrink: 0;
+	white-space: nowrap;
 }
 [bog_ui_breadcrumb_last] {
 	color: var(--mol_theme_text);
 	font-weight: 500;
+	flex-shrink: 0;
+	white-space: nowrap;
 }
 </style><style id="$mol_style_attach:$bog_ui_app_breadcrumb">[bog_ui_app_breadcrumb] {
 	padding: var(--mol_gap_block);
