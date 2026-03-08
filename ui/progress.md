@@ -310,3 +310,28 @@
 - Integrated into app router via switch/case in pages()
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-018: Demo Skeleton Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/app/skeleton/skeleton.view.tree` — $mol_page with 3 Skeleton demo variants (single line, card placeholder, different sizes)
+- `bog/ui/app/skeleton/skeleton.view.css.ts` — Styled with padding, shade description, bold section titles, card container, custom skeleton sizes
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Skeleton_page $bog_ui_app_skeleton declaration
+- `bog/ui/app/app.view.ts` — Updated pages() to route to Skeleton_page when component==='skeleton'
+- `bog/ui/skeleton/skeleton.view.css.ts` — Fixed TS errors: `border.radius` → `borderRadius: '0.5rem'`, moved gradient to raw CSS
+- `bog/ui/skeleton/skeleton.view.css` — Added background-image and background-size for shimmer gradient
+
+**Features:**
+- 3 demo variants: Single Line (default skeleton), Card Placeholder (avatar + title + 3 text lines), Different Sizes (small 0.5rem, medium 1rem, large 2rem)
+- Each variant has a section title
+- Card variant shows grouped skeletons in a card container with rounded corners
+- Component description at top
+- Integrated into app router via switch/case in pages()
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
