@@ -519,3 +519,25 @@
 - Hover effect on cards (box-shadow)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-026: GitHub Actions Deploy — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, committed & pushed.
+
+**File:** `bog/.github/workflows/deploy.yml` (already existed, committed)
+
+**Also modified:**
+- `.gitignore` — Added rules to allow `.github/` directory through gitignore
+
+**Features:**
+- Workflow name: `$bog_ui`
+- Uses `hyoo-ru/mam_build@master2` with `package: 'bog/ui'`, `modules: 'app'`
+- Deploys via `hyoo-ru/gh-deploy@v4.4.1` from `bog/ui/app/-`
+- Deploy only from master branch (`if: github.ref == 'refs/heads/master'`)
+- Triggers: push, pull_request, workflow_dispatch, daily schedule (cron)
+- Permissions: write-all
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `d6ca2d3` pushed to origin/master

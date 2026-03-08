@@ -20,6 +20,10 @@ jobs:
         package: 'bog/ui'
         modules: 'app'
 
+    - uses: b-on-g/mol-prerender-action@master
+      with:
+        base-url: 'https://b-on-g.github.io/bog/ui/app/-/'
+
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
       with:

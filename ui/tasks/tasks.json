@@ -573,6 +573,29 @@
 				"TASK-024"
 			],
 			"status": "done"
+		},
+		{
+			"id": "TASK-026",
+			"category": "infrastructure",
+			"priority": "high",
+			"description": "Деплой bog/ui/app как статический сайт через GitHub Actions",
+			"acceptance_criteria": [
+				"Создан bog/.github/workflows/deploy.yml",
+				"Workflow использует hyoo-ru/mam_build@master2 с package: 'bog/ui' modules: 'app'",
+				"Деплой через hyoo-ru/gh-deploy@v4.4.1 из папки bog/ui/app/-",
+				"Деплой только из ветки master",
+				"Workflow запускается на push, pull_request и workflow_dispatch",
+				"Статический сайт доступен через GitHub Pages"
+			],
+			"test_steps": [
+				"Шаг 1: Проверить что bog/.github/workflows/deploy.yml существует и синтаксис корректный",
+				"Шаг 2: git push и проверить что GitHub Action запускается",
+				"Шаг 3: Проверить что сайт доступен на GitHub Pages"
+			],
+			"dependencies": [
+				"TASK-025"
+			],
+			"status": "done"
 		}
 	]
 }
