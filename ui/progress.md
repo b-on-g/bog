@@ -889,3 +889,22 @@
 - Different sizes (0.5rem, 1rem, 2rem) display correctly at 320px — width 100% scales to container
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-043: Adaptive Breadcrumb Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/breadcrumb/breadcrumb.view.css.ts` — overflow-x: auto, flex-wrap: nowrap, flex-shrink: 1, minWidth: 0 on root; flex-shrink: 0 + whiteSpace: nowrap on Crumb, Sep, Last (from TASK-035)
+- `bog/ui/app/breadcrumb/breadcrumb.view.tree` — 2 sections (Short Path, Long Path) stacking vertically via $mol_page body flex column
+- `bog/ui/app/breadcrumb/breadcrumb.view.css.ts` — padding, description styles, section titles
+
+**All acceptance criteria met:**
+- No @media queries — only flex, overflow-x, whiteSpace, minWidth
+- Breadcrumb has overflow-x: auto — long paths scroll horizontally on narrow screens
+- Long paths don't break layout (minWidth: 0 + overflow-x: auto on component)
+- Separators not clipped (flex-shrink: 0 on Sep, Crumb, Last elements)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
