@@ -8753,6 +8753,8 @@ var $;
             flex: {
                 wrap: 'wrap',
             },
+            width: '100%',
+            boxSizing: 'border-box',
             border: {
                 width: '1px',
                 style: 'solid',
