@@ -20,7 +20,7 @@ jobs:
         package: 'bog/ui'
         modules: 'app'
 
-    - uses: b-on-g/mol-prerender-action@master
+    - uses: b-on-g/mol-prerender-action@main
       with:
         base-url: 'https://b-on-g.github.io/bog/ui/app/-/'
 
