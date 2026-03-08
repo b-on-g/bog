@@ -5322,6 +5322,9 @@ declare namespace $ {
 //# sourceMappingURL=app.view.tree.d.ts.map
 declare namespace $.$$ {
     class $bog_ui_app extends $.$bog_ui_app {
+        size_watcher(): {
+            destructor: () => void;
+        };
         sub(): any[];
         global_keydown(event?: KeyboardEvent): null;
         component(next?: string): string;
@@ -5349,6 +5352,9 @@ declare namespace $.$$ {
         page_text(): string;
         pages(): any[];
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {

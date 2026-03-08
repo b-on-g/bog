@@ -12524,7 +12524,27 @@ var $;
     var $$;
     (function ($$) {
         class $bog_ui_app extends $.$bog_ui_app {
+            size_watcher() {
+                const node = this.dom_node();
+                const observer = new ResizeObserver(entries => {
+                    const width = entries[0]?.contentRect.width ?? 0;
+                    if (width <= 0)
+                        return;
+                    if (width < 500) {
+                        this.sidebar_mode('hidden');
+                    }
+                    else if (width < 900) {
+                        this.sidebar_mode('rail');
+                    }
+                    else {
+                        this.sidebar_mode('dock');
+                    }
+                });
+                observer.observe(node);
+                return { destructor: () => observer.disconnect() };
+            }
             sub() {
+                this.size_watcher();
                 return [
                     ...this.pages(),
                     this.Command(),
@@ -12684,6 +12704,9 @@ var $;
             }
         }
         __decorate([
+            $mol_mem
+        ], $bog_ui_app.prototype, "size_watcher", null);
+        __decorate([
             $mol_action
         ], $bog_ui_app.prototype, "global_keydown", null);
         __decorate([
@@ -12766,11 +12789,20 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("bog/ui/app/app.view.css", "/* Content pages fill remaining space (override $mol_book2 flex-shrink: 0) */\n[bog_ui_app] > [mol_page] {\n\tflex-shrink: 1;\n\tflex-grow: 1;\n\tmin-width: 0;\n}\n\n/* Toolbar tools wrap when not enough space */\n[bog_ui_app] [mol_page_head] {\n\tflex-wrap: wrap;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     $mol_style_define($bog_ui_app, {
         Content_page: {
             flex: {
                 grow: 1,
+                shrink: 1,
             },
+            minWidth: 0,
         },
         Page_body: {
             padding: $mol_gap.block,
