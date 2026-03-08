@@ -2,6 +2,9 @@ namespace $ {
 
 	$mol_style_define( $bog_ui_table , {
 
+		overflow: { x: 'auto' },
+		width: '100%',
+
 		Head: {
 			background: {
 				color: $mol_theme.back ,
@@ -30,6 +33,7 @@ namespace $ {
 				width: 0,
 				color: $mol_theme.line,
 			},
+			minWidth: '100px',
 		},
 
 		Row: {
@@ -47,6 +51,7 @@ namespace $ {
 				left: '0.75rem',
 				right: '0.75rem',
 			},
+			minWidth: '100px',
 		},
 
 		Cell_number: {
@@ -57,6 +62,23 @@ namespace $ {
 				right: '0.75rem',
 			},
 			textAlign: 'right',
+			minWidth: '80px',
+		},
+
+		Select_all: {
+			flex: {
+				shrink: 0,
+				grow: 0,
+			},
+			width: '3rem',
+		},
+
+		Select_row: {
+			flex: {
+				shrink: 0,
+				grow: 0,
+			},
+			width: '3rem',
 		},
 
 	} )
