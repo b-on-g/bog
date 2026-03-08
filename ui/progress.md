@@ -971,3 +971,23 @@
 - Toast text wraps via overflowWrap: break-word on Body
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-047: Adaptive Command Palette Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/command/command.view.css` — Dialog already uses `width: clamp(280px, 90%, 640px)` (line 14); Results already uses `max-height: clamp(200px, 50vh, 400px)` (line 28)
+- `bog/ui/command/command.view.css.ts` — Results has `overflow: { y: 'auto' }` for scroll (line 55); Search stretches in flex column Dialog; Label has `overflow: 'hidden'`, `textOverflow: 'ellipsis'`, `whiteSpace: 'nowrap'` (lines 113-115)
+- `bog/ui/app/command/command.view.css.ts` — Open_row has `flex: { wrap: 'wrap' }` (line 29); no @media queries
+
+**All acceptance criteria met:**
+- No @media queries — only flex-wrap, clamp(), overflow
+- Palette width: clamp(280px, 90%, 640px) via raw CSS on Dialog (from TASK-030)
+- Results max-height: clamp(200px, 50vh, 400px) with overflow-y: auto scroll (from TASK-030)
+- Search input takes 100% palette width (flex column child in Dialog)
+- Label commands: text-overflow ellipsis with overflow hidden and whiteSpace nowrap (from TASK-030)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
