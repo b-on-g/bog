@@ -941,19 +941,28 @@
 	gap: .75rem;
 	align-items: center;
 }
+</style><style id="$mol_style_attach:bog/ui/empty/empty.view.css">[bog_ui_empty] {
+	padding: clamp(1rem, 5%, 3rem);
+}
+
+[bog_ui_empty] > [bog_ui_empty_icon] {
+	font-size: clamp(2rem, 8vw, 4rem);
+}
 </style><style id="$mol_style_attach:$bog_ui_empty">[bog_ui_empty] {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
+	height: 100%;
 	gap: 1rem;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 	padding-left: 2rem;
 	padding-right: 2rem;
+	box-sizing: border-box;
 }
 [bog_ui_empty_icon] {
-	font-size: 3rem;
 	color: var(--mol_theme_shade);
 }
 [bog_ui_empty_title] {
@@ -965,6 +974,8 @@
 	color: var(--mol_theme_shade);
 	font-size: .875rem;
 	text-align: center;
+	max-width: 400px;
+	width: 100%;
 }
 </style><style id="$mol_style_attach:mol/button/major/major.view.css">[mol_button_major] {
 	background-color: var(--mol_theme_back);

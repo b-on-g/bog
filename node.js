@@ -7866,6 +7866,13 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/ui/empty/empty.view.css", "[bog_ui_empty] {\n\tpadding: clamp(1rem, 5%, 3rem);\n}\n\n[bog_ui_empty] > [bog_ui_empty_icon] {\n\tfont-size: clamp(2rem, 8vw, 4rem);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
 
 ;
 "use strict";
@@ -7882,6 +7889,8 @@ var $;
         justify: {
             content: 'center',
         },
+        width: '100%',
+        height: '100%',
         gap: '1rem',
         padding: {
             top: '2rem',
@@ -7889,10 +7898,8 @@ var $;
             left: '2rem',
             right: '2rem',
         },
+        boxSizing: 'border-box',
         Icon: {
-            font: {
-                size: '3rem',
-            },
             color: $mol_theme.shade,
         },
         Title: {
@@ -7908,6 +7915,8 @@ var $;
                 size: '.875rem',
             },
             textAlign: 'center',
+            maxWidth: '400px',
+            width: '100%',
         },
     });
 })($ || ($ = {}));
