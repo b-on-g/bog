@@ -13,6 +13,12 @@ namespace $ {
 		Page_body: {
 			padding: $mol_gap.block,
 			color: $mol_theme.shade,
+			overflow: {
+				y: 'auto',
+			},
+			flex: {
+				shrink: 1,
+			},
 		},
 
 	} )

@@ -814,7 +814,7 @@
 			"dependencies": [
 				"TASK-004"
 			],
-			"status": "pending"
+			"status": "done"
 		},
 		{
 			"id": "TASK-037",
@@ -837,6 +837,253 @@
 				"TASK-025"
 			],
 			"status": "done"
+		},
+		{
+			"id": "TASK-038",
+			"category": "ui",
+			"priority": "critical",
+			"description": "Адаптивность: $bog_ui_app — главный layout должен быть резиновым на любой ширине",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН! Только flex/grid, %, rem, min/max/clamp",
+				"$mol_book pages: sidebar + content_page занимают 100% ширины",
+				"Content_page растягивается (flex: 1, min-width: 0)",
+				"На узком экране sidebar скрыт или rail, контент 100%",
+				"Toolbar tools не вылезают, flex-wrap при нехватке места",
+				"Текст page_title обрезается ellipsis, не ломает layout",
+				"Body контента скроллится вертикально, не вылезает за viewport"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: grep -r '@media' bog/ui/app/app.view.css.ts — не должно быть",
+				"Шаг 3: web.audit.js — Audit passed"
+			],
+			"dependencies": [],
+			"status": "done"
+		},
+		{
+			"id": "TASK-039",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Overview — grid карточек на любой ширине",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Grid: repeat(auto-fill, minmax(min(100%, 280px), 1fr))",
+				"Карточки не вылезают за контейнер, gap между ними",
+				"На 320px — одна колонка, на 1200px — 3-4 колонки",
+				"Текст внутри карточек переносится, не обрезается"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-040",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Badge — варианты badge переносятся flex-wrap",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Контейнер с badge: flex-wrap, gap",
+				"Badge не обрезаются, переносятся на новую строку",
+				"Секции с заголовками стакаются вертикально"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-041",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Empty State — центрируется и сжимается",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Empty state центрирован в контейнере",
+				"Padding: clamp(1rem, 5%, 3rem)",
+				"Текст message переносится, max-width: min(100%, 400px)",
+				"Несколько вариантов стакаются вертикально с gap"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-042",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Skeleton — скелетоны масштабируются по ширине",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Скелетоны width: 100% контейнера",
+				"Группы скелетонов стакаются вертикально",
+				"Разные размеры скелетонов корректно отображаются на 320px"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-043",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Breadcrumb — скролл или перенос на узком экране",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Breadcrumb: overflow-x: auto или flex-wrap",
+				"На узком экране длинные пути не ломают layout",
+				"Разделители не обрезаются пополам"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-044",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Sidebar — демо-контейнер масштабируется",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Демо sidebar внутри ограниченного контейнера с min/max-width",
+				"Кнопки переключения режимов flex-wrap",
+				"На 320px демо-контейнер 100% ширины"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-045",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Sheet — кнопки и drawer подстраиваются",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Кнопки открытия sheet: flex-wrap при нехватке места",
+				"Sheet width: clamp(280px, 80%, 480px) для left/right",
+				"Sheet height: clamp(200px, 50vh, 70vh) для top/bottom",
+				"Контент внутри sheet скроллится"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-046",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Toast — тосты не вылезают за экран",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Кнопки триггера тостов: flex-wrap",
+				"Тост: width clamp(250px, 90vw, 420px)",
+				"Текст тоста word-wrap: break-word"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-047",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Command Palette — палитра подстраивается под экран",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Палитра: width clamp(280px, 90%, 640px)",
+				"Список результатов: max-height clamp(200px, 50vh, 400px) со скроллом",
+				"Search input 100% ширины палитры",
+				"Label команд: text-overflow ellipsis"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-048",
+			"category": "ui",
+			"priority": "high",
+			"description": "Адаптивность: страница Data Table — таблица скроллится горизонтально",
+			"acceptance_criteria": [
+				"@media ЗАПРЕЩЁН!",
+				"Контейнер таблицы: overflow-x: auto",
+				"Колонки min-width, не схлопываются",
+				"На широком экране таблица width: 100%",
+				"Счётчик выбранных и кнопки не ломают layout"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed"
+			],
+			"dependencies": ["TASK-038"],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-049",
+			"category": "infrastructure",
+			"priority": "medium",
+			"description": "Добавить favicon/иконку для bog/ui/app",
+			"acceptance_criteria": [
+				"Создан SVG favicon в bog/ui/app/ (минималистичный, отражает дизайн-систему)",
+				"В index.html добавлен <link rel='icon'>",
+				"Иконка видна во вкладке браузера",
+				"Работает в light и dark режимах браузера (prefers-color-scheme в SVG или два файла)"
+			],
+			"test_steps": [
+				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
+				"Шаг 2: web.audit.js — Audit passed",
+				"Шаг 3: Проверить что favicon отображается"
+			],
+			"dependencies": [],
+			"status": "pending"
+		},
+		{
+			"id": "TASK-050",
+			"category": "infrastructure",
+			"priority": "high",
+			"description": "Исправить sitemap и prerender — передать screens и правильные параметры в mol-prerender-action",
+			"acceptance_criteria": [
+				"В deploy.yml передан параметр screens со ВСЕМИ экранами: badge, empty, skeleton, breadcrumb, sidebar, sheet, toast, command, table",
+				"route-key установлен в 'component' (в app используется ?component=badge)",
+				"base-url указывает на корректный URL деплоя (GitHub Pages)",
+				"sitemap.xml содержит 10 URL (index + 9 компонентов)",
+				"Для каждого экрана генерируется отдельный .html файл с пререндеренным контентом",
+				"robots.txt содержит ссылку на sitemap.xml"
+			],
+			"test_steps": [
+				"Шаг 1: Проверить deploy.yml — screens, route-key, base-url заполнены",
+				"Шаг 2: git push и проверить что Action проходит",
+				"Шаг 3: Проверить sitemap.xml на деплое — 10 URL"
+			],
+			"dependencies": ["TASK-026"],
+			"status": "pending"
 		}
 	]
 }

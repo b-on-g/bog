@@ -9,3 +9,12 @@
 [bog_ui_app] [mol_page_head] {
 	flex-wrap: wrap;
 }
+
+/* Page title truncates with ellipsis, doesn't break layout */
+[bog_ui_app] [mol_page_title] {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+	flex-shrink: 1;
+}

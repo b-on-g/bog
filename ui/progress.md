@@ -763,3 +763,51 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-036: Adaptive Skeleton ($bog_ui_skeleton) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/skeleton/skeleton.view.css.ts` — Added `minHeight: '0.25rem'`, `maxHeight: '4rem'` to prevent collapse/bloat; added `flex: { shrink: 0 }` to maintain height in flex containers
+- `bog/ui/app/skeleton/skeleton.view.css.ts` — Added `flex: { wrap: 'wrap' }` to Sizes container for wrapping when space is insufficient
+
+**Features:**
+- No @media queries — only minHeight, maxHeight, flex-shrink, flex-wrap
+- Width 100% of parent (already existed)
+- Height constrained: minHeight 0.25rem prevents collapse, maxHeight 4rem prevents bloat, default 1rem
+- flex-shrink: 0 ensures skeleton maintains its height in flex containers
+- Group of skeletons wraps via flex-wrap: wrap on Sizes container
+- Card group uses flex column with gap (already existed)
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `d84488d` pushed to origin/master
+
+---
+
+### TASK-038: Adaptive $bog_ui_app Main Layout — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/app/app.view.css` — Added page title ellipsis styles: overflow hidden, text-overflow ellipsis, white-space nowrap, min-width 0, flex-shrink 1 on `[mol_page_title]`
+- `bog/ui/app/app.view.css.ts` — Added overflow-y: auto and flex-shrink: 1 to Page_body for vertical scrolling
+
+**Pre-existing features (from TASK-027):**
+- Content_page: flex-grow 1, flex-shrink 1, minWidth 0
+- Raw CSS: content pages override $mol_book2 flex-shrink: 0; toolbar flex-wrap: wrap
+- ResizeObserver auto-switches sidebar mode (hidden < 500px, rail < 900px, dock >= 900px)
+
+**All acceptance criteria met:**
+- No @media queries — only flex, overflow, text-overflow, ResizeObserver
+- $mol_book pages: sidebar + content_page fill 100% width
+- Content_page stretches (flex: 1, min-width: 0)
+- Narrow screen: sidebar hidden/rail, content 100%
+- Toolbar tools wrap with flex-wrap
+- Page title truncates with ellipsis
+- Body content scrolls vertically (overflow-y: auto)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
