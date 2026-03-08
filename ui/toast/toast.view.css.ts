@@ -41,10 +41,14 @@ namespace $ {
 		Body: {
 			flex: {
 				grow: 1,
+				shrink: 1,
 			},
 			font: {
 				size: '.875rem',
 			},
+			overflow: 'hidden',
+			overflowWrap: 'break-word',
+			minWidth: 0,
 		},
 		Close: {
 			flex: {

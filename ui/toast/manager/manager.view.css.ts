@@ -11,8 +11,7 @@ namespace $ {
 		},
 		gap: '.5rem',
 		zIndex: 9999,
-		maxWidth: '400px',
-		width: '100%',
+		maxHeight: '100vh',
 		pointerEvents: 'none',
 
 		Toast: {
