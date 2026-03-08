@@ -17,10 +17,16 @@ $bog_ui_app $mol_book2
 	Toast_page $bog_ui_app_toast
 	Command_page $bog_ui_app_command
 	Table_page $bog_ui_app_table
+	Overview_page $bog_ui_app_overview
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock
 			items /
+				<= Overview_nav $bog_ui_sidebar_item
+					Icon <= Overview_icon $mol_icon_view_grid
+					label \Overview
+					active <= overview_active false
+					click? <=> nav_overview? null
 				<= Badge_nav $bog_ui_sidebar_item
 					Icon <= Badge_icon $mol_icon_tag
 					label \Badge

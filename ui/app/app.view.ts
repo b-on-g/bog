@@ -27,6 +27,11 @@ namespace $.$$ {
 		}
 
 		@ $mol_mem
+		overview_active() {
+			return this.component() === ''
+		}
+
+		@ $mol_mem
 		badge_active() {
 			return this.component() === 'badge'
 		}
@@ -69,6 +74,12 @@ namespace $.$$ {
 		@ $mol_mem
 		table_active() {
 			return this.component() === 'table'
+		}
+
+		@ $mol_action
+		nav_overview( next?: any ) {
+			if( next !== undefined ) this.component( '' )
+			return null
 		}
 
 		@ $mol_action
@@ -138,7 +149,7 @@ namespace $.$$ {
 				command: 'Command Palette',
 				table: 'Data Table',
 			}
-			return titles[ this.component() ] ?? 'Components'
+			return titles[ this.component() ] ?? 'Components Overview'
 		}
 
 		@ $mol_mem
@@ -162,7 +173,7 @@ namespace $.$$ {
 				case 'toast': content = this.Toast_page(); break
 				case 'command': content = this.Command_page(); break
 				case 'table': content = this.Table_page(); break
-				default: content = this.Content_page()
+				default: content = this.Overview_page()
 			}
 			return [
 				this.Nav(),

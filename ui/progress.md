@@ -437,3 +437,85 @@
 - Integrated into app router and sidebar navigation
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-023: Demo Command Palette Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/command/command.view.tree` — $mol_page with open button, shortcut hint, and $bog_ui_command palette with 12 demo commands in 3 groups
+- `bog/ui/app/command/command.view.ts` — open_palette action to show palette
+- `bog/ui/app/command/command.view.css.ts` — Styled with padding, shade description, bold section titles, open row flex layout
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Command_page declaration and Command_nav sidebar item ($mol_icon_console)
+- `bog/ui/app/app.view.ts` — Added command_active, nav_command, routing to Command_page, page title
+
+**Features:**
+- "Open Command Palette" button with ⌘K shortcut hint
+- 12 demo commands in 3 groups: Navigation (4), Actions (3), Settings (3)
+- Commands defined declaratively in view.tree with label and shortcut properties
+- Real-time search filtering via $bog_ui_command's built-in fuzzy filter
+- Integrated into app router and sidebar navigation
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `cc77ca8` pushed to origin/master
+
+---
+
+### TASK-024: Demo Data Table Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/table/table.view.tree` — $mol_page with description, selected counter, and $bog_ui_table instance (selectable, sortable)
+- `bog/ui/app/table/table.view.ts` — 5 columns (Name, Email, Department, Role, Salary) with 22 rows of employee data; selected_text() computed counter
+- `bog/ui/app/table/table.view.css.ts` — Styled with padding, shade description, bold selected info, table flex-shrink
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Table_page declaration and Table_nav sidebar item ($mol_icon_table)
+- `bog/ui/app/app.view.ts` — Added table_active, nav_table, routing to Table_page, page title
+
+**Features:**
+- 5 columns: Name, Email, Department, Role, Salary — all sortable
+- 22 rows of employee demo data
+- Sorting by click on column header (▲/▼ indicator)
+- Row selection checkboxes enabled (selectable=true)
+- Select All checkbox in header
+- Selected rows counter displayed above table ("X rows selected")
+- Zebra striping and hover effects from base $bog_ui_table component
+- Integrated into app router and sidebar navigation
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `7500196` pushed to origin/master
+
+---
+
+### TASK-025: Demo Overview Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/app/overview/overview.view.tree` — $mol_page with grid of 9 component cards; $bog_ui_app_overview_card sub-component ($mol_button_minor) with Preview + Title + Description
+- `bog/ui/app/overview/overview.view.ts` — 9 go_* actions navigating to component pages via $mol_state_arg
+- `bog/ui/app/overview/overview.view.css.ts` — Typed styles: CSS grid layout (auto-fill, minmax 260px), card styles with card bg, rounded corners, preview area with back bg
+- `bog/ui/app/overview/overview.view.css` — Raw CSS: card border via var(--mol_theme_line), hover shadow, miniature preview layouts for all 9 components
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Overview_page declaration, Overview_nav sidebar item ($mol_icon_view_grid) at top of nav list
+- `bog/ui/app/app.view.ts` — Added overview_active, nav_overview handlers; default route shows Overview_page instead of Content_page; page_title defaults to "Components Overview"
+
+**Features:**
+- Default page (no ?component= param) shows component grid overview
+- CSS grid with auto-fill responsive layout (min 260px cards)
+- 9 component cards: Badge, Empty State, Skeleton, Breadcrumb, Sidebar, Sheet, Toast, Command Palette, Data Table
+- Each card has: miniature visual preview + component name + short description
+- Click on any card navigates to that component's demo page
+- Overview nav item at top of sidebar with grid icon
+- Hover effect on cards (box-shadow)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
