@@ -718,3 +718,48 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-034: Adaptive Empty State ($bog_ui_empty) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/empty/empty.view.css.ts` — Added `width: '100%'`, `height: '100%'`, `boxSizing: 'border-box'` on root; removed fixed `font.size: '3rem'` from Icon (moved to raw CSS with clamp); added `maxWidth: '400px'` and `width: '100%'` on Message
+
+**Created files:**
+- `bog/ui/empty/empty.view.css` — Raw CSS: `padding: clamp(1rem, 5%, 3rem)` on root (overrides typed fallback); `font-size: clamp(2rem, 8vw, 4rem)` on Icon
+
+**Features:**
+- No @media queries — only flex, %, clamp(), maxWidth
+- Container flex column center, takes 100% of parent (width + height)
+- Padding: clamp(1rem, 5%, 3rem) — shrinks on small containers
+- Icon scales: clamp(2rem, 8vw, 4rem) — from 2rem on narrow to 4rem on wide
+- Message text wraps, constrained by maxWidth: 400px + width: 100%
+- boxSizing: border-box prevents padding overflow
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `8c48462` pushed to origin/master
+
+---
+
+### TASK-035: Adaptive Breadcrumb ($bog_ui_breadcrumb) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/breadcrumb/breadcrumb.view.css.ts` — Changed flex-wrap from 'wrap' to 'nowrap'; added overflow-x: auto for horizontal scroll; added whiteSpace: nowrap and minWidth: 0 on root; added flex-shrink: 0 + whiteSpace: nowrap on Crumb, Sep, and Last sub-components
+
+**Features:**
+- No @media queries — only flex, overflow-x, whiteSpace, minWidth
+- On wide containers: single row, all crumbs visible
+- On narrow containers: horizontal scroll (overflow-x: auto) keeps all crumbs accessible
+- flex-wrap: nowrap ensures single-line layout
+- All sub-components (Crumb, Sep, Last) have flex-shrink: 0 — separators never get cut in half
+- whiteSpace: nowrap prevents text wrapping within crumbs
+- minWidth: 0 allows the container to shrink within flex parents
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
