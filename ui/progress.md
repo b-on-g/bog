@@ -192,3 +192,52 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-012: Global Keyboard Listener for Command Palette — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added `event * keydown?` handler, `command_showed?` state, `Command $bog_ui_command` instance
+- `bog/ui/app/app.view.ts` — Added `sub()` override to include Command overlay, `global_keydown()` handler for Cmd+K / Ctrl+K toggle
+
+**Also fixed pre-existing errors in $bog_ui_command:**
+- `bog/ui/command/command.view.tree` — Changed Backdrop `click?` to `event * click?` (fixes TS2339: 'click' not on $mol_view)
+- `bog/ui/command/command.view.css.ts` — Replaced `$mol_gap.round` with `'0.5rem'` for borderRadius (fixes TS2322 type mismatch)
+- `.gitignore` — Simplified build artifact exclusion patterns
+
+**Features:**
+- Cmd+K (Mac) / Ctrl+K (Windows) toggles Command Palette open/closed
+- Repeated press closes the palette
+- preventDefault only called when shortcut matches (doesn't interfere with other handlers)
+- Command component rendered as overlay via sub() override
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `b53498c` pushed to origin/master
+
+---
+
+### TASK-013: Data Table ($bog_ui_table) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/table/table.view.tree` — Extends $mol_grid with columns, data, sort_column?, sort_dir? API; custom Row with row_even attr; Head_button for clickable headers
+- `bog/ui/table/table.view.ts` — col_ids from columns config, sorted row_ids with localeCompare/numeric sort, col_head_click toggles sort, row_even for zebra striping, records from data array
+- `bog/ui/table/table.view.css.ts` — Typed styles: sticky header, bold headers, cell padding, right-aligned numbers
+- `bog/ui/table/table.view.css` — Raw CSS: zebra striping via bog_ui_table_row_even attr + $mol_theme.card, hover effect via $mol_theme.current
+
+**Features:**
+- API: columns / (list of {id, title, sortable?}), data / (array of row objects), sort_column? \, sort_dir? \asc
+- Extends $mol_grid for virtualization support
+- Clickable column headers toggle sort (asc→desc→asc cycle)
+- Sort indicator ▲/▼ displayed in active sort column header
+- Non-sortable columns (sortable: false) ignore clicks
+- Numeric sort for number values, localeCompare for strings
+- Zebra striping: odd rows get $mol_theme.card background via row_even attribute
+- Hover effect on rows via $mol_theme.current
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
