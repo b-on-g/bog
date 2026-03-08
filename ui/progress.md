@@ -587,3 +587,48 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-029: Adaptive Sheet/Drawer ($bog_ui_sheet) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/sheet/sheet.view.css` — Replaced fixed width/height with clamp() values
+
+**Changes:**
+- right/left panels: `width: 400px; max-width: 80vw` → `width: clamp(280px, 80%, 480px)`
+- top/bottom panels: `height: 50vh; max-height: 50vh` → `height: clamp(200px, 50vh, 70vh)`
+
+**Features:**
+- No @media queries — only clamp(), %, vw/vh
+- right/left sheet: width clamp(280px, 80%, 480px) — on narrow screens takes ~80% width, on wide capped at 480px
+- top/bottom sheet: height clamp(200px, 50vh, 70vh) — minimum 200px, scales with viewport
+- Content scrolls via existing overflow-y: auto on Panel
+- Backdrop covers full viewport via position: fixed + top/left/right/bottom: 0
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `9030f6d` pushed to origin/master
+
+---
+
+### TASK-030: Adaptive Command Palette ($bog_ui_command) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Modified files:**
+- `bog/ui/command/command.view.css.ts` — Removed fixed `width: '32rem'` + `maxWidth: '90vw'` from Dialog (moved to raw CSS with clamp); added Label truncation (overflow hidden, textOverflow ellipsis, whiteSpace nowrap, flex-shrink 1, minWidth 0)
+- `bog/ui/command/command.view.css` — Added `width: clamp(280px, 90%, 640px)` and `max-height: 60vh` on Dialog; added `max-height: clamp(200px, 50vh, 400px)` on Results
+
+**Features:**
+- No @media queries — only clamp(), %, vw/vh
+- Dialog width: clamp(280px, 90%, 640px) — on narrow screens takes ~90% width, capped at 640px on wide
+- Results max-height: clamp(200px, 50vh, 400px) with scroll
+- Search input takes full palette width (unchanged, already 100%)
+- Label truncation with text-overflow: ellipsis when container is narrow
+- Shortcut text preserved with whiteSpace: nowrap
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"

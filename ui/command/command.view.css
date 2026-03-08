@@ -11,6 +11,8 @@
 }
 
 [bog_ui_command] [bog_ui_command="Dialog"] {
+	width: clamp(280px, 90%, 640px);
+	max-height: 60vh;
 	opacity: 0;
 	transform: scale(0.95) translateY(-10px);
 	transition: opacity 0.2s ease, transform 0.2s ease;
@@ -23,4 +25,5 @@
 
 [bog_ui_command] [bog_ui_command="Results"] {
 	border-top-width: 1px;
+	max-height: clamp(200px, 50vh, 400px);
 }

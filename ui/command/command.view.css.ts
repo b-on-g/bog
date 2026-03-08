@@ -28,9 +28,6 @@ namespace $ {
 		Dialog: {
 			position: 'relative',
 			zIndex: 1,
-			width: '32rem',
-			maxWidth: '90vw',
-			maxHeight: '60vh',
 			display: 'flex',
 			flex: {
 				direction: 'column',
@@ -111,7 +108,12 @@ namespace $ {
 		Label: {
 			flex: {
 				grow: 1,
+				shrink: 1,
 			},
+			overflow: 'hidden',
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
+			minWidth: 0,
 		},
 
 		Shortcut: {
