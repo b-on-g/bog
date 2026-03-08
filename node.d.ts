@@ -3611,6 +3611,9 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
 
 	type $mol_view__sub_bog_ui_app_toast_1 = $mol_type_enforce<
 		readonly(any)[]

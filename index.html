@@ -1397,7 +1397,11 @@
 }
 [bog_ui_toast_body] {
 	flex-grow: 1;
+	flex-shrink: 1;
 	font-size: .875rem;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	min-width: 0;
 }
 [bog_ui_toast_close] {
 	flex-shrink: 0;
@@ -1430,6 +1434,9 @@
 	border-style: solid;
 	border-width: 1px;
 }
+</style><style id="$mol_style_attach:bog/ui/toast/manager/manager.view.css">[bog_ui_toast_manager] {
+	width: clamp(250px, 90vw, 420px);
+}
 </style><style id="$mol_style_attach:$bog_ui_toast_manager">[bog_ui_toast_manager] {
 	position: fixed;
 	bottom: 1rem;
@@ -1438,8 +1445,7 @@
 	flex-direction: column;
 	gap: .5rem;
 	z-index: 9999;
-	max-width: 400px;
-	width: 100%;
+	max-height: 100vh;
 	pointer-events: none;
 }
 [bog_ui_toast_manager_toast] {

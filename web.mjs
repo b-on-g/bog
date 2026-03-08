@@ -9539,10 +9539,14 @@ var $;
         Body: {
             flex: {
                 grow: 1,
+                shrink: 1,
             },
             font: {
                 size: '.875rem',
             },
+            overflow: 'hidden',
+            overflowWrap: 'break-word',
+            minWidth: 0,
         },
         Close: {
             flex: {
@@ -9660,6 +9664,13 @@ var $;
 "use strict";
 var $;
 (function ($) {
+    $mol_style_attach("bog/ui/toast/manager/manager.view.css", "[bog_ui_toast_manager] {\n\twidth: clamp(250px, 90vw, 420px);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
     $mol_style_define($bog_ui_toast_manager, {
         position: 'fixed',
         bottom: '1rem',
@@ -9670,8 +9681,7 @@ var $;
         },
         gap: '.5rem',
         zIndex: 9999,
-        maxWidth: '400px',
-        width: '100%',
+        maxHeight: '100vh',
         pointerEvents: 'none',
         Toast: {
             pointerEvents: 'auto',
