@@ -10,13 +10,8 @@ namespace $ {
 			left: '.5rem',
 			right: '.5rem',
 		},
+		borderRadius: '9999px',
 		border: {
-			radius: {
-				leftTop: '9999px',
-				rightTop: '9999px',
-				leftBottom: '9999px',
-				rightBottom: '9999px',
-			},
 			color: $mol_theme.line,
 			style: 'solid',
 			width: '1px',
@@ -25,12 +20,8 @@ namespace $ {
 			size: '.75rem',
 			weight: 500,
 		},
-		line: {
-			height: '1rem',
-		},
-		white: {
-			space: 'nowrap',
-		},
+		lineHeight: '1rem',
+		whiteSpace: 'nowrap',
 		background: {
 			color: $mol_theme.card,
 		},
@@ -46,12 +37,6 @@ namespace $ {
 						color: '#22c55e33',
 						style: 'solid',
 						width: '1px',
-						radius: {
-							leftTop: '9999px',
-							rightTop: '9999px',
-							leftBottom: '9999px',
-							rightBottom: '9999px',
-						},
 					},
 				},
 				warning: {
@@ -63,12 +48,6 @@ namespace $ {
 						color: '#eab30833',
 						style: 'solid',
 						width: '1px',
-						radius: {
-							leftTop: '9999px',
-							rightTop: '9999px',
-							leftBottom: '9999px',
-							rightBottom: '9999px',
-						},
 					},
 				},
 				error: {
@@ -80,12 +59,6 @@ namespace $ {
 						color: '#ef444433',
 						style: 'solid',
 						width: '1px',
-						radius: {
-							leftTop: '9999px',
-							rightTop: '9999px',
-							leftBottom: '9999px',
-							rightBottom: '9999px',
-						},
 					},
 				},
 				info: {
@@ -97,12 +70,6 @@ namespace $ {
 						color: '#3b82f633',
 						style: 'solid',
 						width: '1px',
-						radius: {
-							leftTop: '9999px',
-							rightTop: '9999px',
-							leftBottom: '9999px',
-							rightBottom: '9999px',
-						},
 					},
 				},
 			},

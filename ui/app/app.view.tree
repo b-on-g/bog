@@ -8,6 +8,7 @@ $bog_ui_app $mol_book2
 	command_showed? false
 	Command $bog_ui_command
 		showed? <=> command_showed?
+	Badge_page $bog_ui_app_badge
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock

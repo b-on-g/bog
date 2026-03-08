@@ -112,6 +112,18 @@ namespace $.$$ {
 			return `Demo for ${ this.page_title() } component`
 		}
 
+		@ $mol_mem
+		pages() {
+			const comp = this.component()
+			const content = comp === 'badge'
+				? this.Badge_page()
+				: this.Content_page()
+			return [
+				this.Nav(),
+				content,
+			]
+		}
+
 	}
 
 }
