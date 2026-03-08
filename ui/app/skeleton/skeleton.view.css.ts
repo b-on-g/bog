@@ -90,6 +90,7 @@ namespace $ {
 			display: 'flex',
 			flex: {
 				direction: 'column',
+				wrap: 'wrap',
 			},
 			gap: '.75rem',
 		},
