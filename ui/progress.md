@@ -142,3 +142,53 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-010: Toast Manager ($bog_ui_toast_manager) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/toast/manager/manager.view.tree` — $mol_view with Toast* multiproperty, toast_data list
+- `bog/ui/toast/manager/manager.view.ts` — add(message, type), remove(id), toast_views() sliced to max 5, reactive toast_data with $mol_mem
+- `bog/ui/toast/manager/manager.view.css.ts` — Fixed position bottom-right, flex column, gap, z-index 9999, pointerEvents pass-through
+
+**Features:**
+- API: toast_data / (reactive list), add(message, type), remove(id)
+- Position fixed, bottom-right corner
+- Toasts stack vertically with flex column + gap
+- Max 5 visible toasts (slice -5)
+- Close ONLY by × button — NO auto-dismiss, NO setTimeout/setInterval
+- Each Toast* keyed by unique ID, close event triggers remove via $mol_mem_key
+- pointerEvents: none on container, auto on individual toasts (click-through)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `acb02b8` pushed to origin/master
+
+---
+
+### TASK-011: Command Palette ($bog_ui_command) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/command/command.view.tree` — $mol_view overlay with Backdrop + Dialog (Search + Results list); includes $bog_ui_command_group (section header) and $bog_ui_command_item (clickable command row with label + shortcut)
+- `bog/ui/command/command.view.ts` — fuzzy filtering by query, keyboard navigation (Esc/ArrowUp/ArrowDown/Enter), selected index resets on query change
+- `bog/ui/command/command.view.css.ts` — typed styles: fixed overlay, centered dialog (32rem), backdrop darkening, group title uppercase, item active state via $mol_theme.current, shortcut muted text
+- `bog/ui/command/command.view.css` — raw CSS: visibility toggle via bog_ui_command_showed attr, scale+fade animation on dialog, border-top on results
+
+**Features:**
+- API: showed? false, query? "", commands /, filtered / (computed), selected? 0
+- Overlay with semi-transparent backdrop, click-to-close
+- Search field ($mol_string) with hint text
+- Filtering by label text (case-insensitive includes)
+- $bog_ui_command_group for section headers (uppercase, shade color)
+- $bog_ui_command_item extends $mol_button_minor with label + shortcut display
+- Keyboard: Esc closes, ArrowUp/Down cycles through items, Enter executes selected
+- Active item highlighted via bog_ui_command_item_active attr + $mol_theme.current
+- Shortcut text displayed right-aligned in muted color
+- Scale + opacity CSS animation on show/hide (0.2s ease)
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
