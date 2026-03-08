@@ -93,3 +93,52 @@
 - Content scrolls via overflow-y auto on Panel
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-015: Demo App Navigation + Router — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — $mol_book2 layout with sidebar + content page, theme auto plugin
+- `bog/ui/app/app.view.ts` — URL routing via $mol_state_arg('component'), nav click handlers, active state computation
+- `bog/ui/app/app.view.css.ts` — Content page flex grow, page body padding/shade color
+- `bog/ui/app/index.html` — Removed hardcoded mol_theme="$mol_theme_dark" (now managed by $mol_theme_auto)
+
+**Also fixed pre-existing issues:**
+- `bog/ui/sidebar/item/item.view.tree` — Added `^` to attr inheritance (fixes TS2416), made `collapsed?` writable (fixes TS2554)
+- `bog/ui/sidebar/item/item.view.css.ts` — Changed `white: { space: ... }` to `whiteSpace` shorthand (fixes TS2322)
+- `.gitignore` — Added `ui/**/-css/` to exclude build artifacts
+
+**Features:**
+- Sidebar with 6 nav items: Badge, Empty State, Skeleton, Breadcrumb, Sidebar, Sheet
+- URL-based routing: ?component=badge selects component
+- Active state highlights current nav item via $mol_theme.current
+- Theme toggle (light/dark) via $mol_lights_toggle in toolbar
+- Content page shows placeholder text (demo content for individual tasks TASK-016..024)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `28fc8ab` pushed to origin/master
+
+---
+
+### TASK-009: Toast ($bog_ui_toast) — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/toast/toast.view.tree` — $mol_view with message, type, closeable attrs; Icon + Body + Close sub-components
+- `bog/ui/toast/toast.view.ts` — Icon() override returns type-specific icon (info/success/warning/error)
+- `bog/ui/toast/toast.view.css.ts` — Typed styles: flex layout, 4 color variants via '@' bog_ui_toast_type, box-shadow, borderRadius
+- `bog/ui/toast/toast.view.css` — Raw CSS: @keyframes slide-in animation, hide Close when closeable=false
+
+**Features:**
+- API: message (text), type (info|success|warning|error), closeable (true), close? (event)
+- 4 color variants via `bog_ui_toast_type` attribute (blue/green/amber/red with alpha backgrounds)
+- Dynamic icon per type: $mol_icon_information, $mol_icon_check_circle, $mol_icon_alert, $mol_icon_alert_circle
+- Close button (×) via $mol_button_minor + $mol_icon_close, hideable via closeable=false
+- Slide-in animation via raw CSS @keyframes (translateX + opacity)
+- No setTimeout/setInterval used
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
