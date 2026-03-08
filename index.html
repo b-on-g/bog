@@ -752,6 +752,8 @@
 }
 
 [bog_ui_command] [bog_ui_command="Dialog"] {
+	width: clamp(280px, 90%, 640px);
+	max-height: 60vh;
 	opacity: 0;
 	transform: scale(0.95) translateY(-10px);
 	transition: opacity 0.2s ease, transform 0.2s ease;
@@ -764,6 +766,7 @@
 
 [bog_ui_command] [bog_ui_command="Results"] {
 	border-top-width: 1px;
+	max-height: clamp(200px, 50vh, 400px);
 }
 </style><style id="$mol_style_attach:$bog_ui_command">[bog_ui_command] {
 	position: fixed;
@@ -789,9 +792,6 @@
 [bog_ui_command_dialog] {
 	position: relative;
 	z-index: 1;
-	width: 32rem;
-	max-width: 90vw;
-	max-height: 60vh;
 	display: flex;
 	flex-direction: column;
 	background-color: var(--mol_theme_back);
@@ -853,6 +853,11 @@
 }
 [bog_ui_command_item_label] {
 	flex-grow: 1;
+	flex-shrink: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
 }
 [bog_ui_command_item_shortcut] {
 	font-size: 0.75rem;

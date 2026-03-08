@@ -7454,7 +7454,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/command/command.view.css", "[bog_ui_command] {\n\tvisibility: hidden;\n}\n\n[bog_ui_command_showed=\"true\"] {\n\tvisibility: visible;\n}\n\n[bog_ui_command] [bog_ui_command=\"Backdrop\"] {\n\ttransition: background-color 0.2s ease;\n}\n\n[bog_ui_command] [bog_ui_command=\"Dialog\"] {\n\topacity: 0;\n\ttransform: scale(0.95) translateY(-10px);\n\ttransition: opacity 0.2s ease, transform 0.2s ease;\n}\n\n[bog_ui_command_showed=\"true\"] [bog_ui_command=\"Dialog\"] {\n\topacity: 1;\n\ttransform: scale(1) translateY(0);\n}\n\n[bog_ui_command] [bog_ui_command=\"Results\"] {\n\tborder-top-width: 1px;\n}\n");
+    $mol_style_attach("bog/ui/command/command.view.css", "[bog_ui_command] {\n\tvisibility: hidden;\n}\n\n[bog_ui_command_showed=\"true\"] {\n\tvisibility: visible;\n}\n\n[bog_ui_command] [bog_ui_command=\"Backdrop\"] {\n\ttransition: background-color 0.2s ease;\n}\n\n[bog_ui_command] [bog_ui_command=\"Dialog\"] {\n\twidth: clamp(280px, 90%, 640px);\n\tmax-height: 60vh;\n\topacity: 0;\n\ttransform: scale(0.95) translateY(-10px);\n\ttransition: opacity 0.2s ease, transform 0.2s ease;\n}\n\n[bog_ui_command_showed=\"true\"] [bog_ui_command=\"Dialog\"] {\n\topacity: 1;\n\ttransform: scale(1) translateY(0);\n}\n\n[bog_ui_command] [bog_ui_command=\"Results\"] {\n\tborder-top-width: 1px;\n\tmax-height: clamp(200px, 50vh, 400px);\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -7486,9 +7486,6 @@ var $;
         Dialog: {
             position: 'relative',
             zIndex: 1,
-            width: '32rem',
-            maxWidth: '90vw',
-            maxHeight: '60vh',
             display: 'flex',
             flex: {
                 direction: 'column',
@@ -7559,7 +7556,12 @@ var $;
         Label: {
             flex: {
                 grow: 1,
+                shrink: 1,
             },
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            minWidth: 0,
         },
         Shortcut: {
             font: {
