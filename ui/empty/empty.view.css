@@ -5,3 +5,7 @@
 [bog_ui_empty] > [bog_ui_empty_icon] {
 	font-size: clamp(2rem, 8vw, 4rem);
 }
+
+[bog_ui_empty] > [bog_ui_empty_message] {
+	max-width: min(100%, 400px);
+}

@@ -36,8 +36,6 @@ namespace $ {
 				size: '.875rem',
 			},
 			textAlign: 'center',
-			maxWidth: '400px',
-			width: '100%',
 		},
 	} )
 }
