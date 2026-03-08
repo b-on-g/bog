@@ -1,0 +1,7 @@
+[bog_ui_table_row_even="false"] {
+	background: var(--mol_theme_card);
+}
+
+[bog_ui_table] [mol_grid_row]:hover {
+	background: var(--mol_theme_current);
+}

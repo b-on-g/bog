@@ -1,0 +1,15 @@
+$bog_ui_table $mol_grid
+	columns /
+	data /
+	sort_column? \
+	sort_dir? \asc
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+		attr *
+			^
+			bog_ui_table_row_even <= row_even* false
+	Head_button* $mol_button_minor
+		click? <=> col_head_click*? null
+		sub / <= head_button_content* /
