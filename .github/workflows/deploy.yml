@@ -17,12 +17,12 @@ jobs:
 
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'bog/ui'
-        modules: 'app'
+        package: 'bog'
+        modules: 'ui/app'
 
     - uses: b-on-g/mol-prerender-action@main
       with:
-        base-url: 'https://b-on-g.github.io/bog/ui/app/-/'
+        base-url: 'https://b-on-g.github.io/bog/'
 
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
