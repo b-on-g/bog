@@ -38,7 +38,7 @@ namespace $ {
 			background: {
 				color: $mol_theme.back,
 			},
-			borderRadius: $mol_gap.round,
+			borderRadius: '0.5rem',
 			boxShadow: '0 16px 48px #00000066',
 			overflow: { y: 'hidden', x: 'hidden' },
 			pointerEvents: 'auto',
@@ -105,7 +105,7 @@ namespace $ {
 		justify: { content: 'space-between' },
 		align: { items: 'center' },
 		padding: { top: '0.5rem', bottom: '0.5rem', left: '0.75rem', right: '0.75rem' },
-		borderRadius: $mol_gap.round,
+		borderRadius: '0.5rem',
 		cursor: 'pointer',
 
 		Label: {

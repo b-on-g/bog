@@ -2,6 +2,12 @@ $bog_ui_app $mol_book2
 	plugins /
 		^
 		<= Theme $mol_theme_auto
+	event *
+		^
+		keydown? <=> global_keydown? null
+	command_showed? false
+	Command $bog_ui_command
+		showed? <=> command_showed?
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock

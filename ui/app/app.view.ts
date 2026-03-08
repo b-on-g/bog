@@ -2,6 +2,25 @@ namespace $.$$ {
 
 	export class $bog_ui_app extends $.$bog_ui_app {
 
+		sub() {
+			return [
+				...this.pages(),
+				this.Command(),
+			]
+		}
+
+		@ $mol_action
+		global_keydown( event?: KeyboardEvent ) {
+			if( !event ) return null
+			if( event.key !== 'k' && event.key !== 'K' ) return null
+			if( !event.metaKey && !event.ctrlKey ) return null
+
+			event.preventDefault()
+			this.command_showed( !this.command_showed() )
+
+			return null
+		}
+
 		@ $mol_mem
 		component( next?: string ) {
 			return $mol_state_arg.value( 'component', next ) ?? ''

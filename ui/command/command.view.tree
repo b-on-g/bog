@@ -6,7 +6,8 @@ $bog_ui_command $mol_view
 	selected? 0
 	sub /
 		<= Backdrop $mol_view
-			click? <=> backdrop_click? null
+			event *
+				click? <=> backdrop_click? null
 		<= Dialog $mol_view
 			event *
 				keydown? <=> key_down? null
