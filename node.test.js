@@ -7627,10 +7627,16 @@ var $;
         },
         lineHeight: '1rem',
         whiteSpace: 'nowrap',
+        maxWidth: '100%',
+        overflow: 'hidden',
         background: {
             color: $mol_theme.card,
         },
         color: $mol_theme.text,
+        Label: {
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        },
         '@': {
             bog_ui_badge_type: {
                 success: {

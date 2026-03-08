@@ -886,8 +886,14 @@
 	font-weight: 500;
 	line-height: 1rem;
 	white-space: nowrap;
+	max-width: 100%;
+	overflow: hidden;
 	background-color: var(--mol_theme_card);
 	color: var(--mol_theme_text);
+}
+[bog_ui_badge_label] {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 [bog_ui_badge]:where([bog_ui_badge_type="info"]) {
 	background-color: #3b82f61a;
