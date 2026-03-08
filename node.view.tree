@@ -1,0 +1,1109 @@
+$mol_scroll $mol_view
+	scroll_top? 0
+	scroll_left? 0
+	attr *
+		^
+		tabindex <= tabindex -1
+	event *
+		^
+		scroll?event <=> event_scroll?event null
+
+$mol_book2 $mol_scroll
+	menu_title \
+	sub /$mol_view
+		^ pages <= pages_deep /$mol_view
+		^ placeholders /$mol_view
+			<= Placeholder $mol_view
+	minimal_width 0
+	Gap* $mol_view title \
+
+$mol_theme_auto $mol_plugin
+	light \$mol_theme_light
+	attr * mol_theme <= theme <= dark \$mol_theme_dark
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_view_grid $mol_icon path \M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3
+
+$mol_speck $mol_view
+	theme \$mol_theme_accent
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	click?event null
+	event_click?event null
+	status? /
+	event *
+		^
+		click?event <=> activate?event <=> event_activate?event null
+		dblclick?event <=> clicks?event null
+		keydown?event <=> key_press?event <=> event_key_press?event null
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_safe <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+		value <= error \
+
+$mol_button_typed $mol_button
+	minimal_height 40
+	minimal_width 40
+
+$mol_button_minor $mol_button_typed
+
+$bog_ui_sidebar_item $mol_button_minor
+	Icon $mol_icon
+	label \
+	active false
+	collapsed? false
+	sub /
+		<= Icon
+		<= Label $mol_view
+			sub /
+				<= label
+	attr *
+		^
+		bog_ui_sidebar_item_active <= active
+		bog_ui_sidebar_item_collapsed <= collapsed?
+
+$mol_icon_tag $mol_icon path \M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z
+
+$mol_icon_file $mol_icon path \M13,9V3.5L18.5,9M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6Z
+
+$mol_icon_rectangle $mol_icon path \M4,6V19H20V6H4Z
+
+$mol_icon_navigation $mol_icon path \M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z
+
+$mol_icon_dock_left $mol_icon path \M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 18H9V6H20Z
+
+$mol_icon_card $mol_icon path \M20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20Z
+
+$mol_icon_bell $mol_icon path \M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21
+
+$mol_icon_console $mol_icon path \M20,19V7H4V19H20M20,3A2,2 0 0,1 22,5V19A2,2 0 0,1 20,21H4A2,2 0 0,1 2,19V5C2,3.89 2.9,3 4,3H20M13,17V15H18V17H13M9.58,13L5.57,9H8.4L11.7,12.3C12.09,12.69 12.09,13.33 11.7,13.72L8.42,17H5.59L9.58,13Z
+
+$mol_icon_table $mol_icon path \M5,4H19A2,2 0 0,1 21,6V18A2,2 0 0,1 19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4M5,8V12H11V8H5M13,8V12H19V8H13M5,14V18H11V14H5M13,14V18H19V14H13Z
+
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0.1
+	sub <= rows /$mol_view
+		<= Gap_before $mol_view style * paddingTop <= gap_before 0
+		<= Empty $mol_view
+		<= Gap_after $mol_view style * paddingTop <= gap_after 0
+	item_height_min* 1
+	item_width_min* 1
+	view_window_shift? 0
+	view_window /
+		0
+		0
+
+$mol_icon_menu $mol_icon path \M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z
+
+$bog_ui_sidebar $mol_view
+	mode? \dock
+	items /
+	sub /
+		<= Header $mol_view
+			sub /
+		<= Items $mol_list
+			rows <= items_with_collapsed /
+		<= Footer $mol_view
+			sub /
+		<= Toggle $mol_button_minor
+			click? <=> toggle? null
+			sub /
+				<= Toggle_icon $mol_icon_menu
+	attr *
+		bog_ui_sidebar_mode <= mode?
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked? false
+		aria-checked <= aria_checked \false
+		role <= aria_role \checkbox
+	sub /$mol_view_content
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_4 $mol_icon path \M12,18C11.11,18 10.26,17.8 9.5,17.45C11.56,16.5 13,14.42 13,12C13,9.58 11.56,7.5 9.5,6.55C10.26,6.2 11.11,6 12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18M20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31L23.31,12L20,8.69Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_4
+	hint @ \Toggle lights
+	checked? <=> lights? false
+
+$mol_page $mol_view
+	dom_name \article
+	attr *
+		^
+		tabIndex <= tabindex -1
+	sub /
+		<= Head $mol_view
+			minimal_height 64
+			dom_name \header
+			sub <= head /
+				<= Title $mol_view
+					dom_name \h1
+					sub <= title_content /
+						<= Logo null
+						<= title
+				<= Tools $mol_view
+					sub <= tools /$mol_view_content
+		<= Body $mol_scroll
+			scroll_top? => body_scroll_top?
+			sub <= body_content /
+				<= Body_content $mol_view
+					sub <= body /$mol_view
+		<= Foot $mol_view
+			dom_name \footer
+			sub <= foot /$mol_view
+
+$mol_hotkey $mol_plugin
+	event *
+		^
+		keydown?event <=> keydown?event null
+	key *
+	mod_ctrl false
+	mod_alt false
+	mod_shift false
+
+$mol_string $mol_view
+	dom_name \input
+	enabled true
+	minimal_height 40
+	autocomplete false
+	selection? /number
+		0
+		0
+	auto /
+		<= selection_watcher null
+		<= error_report null
+	field *
+		^
+		disabled <= disabled false
+		value <= value_changed? <=> value? \
+		placeholder <= hint_visible <= hint \
+		spellcheck <= spellcheck true
+		autocomplete <= autocomplete_native \
+		selectionEnd <= selection_end 0
+		selectionStart <= selection_start 0
+		inputMode <= keyboard \text
+		enterkeyhint <= enter \go
+	attr *
+		^
+		maxlength <= length_max +Infinity
+		type <= type? \text
+	event *
+		^
+		input?event <=> event_change?event null
+	plugins /
+		<= Submit $mol_hotkey
+			mod_ctrl <= submit_with_ctrl false
+			key * enter?event <=> submit?event null
+
+$bog_ui_command $mol_view
+	showed? false
+	query? \
+	commands /
+	filtered /
+	selected? 0
+	sub /
+		<= Backdrop $mol_view
+			event *
+				click? <=> backdrop_click? null
+		<= Dialog $mol_view
+			event *
+				keydown? <=> key_down? null
+			sub /
+				<= Search $mol_string
+					hint \Search commands…
+					value? <=> query?
+				<= Results $mol_list
+					rows <= result_rows /
+	attr *
+		bog_ui_command_showed <= showed?
+
+$bog_ui_command_group $mol_view
+	title \
+	sub /
+		<= Title $mol_view
+			sub /
+				<= title
+
+$bog_ui_command_item $mol_button_minor
+	label \
+	shortcut \
+	active false
+	click? <=> execute? null
+	sub /
+		<= Label $mol_view
+			sub /
+				<= label
+		<= Shortcut $mol_view
+			sub /
+				<= shortcut
+	attr *
+		^
+		bog_ui_command_item_active <= active
+
+$bog_ui_badge $mol_view
+	label \
+	type \default
+	sub /
+		<= Label $mol_view
+			sub /
+				<= label
+	attr *
+		bog_ui_badge_type <= type
+
+$bog_ui_app_badge $mol_page
+	title \Badge
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Compact label component with 5 color variants for status indication.
+		<= Variants_title $mol_view
+			sub /
+				<= variants_title \Variants
+		<= Variants $mol_view
+			sub /
+				<= Default_badge $bog_ui_badge
+					label \Default
+					type \default
+				<= Success_badge $bog_ui_badge
+					label \Success
+					type \success
+				<= Warning_badge $bog_ui_badge
+					label \Warning
+					type \warning
+				<= Error_badge $bog_ui_badge
+					label \Error
+					type \error
+				<= Info_badge $bog_ui_badge
+					label \Info
+					type \info
+
+$mol_icon_magnify $mol_icon path \M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z
+
+$bog_ui_empty $mol_view
+	sub /
+		<= Icon $mol_icon_magnify
+		<= Title $mol_view
+			sub /
+				<= title \Nothing found
+		<= Message $mol_view
+			sub /
+				<= message \Try adjusting your search or filters
+		<= Action null
+
+$mol_icon_folder $mol_icon path \M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z
+
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+
+$mol_icon_plus_circle $mol_icon path \M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
+
+$mol_button_major $mol_button_minor
+	theme \$mol_theme_base
+
+$bog_ui_app_empty $mol_page
+	title \Empty State
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Placeholder component for empty pages with icon, title, message, and optional action button.
+		<= Section_default $mol_view
+			sub /
+				<= section_default_title \Default
+		<= Default $bog_ui_empty
+		<= Section_custom $mol_view
+			sub /
+				<= section_custom_title \Custom Icon
+		<= Custom_icon $bog_ui_empty
+			Icon <= Custom_icon_icon $mol_icon_folder
+			title \No documents
+			message \Upload your first document to get started
+		<= Section_action $mol_view
+			sub /
+				<= section_action_title \With Action Button
+		<= With_action $bog_ui_empty
+			Icon <= Action_icon $mol_icon_plus_circle
+			title \No items yet
+			message \Create your first item to begin
+			Action <= Action_button $mol_button_major
+				sub /
+					<= action_label \Create Item
+
+$bog_ui_skeleton $mol_view
+
+$bog_ui_app_skeleton $mol_page
+	title \Skeleton
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Loading placeholder with shimmer animation. Use to indicate content is being loaded.
+		<= Section_single $mol_view
+			sub /
+				<= section_single_title \Single Line
+		<= Single $bog_ui_skeleton
+		<= Section_card $mol_view
+			sub /
+				<= section_card_title \Card Placeholder
+		<= Card $mol_view
+			sub /
+				<= Card_avatar $bog_ui_skeleton
+				<= Card_title $bog_ui_skeleton
+				<= Card_line1 $bog_ui_skeleton
+				<= Card_line2 $bog_ui_skeleton
+				<= Card_short $bog_ui_skeleton
+		<= Section_sizes $mol_view
+			sub /
+				<= section_sizes_title \Different Sizes
+		<= Sizes $mol_view
+			sub /
+				<= Size_small $bog_ui_skeleton
+				<= Size_medium $bog_ui_skeleton
+				<= Size_large $bog_ui_skeleton
+
+$mol_link $mol_view
+	uri \
+	dom_name \a
+	uri_off \
+	uri_native null
+	external false
+	attr *
+		^
+		href <= uri_toggle \
+		title <= hint_safe <= hint \
+		target <= target \_self
+		download <= file_name \
+		mol_link_current <= current false
+		rel <= relation \
+	sub /$mol_view_content
+		<= title
+	arg *
+	event *
+		^
+		click?event <=> click?event <=> event_click?event null
+
+$bog_ui_breadcrumb $mol_view
+	crumbs /
+	crumb_title* \
+	crumb_uri* \
+	Crumb* $mol_link
+		title <= crumb_title*
+		uri <= crumb_uri*
+	Sep* $mol_view
+		sub /
+			\›
+	Last $mol_view
+		sub /
+			<= last_title \
+	sub <= items /
+
+$bog_ui_app_breadcrumb $mol_page
+	title \Breadcrumb
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Navigation breadcrumbs showing the user's current location in a hierarchy.
+		<= Short_title $mol_view
+			sub /
+				<= short_title \Short Path (2 levels)
+		<= Short $bog_ui_breadcrumb
+			crumbs <= short_crumbs /
+		<= Long_title $mol_view
+			sub /
+				<= long_title \Long Path (5 levels)
+		<= Long $bog_ui_breadcrumb
+			crumbs <= long_crumbs /
+
+$mol_icon_home $mol_icon path \M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z
+
+$mol_icon_account $mol_icon path \M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z
+
+$mol_icon_cog $mol_icon path \M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z
+
+$bog_ui_app_sidebar $mol_page
+	title \Sidebar
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Navigation sidebar with 3 display modes: dock (full width with labels), rail (icons only), and hidden (collapsed).
+		<= Mode_title $mol_view
+			sub /
+				<= mode_title \Mode Switching
+		<= Mode_buttons $mol_view
+			sub /
+				<= Dock_button $mol_button_minor
+					click? <=> set_dock? null
+					sub /
+						<= dock_label \Dock
+				<= Rail_button $mol_button_minor
+					click? <=> set_rail? null
+					sub /
+						<= rail_label \Rail
+				<= Hidden_button $mol_button_minor
+					click? <=> set_hidden? null
+					sub /
+						<= hidden_label \Hidden
+		<= Current_mode $mol_view
+			sub /
+				<= current_mode_text \Current mode: dock
+		<= Preview $mol_view
+			sub /
+				<= Preview_sidebar $bog_ui_sidebar
+					mode? <=> preview_mode? \dock
+					items /
+						<= Preview_item_home $bog_ui_sidebar_item
+							Icon <= Preview_icon_home $mol_icon_home
+							label \Home
+						<= Preview_item_users $bog_ui_sidebar_item
+							Icon <= Preview_icon_users $mol_icon_account
+							label \Users
+						<= Preview_item_settings $bog_ui_sidebar_item
+							Icon <= Preview_icon_settings $mol_icon_cog
+							label \Settings
+				<= Preview_content $mol_view
+					sub /
+						<= preview_content_text \Main content area
+
+$bog_ui_sheet $mol_view
+	showed? false
+	side \right
+	content /
+	sub /
+		<= Backdrop $mol_view
+			event *
+				click? <=> backdrop_click? null
+		<= Panel $mol_view
+			sub /
+				<= Content $mol_list
+					rows <= content
+	attr *
+		bog_ui_sheet_showed <= showed?
+		bog_ui_sheet_side <= side
+
+$bog_ui_app_sheet $mol_page
+	title \Sheet / Drawer
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Overlay panel that slides in from any edge of the screen. Click a button to open a Sheet from the corresponding side.
+		<= Buttons_title $mol_view
+			sub /
+				<= buttons_title \Open from side
+		<= Buttons $mol_view
+			sub /
+				<= Top_button $mol_button_minor
+					click? <=> open_top? null
+					sub /
+						<= top_label \Top
+				<= Right_button $mol_button_minor
+					click? <=> open_right? null
+					sub /
+						<= right_label \Right
+				<= Bottom_button $mol_button_minor
+					click? <=> open_bottom? null
+					sub /
+						<= bottom_label \Bottom
+				<= Left_button $mol_button_minor
+					click? <=> open_left? null
+					sub /
+						<= left_label \Left
+		<= Sheet_top $bog_ui_sheet
+			showed? <=> top_showed? false
+			side \top
+			content /
+				<= Top_content $mol_view
+					sub /
+						<= Top_heading $mol_view
+							sub /
+								<= top_heading \Sheet from Top
+						<= Top_text $mol_view
+							sub /
+								<= top_text \This sheet slides in from the top edge. It can be used for notifications, search bars, or any content that should appear from above.
+		<= Sheet_right $bog_ui_sheet
+			showed? <=> right_showed? false
+			side \right
+			content /
+				<= Right_content $mol_view
+					sub /
+						<= Right_heading $mol_view
+							sub /
+								<= right_heading \Sheet from Right
+						<= Right_text $mol_view
+							sub /
+								<= right_text \This sheet slides in from the right edge. Commonly used for detail panels, settings, or secondary navigation.
+						<= Right_form_title $mol_view
+							sub /
+								<= right_form_title \Example Form
+						<= Right_name $mol_string
+							hint \Your name
+							value? <=> right_name? \
+						<= Right_email $mol_string
+							hint \Email address
+							value? <=> right_email? \
+		<= Sheet_bottom $bog_ui_sheet
+			showed? <=> bottom_showed? false
+			side \bottom
+			content /
+				<= Bottom_content $mol_view
+					sub /
+						<= Bottom_heading $mol_view
+							sub /
+								<= bottom_heading \Sheet from Bottom
+						<= Bottom_text $mol_view
+							sub /
+								<= bottom_text \This sheet slides in from the bottom edge. Often used for mobile action sheets, media players, or supplementary content.
+		<= Sheet_left $bog_ui_sheet
+			showed? <=> left_showed? false
+			side \left
+			content /
+				<= Left_content $mol_view
+					sub /
+						<= Left_heading $mol_view
+							sub /
+								<= left_heading \Sheet from Left
+						<= Left_text $mol_view
+							sub /
+								<= left_text \This sheet slides in from the left edge. Useful for navigation drawers, filters, or side panels.
+
+$mol_icon_information $mol_icon path \M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
+
+$mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
+
+$bog_ui_toast $mol_view
+	message \
+	type \info
+	closeable true
+	close? null
+	sub /
+		<= Icon $mol_icon_information
+		<= Body $mol_view
+			sub /
+				<= message
+		<= Close $mol_button_minor
+			click? <=> close?
+			sub /
+				<= Close_icon $mol_icon_close
+	attr *
+		bog_ui_toast_type <= type
+		bog_ui_toast_closeable <= closeable
+
+$mol_icon_check $mol_icon path \M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z
+
+$mol_icon_check_circle $mol_icon path \M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z
+
+$mol_icon_alert $mol_icon path \M13 14H11V9H13M13 18H11V16H13M1 21H23L12 2L1 21Z
+
+$mol_icon_alert_circle $mol_icon path \M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z
+
+$bog_ui_toast_manager $mol_view
+	toast_data /
+	Toast* $bog_ui_toast
+		message <= toast_message* \
+		type <= toast_type* \info
+		close? <=> toast_close*? null
+	sub <= toast_views /
+
+$bog_ui_app_toast $mol_page
+	title \Toast
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Toast notifications for user feedback. Click a button to trigger a toast of the corresponding type. Toasts stack vertically and close via the × button.
+		<= Buttons_title $mol_view
+			sub /
+				<= buttons_title \Trigger toasts
+		<= Buttons $mol_view
+			sub /
+				<= Info_button $mol_button_minor
+					click? <=> add_info? null
+					sub /
+						<= info_label \Info
+				<= Success_button $mol_button_minor
+					click? <=> add_success? null
+					sub /
+						<= success_label \Success
+				<= Warning_button $mol_button_minor
+					click? <=> add_warning? null
+					sub /
+						<= warning_label \Warning
+				<= Error_button $mol_button_minor
+					click? <=> add_error? null
+					sub /
+						<= error_label \Error
+		<= Manager $bog_ui_toast_manager
+
+$bog_ui_app_command $mol_page
+	title \Command Palette
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Command palette for quick search and action execution. Press the button or use ⌘K / Ctrl+K to open. Type to filter commands in real time.
+		<= Open_title $mol_view
+			sub /
+				<= open_title \Open palette
+		<= Open_row $mol_view
+			sub /
+				<= Open_button $mol_button_minor
+					click? <=> open_palette? null
+					sub /
+						<= open_label \Open Command Palette
+				<= Shortcut_hint $mol_view
+					sub /
+						<= shortcut_hint \⌘K
+		<= Groups_title $mol_view
+			sub /
+				<= groups_title \Demo commands
+		<= Groups_desc $mol_view
+			sub /
+				<= groups_desc \The palette contains 3 groups: Navigation, Actions, and Settings. Use the search field to filter by command name.
+		<= Palette $bog_ui_command
+			showed? <=> palette_showed? false
+			commands <= demo_commands /
+				<= Nav_group $bog_ui_command_group
+					title \Navigation
+				<= Nav_home $bog_ui_command_item
+					label \Go to Home
+					shortcut \⌘H
+				<= Nav_dashboard $bog_ui_command_item
+					label \Go to Dashboard
+					shortcut \⌘D
+				<= Nav_settings $bog_ui_command_item
+					label \Go to Settings
+					shortcut \⌘,
+				<= Nav_profile $bog_ui_command_item
+					label \Go to Profile
+				<= Actions_group $bog_ui_command_group
+					title \Actions
+				<= Actions_new $bog_ui_command_item
+					label \Create New Item
+					shortcut \⌘N
+				<= Actions_save $bog_ui_command_item
+					label \Save Current
+					shortcut \⌘S
+				<= Actions_export $bog_ui_command_item
+					label \Export as PDF
+					shortcut \⌘⇧E
+				<= Settings_group $bog_ui_command_group
+					title \Settings
+				<= Settings_theme $bog_ui_command_item
+					label \Toggle Dark Mode
+					shortcut \⌘⇧T
+				<= Settings_lang $bog_ui_command_item
+					label \Change Language
+				<= Settings_notifications $bog_ui_command_item
+					label \Notification Settings
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
+$mol_dimmer $mol_paragraph
+	haystack \
+	needle \
+	sub <= parts /$mol_view_content
+	Low* $mol_paragraph
+		sub /
+			<= string* \
+	High* $mol_paragraph
+		sub /
+			<= string* \
+
+$mol_float $mol_view
+	style *
+		^
+		minHeight \auto
+
+$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
+
+$mol_check_expand $mol_check
+	Icon $mol_icon_chevron
+	level 0
+	style *
+		^
+		paddingLeft <= level_style \0px
+	checked? <=> expanded? false
+	enabled <= expandable false
+
+$mol_grid $mol_view
+	row_height 32
+	row_ids /string[]
+	row_id* null
+	col_ids /
+	records *
+	record* null
+	hierarchy null
+	hierarchy_col \
+	minimal_width 0
+	-
+	sub /
+		<= Head
+		<= Table $mol_grid_table
+			sub <= rows /$mol_view
+	Head $mol_grid_row
+		cells <= head_cells /$mol_view
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+	-
+	Cell* $mol_view
+	cell* null
+	Cell_text* $mol_grid_cell
+		sub <= cell_content_text* <= cell_content* /$mol_view_content
+	Cell_number* $mol_grid_number
+		sub <= cell_content_number* <= cell_content* /$mol_view_content
+	Col_head* $mol_float
+		dom_name \th
+		sub <= col_head_content* /$mol_view_content
+	Cell_branch* $mol_check_expand
+		level <= cell_level* 0
+		label <= cell_content* /$mol_view_content
+		expanded? <=> cell_expanded*? false
+	Cell_content* /
+		<= Cell_dimmer* $mol_dimmer
+			needle <= needle \
+			haystack <= cell_value* \
+
+$mol_grid_table $mol_list
+	- dom_name \table
+
+$mol_grid_row $mol_view
+	- dom_name \tr
+	sub <= cells /$mol_view
+
+$mol_grid_cell $mol_view
+	- dom_name \td
+	minimal_height 40
+
+$mol_grid_number $mol_grid_cell
+
+$mol_icon_tick $mol_icon path \M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z
+
+$mol_check_box $mol_check
+	Icon $mol_icon_tick
+
+$bog_ui_table $mol_grid
+	columns /
+	data /
+	sort_column? \
+	sort_dir? \asc
+	selectable false
+	selected? /
+	all_selected? false
+	row_checked*? false
+	Row* $mol_grid_row
+		minimal_height <= row_height
+		minimal_width <= minimal_width
+		cells <= cells* /$mol_view
+		attr *
+			^
+			bog_ui_table_row_even <= row_even* false
+			bog_ui_table_row_selected <= row_selected* false
+	Head_button* $mol_button_minor
+		click? <=> col_head_click*? null
+		sub / <= head_button_content* /
+	Select_all $mol_check_box
+		checked? <=> all_selected? false
+	Select_row* $mol_check_box
+		checked? <=> row_checked*? false
+
+$bog_ui_app_table $mol_page
+	title \Data Table
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Data table with sorting, row selection, and zebra striping. Click column headers to sort. Use checkboxes to select rows.
+		<= Selected_info $mol_view
+			sub /
+				<= selected_text \No rows selected
+		<= Table $bog_ui_table
+			columns <= columns /
+			data <= data /
+			selectable true
+			selected? <=> selected? /
+			sort_column? <=> sort_column? \
+			sort_dir? <=> sort_dir? \asc
+
+$bog_ui_app_overview $mol_page
+	title \Components Overview
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Browse all available UI components. Click a card to see its full demo.
+		<= Grid $mol_view
+			sub <= cards /
+				<= Card_badge $bog_ui_app_overview_card
+					card_id \badge
+					card_title \Badge
+					card_description \Compact label with 5 color variants for status indication
+					click? <=> go_badge? null
+					Preview <= Badge_preview $mol_view
+						sub /
+							<= Badge_s $bog_ui_badge
+								label \Success
+								type \success
+							<= Badge_e $bog_ui_badge
+								label \Error
+								type \error
+							<= Badge_i $bog_ui_badge
+								label \Info
+								type \info
+				<= Card_empty $bog_ui_app_overview_card
+					card_id \empty
+					card_title \Empty State
+					card_description \Placeholder for pages with no content
+					click? <=> go_empty? null
+					Preview <= Empty_preview $mol_view
+						sub /
+							<= Empty_icon $mol_icon_magnify
+							<= Empty_text $mol_view
+								sub /
+									\No results
+				<= Card_skeleton $bog_ui_app_overview_card
+					card_id \skeleton
+					card_title \Skeleton
+					card_description \Loading placeholder with shimmer animation
+					click? <=> go_skeleton? null
+					Preview <= Skeleton_preview $mol_view
+						sub /
+							<= Skel_1 $bog_ui_skeleton
+							<= Skel_2 $bog_ui_skeleton
+							<= Skel_3 $bog_ui_skeleton
+				<= Card_breadcrumb $bog_ui_app_overview_card
+					card_id \breadcrumb
+					card_title \Breadcrumb
+					card_description \Navigation breadcrumb trail with separator
+					click? <=> go_breadcrumb? null
+					Preview <= Breadcrumb_preview $mol_view
+						sub /
+							<= Bc_home $mol_view
+								sub / \Home
+							<= Bc_sep $mol_view
+								sub / \>
+							<= Bc_cat $mol_view
+								sub / \Catalog
+							<= Bc_sep2 $mol_view
+								sub / \>
+							<= Bc_cur $mol_view
+								sub / \Page
+				<= Card_sidebar $bog_ui_app_overview_card
+					card_id \sidebar
+					card_title \Sidebar
+					card_description \Side navigation panel with 3 display modes
+					click? <=> go_sidebar? null
+					Preview <= Sidebar_preview $mol_view
+						sub /
+							<= Sb_bar $mol_view
+								sub /
+									<= Sb_i1 $mol_icon_home
+									<= Sb_i2 $mol_icon_account
+									<= Sb_i3 $mol_icon_cog
+							<= Sb_content $mol_view
+								sub /
+									\Content
+				<= Card_sheet $bog_ui_app_overview_card
+					card_id \sheet
+					card_title \Sheet
+					card_description \Overlay panel sliding from screen edge
+					click? <=> go_sheet? null
+					Preview <= Sheet_preview $mol_view
+						sub /
+							<= Sheet_box $mol_view
+								sub /
+									<= Sheet_panel $mol_view
+										sub /
+											\Panel
+				<= Card_toast $bog_ui_app_overview_card
+					card_id \toast
+					card_title \Toast
+					card_description \Notification messages with 4 severity types
+					click? <=> go_toast? null
+					Preview <= Toast_preview $mol_view
+						sub /
+							<= Toast_info_mini $mol_view
+								sub /
+									<= Toast_info_icon $mol_icon_information
+									\Info message
+							<= Toast_ok_mini $mol_view
+								sub /
+									<= Toast_ok_icon $mol_icon_check_circle
+									\Success!
+				<= Card_command $bog_ui_app_overview_card
+					card_id \command
+					card_title \Command Palette
+					card_description \Search and execute commands via keyboard
+					click? <=> go_command? null
+					Preview <= Command_preview $mol_view
+						sub /
+							<= Cmd_search $mol_view
+								sub /
+									<= Cmd_icon $mol_icon_magnify
+									\Search commands...
+				<= Card_table $bog_ui_app_overview_card
+					card_id \table
+					card_title \Data Table
+					card_description \Sortable data grid with row selection
+					click? <=> go_table? null
+					Preview <= Table_preview $mol_view
+						sub /
+							<= Tbl_head $mol_view
+								sub /
+									\Name
+									\Email
+									\Role
+							<= Tbl_row1 $mol_view
+								sub /
+									\Alice
+									\a@b.c
+									\Dev
+							<= Tbl_row2 $mol_view
+								sub /
+									\Bob
+									\b@b.c
+									\PM
+
+$bog_ui_app_overview_card $mol_button_minor
+	card_id \
+	card_title \
+	card_description \
+	Preview $mol_view
+	attr *
+		^
+		bog_ui_app_overview_card true
+	sub /
+		<= Preview
+		<= Title $mol_view
+			sub /
+				<= card_title
+		<= Card_desc $mol_view
+			sub /
+				<= card_description
+
+$bog_ui_app $mol_book2
+	plugins /
+		^
+		<= Theme $mol_theme_auto
+	event *
+		^
+		keydown? <=> global_keydown? null
+	command_showed? false
+	Command $bog_ui_command
+		showed? <=> command_showed?
+	Badge_page $bog_ui_app_badge
+	Empty_page $bog_ui_app_empty
+	Skeleton_page $bog_ui_app_skeleton
+	Breadcrumb_page $bog_ui_app_breadcrumb
+	Sidebar_page $bog_ui_app_sidebar
+	Sheet_page $bog_ui_app_sheet
+	Toast_page $bog_ui_app_toast
+	Command_page $bog_ui_app_command
+	Table_page $bog_ui_app_table
+	Overview_page $bog_ui_app_overview
+	pages /
+		<= Nav $bog_ui_sidebar
+			mode? <=> sidebar_mode? \dock
+			items /
+				<= Overview_nav $bog_ui_sidebar_item
+					Icon <= Overview_icon $mol_icon_view_grid
+					label \Overview
+					active <= overview_active false
+					click? <=> nav_overview? null
+				<= Badge_nav $bog_ui_sidebar_item
+					Icon <= Badge_icon $mol_icon_tag
+					label \Badge
+					active <= badge_active false
+					click? <=> nav_badge? null
+				<= Empty_nav $bog_ui_sidebar_item
+					Icon <= Empty_icon $mol_icon_file
+					label \Empty State
+					active <= empty_active false
+					click? <=> nav_empty? null
+				<= Skeleton_nav $bog_ui_sidebar_item
+					Icon <= Skeleton_icon $mol_icon_rectangle
+					label \Skeleton
+					active <= skeleton_active false
+					click? <=> nav_skeleton? null
+				<= Breadcrumb_nav $bog_ui_sidebar_item
+					Icon <= Breadcrumb_icon $mol_icon_navigation
+					label \Breadcrumb
+					active <= breadcrumb_active false
+					click? <=> nav_breadcrumb? null
+				<= Sidebar_nav $bog_ui_sidebar_item
+					Icon <= Sidebar_icon $mol_icon_dock_left
+					label \Sidebar
+					active <= sidebar_active false
+					click? <=> nav_sidebar? null
+				<= Sheet_nav $bog_ui_sidebar_item
+					Icon <= Sheet_icon $mol_icon_card
+					label \Sheet
+					active <= sheet_active false
+					click? <=> nav_sheet? null
+				<= Toast_nav $bog_ui_sidebar_item
+					Icon <= Toast_icon $mol_icon_bell
+					label \Toast
+					active <= toast_active false
+					click? <=> nav_toast? null
+				<= Command_nav $bog_ui_sidebar_item
+					Icon <= Command_icon $mol_icon_console
+					label \Command
+					active <= command_active false
+					click? <=> nav_command? null
+				<= Table_nav $bog_ui_sidebar_item
+					Icon <= Table_icon $mol_icon_table
+					label \Data Table
+					active <= table_active false
+					click? <=> nav_table? null
+		<= Content_page $mol_page
+			title <= page_title \Components
+			tools /
+				<= Theme_toggle $mol_lights_toggle
+			body /
+				<= Page_body $mol_view
+					sub /
+						<= page_text \Select a component from the sidebar
