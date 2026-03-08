@@ -13241,7 +13241,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/app/app.view.css", "/* Content pages fill remaining space (override $mol_book2 flex-shrink: 0) */\n[bog_ui_app] > [mol_page] {\n\tflex-shrink: 1;\n\tflex-grow: 1;\n\tmin-width: 0;\n}\n\n/* Toolbar tools wrap when not enough space */\n[bog_ui_app] [mol_page_head] {\n\tflex-wrap: wrap;\n}\n");
+    $mol_style_attach("bog/ui/app/app.view.css", "/* Content pages fill remaining space (override $mol_book2 flex-shrink: 0) */\n[bog_ui_app] > [mol_page] {\n\tflex-shrink: 1;\n\tflex-grow: 1;\n\tmin-width: 0;\n}\n\n/* Toolbar tools wrap when not enough space */\n[bog_ui_app] [mol_page_head] {\n\tflex-wrap: wrap;\n}\n\n/* Page title truncates with ellipsis, doesn't break layout */\n[bog_ui_app] [mol_page_title] {\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n\tmin-width: 0;\n\tflex-shrink: 1;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -13259,6 +13259,12 @@ var $;
         Page_body: {
             padding: $mol_gap.block,
             color: $mol_theme.shade,
+            overflow: {
+                y: 'auto',
+            },
+            flex: {
+                shrink: 1,
+            },
         },
     });
 })($ || ($ = {}));

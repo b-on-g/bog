@@ -1975,6 +1975,15 @@
 [bog_ui_app] [mol_page_head] {
 	flex-wrap: wrap;
 }
+
+/* Page title truncates with ellipsis, doesn't break layout */
+[bog_ui_app] [mol_page_title] {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	min-width: 0;
+	flex-shrink: 1;
+}
 </style><style id="$mol_style_attach:$bog_ui_app">[bog_ui_app_content_page] {
 	flex-grow: 1;
 	flex-shrink: 1;
@@ -1983,6 +1992,8 @@
 [bog_ui_app_page_body] {
 	padding: var(--mol_gap_block);
 	color: var(--mol_theme_shade);
+	overflow-y: auto;
+	flex-shrink: 1;
 }
 </style></head>
 	<body mol_view_root="">
