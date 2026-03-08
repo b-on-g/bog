@@ -35,9 +35,7 @@ namespace $ {
 			font: {
 				size: '.875rem',
 			},
-			text: {
-				align: 'center',
-			},
+			textAlign: 'center',
 		},
 	} )
 }

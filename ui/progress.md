@@ -263,3 +263,50 @@
 - No setTimeout/setInterval used
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-016: Demo Badge Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/badge/badge.view.tree` — $mol_page with description, variants title, and all 5 badge variants (default, success, warning, error, info)
+- `bog/ui/app/badge/badge.view.css.ts` — Styled with padding, shade description, bold variants title, flex-wrap variants container
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Badge_page $bog_ui_app_badge declaration
+- `bog/ui/app/app.view.ts` — Added pages() override to show Badge_page when component==='badge'
+- `bog/ui/badge/badge.view.css.ts` — Fixed pre-existing TS errors: border.radius → borderRadius, line.height → lineHeight, white.space → whiteSpace
+
+**Features:**
+- Demo page at ?component=badge showing all 5 badge variants
+- Section title "Variants" and component description
+- Flex-wrap layout for badge display
+- Integrated into app router via pages() override
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `fbfaac0` pushed to origin/master
+
+---
+
+### TASK-017: Demo Empty State Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/app/empty/empty.view.tree` — $mol_page with 3 Empty State variants (default, custom icon, with action button)
+- `bog/ui/app/empty/empty.view.css.ts` — Styled with padding, shade description, bold section titles
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Empty_page $bog_ui_app_empty declaration
+- `bog/ui/app/app.view.ts` — Updated pages() to route to Empty_page when component==='empty'
+- `bog/ui/empty/empty.view.css.ts` — Fixed pre-existing TS error: `text: { align: 'center' }` → `textAlign: 'center'`
+
+**Features:**
+- 3 demo variants: Default (magnify icon), Custom Icon (folder icon), With Action Button (plus-circle icon + Create Item button)
+- Each variant has a section title
+- Component description at top
+- Integrated into app router via switch/case in pages()
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"

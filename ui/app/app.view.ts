@@ -115,9 +115,12 @@ namespace $.$$ {
 		@ $mol_mem
 		pages() {
 			const comp = this.component()
-			const content = comp === 'badge'
-				? this.Badge_page()
-				: this.Content_page()
+			let content: any
+			switch( comp ) {
+				case 'badge': content = this.Badge_page(); break
+				case 'empty': content = this.Empty_page(); break
+				default: content = this.Content_page()
+			}
 			return [
 				this.Nav(),
 				content,
