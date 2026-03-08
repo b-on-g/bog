@@ -56,6 +56,11 @@ namespace $.$$ {
 			return this.component() === 'sheet'
 		}
 
+		@ $mol_mem
+		toast_active() {
+			return this.component() === 'toast'
+		}
+
 		@ $mol_action
 		nav_badge( next?: any ) {
 			if( next !== undefined ) this.component( 'badge' )
@@ -92,6 +97,12 @@ namespace $.$$ {
 			return null
 		}
 
+		@ $mol_action
+		nav_toast( next?: any ) {
+			if( next !== undefined ) this.component( 'toast' )
+			return null
+		}
+
 		@ $mol_mem
 		page_title() {
 			const titles: Record<string, string> = {
@@ -101,6 +112,7 @@ namespace $.$$ {
 				breadcrumb: 'Breadcrumb',
 				sidebar: 'Sidebar',
 				sheet: 'Sheet',
+				toast: 'Toast',
 			}
 			return titles[ this.component() ] ?? 'Components'
 		}
@@ -123,6 +135,7 @@ namespace $.$$ {
 				case 'breadcrumb': content = this.Breadcrumb_page(); break
 				case 'sidebar': content = this.Sidebar_page(); break
 				case 'sheet': content = this.Sheet_page(); break
+				case 'toast': content = this.Toast_page(); break
 				default: content = this.Content_page()
 			}
 			return [

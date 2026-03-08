@@ -11,7 +11,7 @@ namespace $ {
 			left: '1rem',
 			right: '1rem',
 		},
-		borderRadius: $mol_gap.round,
+		borderRadius: '0.5rem',
 		background: {
 			color: $mol_theme.card,
 		},

@@ -387,3 +387,53 @@
 - All 3 modes demonstrated: dock (240px with labels), rail (56px icons only), hidden (0px collapsed)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-021: Demo Sheet/Drawer Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/sheet/sheet.view.tree` — $mol_page with 4 open buttons and 4 Sheet instances (top, right, bottom, left)
+- `bog/ui/app/sheet/sheet.view.ts` — open_top/right/bottom/left actions setting showed? to true
+- `bog/ui/app/sheet/sheet.view.css.ts` — Styled with padding, description, buttons flex layout, content padding/headings
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Sheet_page $bog_ui_app_sheet declaration
+- `bog/ui/app/app.view.ts` — Updated pages() to route to Sheet_page when component==='sheet'
+- `bog/ui/sheet/sheet.view.tree` — Fixed pre-existing TS error: `click?` → `event * click?` on Backdrop (fixes TS2339)
+
+**Features:**
+- 4 buttons: Top, Right, Bottom, Left — each opens a Sheet from corresponding side
+- Each Sheet contains heading, descriptive text explaining the use case
+- Right Sheet includes an example form with name/email $mol_string inputs
+- Sheets close by clicking the backdrop
+- All 4 sides demonstrated with slide-in CSS transitions
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `c978d79` pushed to origin/master
+
+---
+
+### TASK-022: Demo Toast Page — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed.
+
+**Created files:**
+- `bog/ui/app/toast/toast.view.tree` — $mol_page with 4 trigger buttons (info, success, warning, error) and $bog_ui_toast_manager
+- `bog/ui/app/toast/toast.view.ts` — add_info/success/warning/error actions calling Manager().add()
+- `bog/ui/app/toast/toast.view.css.ts` — Styled with padding, shade description, bold section title, flex-wrap buttons
+
+**Modified files:**
+- `bog/ui/app/app.view.tree` — Added Toast_page declaration and Toast_nav sidebar item ($mol_icon_bell)
+- `bog/ui/app/app.view.ts` — Added toast_active, nav_toast, routing to Toast_page, page title
+- `bog/ui/toast/toast.view.css.ts` — Fixed pre-existing TS error: `$mol_gap.round` → `'0.5rem'` for borderRadius
+
+**Features:**
+- 4 buttons: Info, Success, Warning, Error — each triggers a toast of corresponding type
+- Toasts stack vertically (max 5 visible) via $bog_ui_toast_manager
+- Toasts close only via × button (no auto-dismiss, no timers)
+- Integrated into app router and sidebar navigation
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
