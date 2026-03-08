@@ -16,6 +16,7 @@ $bog_ui_app $mol_book2
 	Sheet_page $bog_ui_app_sheet
 	Toast_page $bog_ui_app_toast
 	Command_page $bog_ui_app_command
+	Table_page $bog_ui_app_table
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock
@@ -60,6 +61,11 @@ $bog_ui_app $mol_book2
 					label \Command
 					active <= command_active false
 					click? <=> nav_command? null
+				<= Table_nav $bog_ui_sidebar_item
+					Icon <= Table_icon $mol_icon_table
+					label \Data Table
+					active <= table_active false
+					click? <=> nav_table? null
 		<= Content_page $mol_page
 			title <= page_title \Components
 			tools /
