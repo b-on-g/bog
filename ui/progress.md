@@ -908,3 +908,47 @@
 - Separators not clipped (flex-shrink: 0 on Sep, Crumb, Last elements)
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-044: Adaptive Sidebar Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Mostly pre-existing, small addition made. Built, Audit passed, committed & pushed.
+
+**Modified files:**
+- `bog/ui/app/sidebar/sidebar.view.css.ts` — Added `width: '100%'` and `boxSizing: 'border-box'` to Preview container
+
+**Pre-existing features (already correct):**
+- Mode_buttons: `flex: { wrap: 'wrap' }` with gap — buttons wrap on narrow screens
+- Preview: `flex: { wrap: 'wrap' }`, border, overflow hidden, minHeight 200px
+- Preview_content: flex-grow 1, centered content
+- No @media queries anywhere in the file
+
+**All acceptance criteria met:**
+- No @media queries — only flex, width %, boxSizing, overflow
+- Demo sidebar inside bounded container with border, overflow hidden, minHeight
+- Mode switching buttons flex-wrap with gap
+- At 320px: Preview container 100% width (width: 100% + boxSizing: border-box)
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `5a71766` pushed to origin/master
+
+---
+
+### TASK-045: Adaptive Sheet Demo Page — DONE
+**Date:** 2026-03-08
+**Status:** Already implemented. Verified and marked done.
+
+**Existing implementation (verified correct):**
+- `bog/ui/app/sheet/sheet.view.css.ts` — Buttons container already has `flex: { wrap: 'wrap' }` and `gap: '.75rem'` (lines 26-33)
+- `bog/ui/sheet/sheet.view.css` — left/right panels already use `width: clamp(280px, 80%, 480px)` (lines 22, 35); top/bottom panels already use `height: clamp(200px, 50vh, 70vh)` (lines 48, 61)
+- `bog/ui/sheet/sheet.view.css.ts` — Panel already has `overflow: { y: 'auto', x: 'hidden' }` for content scrolling (lines 30-33)
+
+**All acceptance criteria met:**
+- No @media queries — only flex-wrap, clamp(), overflow
+- Buttons flex-wrap with gap for wrapping on narrow screens
+- Sheet width: clamp(280px, 80%, 480px) for left/right (from TASK-029)
+- Sheet height: clamp(200px, 50vh, 70vh) for top/bottom (from TASK-029)
+- Content inside sheet scrolls via overflow-y: auto on Panel
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
