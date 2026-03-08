@@ -876,8 +876,10 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
-			"status": "pending"
+			"dependencies": [
+				"TASK-038"
+			],
+			"status": "done"
 		},
 		{
 			"id": "TASK-040",
@@ -894,7 +896,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -913,7 +917,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -931,7 +937,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -949,7 +957,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -967,7 +977,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -986,7 +998,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -1004,7 +1018,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -1023,7 +1039,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -1042,7 +1060,9 @@
 				"Шаг 1: npx mam bog/ui/app — без TS ошибок",
 				"Шаг 2: web.audit.js — Audit passed"
 			],
-			"dependencies": ["TASK-038"],
+			"dependencies": [
+				"TASK-038"
+			],
 			"status": "pending"
 		},
 		{
@@ -1082,7 +1102,9 @@
 				"Шаг 2: git push и проверить что Action проходит",
 				"Шаг 3: Проверить sitemap.xml на деплое — 10 URL"
 			],
-			"dependencies": ["TASK-026"],
+			"dependencies": [
+				"TASK-026"
+			],
 			"status": "pending"
 		}
 	]
