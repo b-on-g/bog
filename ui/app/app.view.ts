@@ -61,6 +61,11 @@ namespace $.$$ {
 			return this.component() === 'toast'
 		}
 
+		@ $mol_mem
+		command_active() {
+			return this.component() === 'command'
+		}
+
 		@ $mol_action
 		nav_badge( next?: any ) {
 			if( next !== undefined ) this.component( 'badge' )
@@ -103,6 +108,12 @@ namespace $.$$ {
 			return null
 		}
 
+		@ $mol_action
+		nav_command( next?: any ) {
+			if( next !== undefined ) this.component( 'command' )
+			return null
+		}
+
 		@ $mol_mem
 		page_title() {
 			const titles: Record<string, string> = {
@@ -113,6 +124,7 @@ namespace $.$$ {
 				sidebar: 'Sidebar',
 				sheet: 'Sheet',
 				toast: 'Toast',
+				command: 'Command Palette',
 			}
 			return titles[ this.component() ] ?? 'Components'
 		}
@@ -136,6 +148,7 @@ namespace $.$$ {
 				case 'sidebar': content = this.Sidebar_page(); break
 				case 'sheet': content = this.Sheet_page(); break
 				case 'toast': content = this.Toast_page(); break
+				case 'command': content = this.Command_page(); break
 				default: content = this.Content_page()
 			}
 			return [
