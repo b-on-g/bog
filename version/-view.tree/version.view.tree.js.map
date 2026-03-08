@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"sources": [
+		"bog/version/version.view.tree"
+	],
+	"sourcesContent": [
+		"$bog_version $mol_paragraph\n\ttitle <= version \\0.0.0\n"
+	],
+	"mappings": "AAAA,AAAA,uCAAa,2BAAb;AAAA,AACU;AAAA,AAAA,UAAS,OAAT;AAAA;AAAT;AAAA,AAAA,UAAM,KAAG,UAAH,CAAN;AAAA;AADD,CAAA;"
+}
