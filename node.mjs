@@ -11675,7 +11675,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("bog/ui/table/table.view.css", "[bog_ui_table_row_even=\"false\"] {\n\tbackground: var(--mol_theme_card);\n}\n\n[bog_ui_table_row_selected=\"true\"] {\n\tbackground: var(--mol_theme_current);\n}\n\n[bog_ui_table] [mol_grid_row]:hover {\n\tbackground: var(--mol_theme_current);\n}\n");
+    $mol_style_attach("bog/ui/table/table.view.css", "[bog_ui_table_row_even=\"false\"] {\n\tbackground: var(--mol_theme_card);\n}\n\n[bog_ui_table_row_selected=\"true\"] {\n\tbackground: var(--mol_theme_current);\n}\n\n[bog_ui_table] [mol_grid_row]:hover {\n\tbackground: var(--mol_theme_current);\n}\n\n[bog_ui_table] [mol_grid_col_id=\"__select\"] {\n\twidth: 3rem;\n\tmin-width: 3rem;\n\tmax-width: 3rem;\n\tflex-shrink: 0;\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -11683,6 +11683,8 @@ var $;
 var $;
 (function ($) {
     $mol_style_define($bog_ui_table, {
+        overflow: { x: 'auto' },
+        width: '100%',
         Head: {
             background: {
                 color: $mol_theme.back,
@@ -11709,6 +11711,7 @@ var $;
                 width: 0,
                 color: $mol_theme.line,
             },
+            minWidth: '100px',
         },
         Row: {
             border: {
@@ -11724,6 +11727,7 @@ var $;
                 left: '0.75rem',
                 right: '0.75rem',
             },
+            minWidth: '100px',
         },
         Cell_number: {
             padding: {
@@ -11733,6 +11737,21 @@ var $;
                 right: '0.75rem',
             },
             textAlign: 'right',
+            minWidth: '80px',
+        },
+        Select_all: {
+            flex: {
+                shrink: 0,
+                grow: 0,
+            },
+            width: '3rem',
+        },
+        Select_row: {
+            flex: {
+                shrink: 0,
+                grow: 0,
+            },
+            width: '3rem',
         },
     });
 })($ || ($ = {}));

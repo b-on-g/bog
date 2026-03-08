@@ -1652,7 +1652,18 @@
 [bog_ui_table] [mol_grid_row]:hover {
 	background: var(--mol_theme_current);
 }
-</style><style id="$mol_style_attach:$bog_ui_table">[bog_ui_table_head] {
+
+[bog_ui_table] [mol_grid_col_id="__select"] {
+	width: 3rem;
+	min-width: 3rem;
+	max-width: 3rem;
+	flex-shrink: 0;
+}
+</style><style id="$mol_style_attach:$bog_ui_table">[bog_ui_table] {
+	overflow-x: auto;
+	width: 100%;
+}
+[bog_ui_table_head] {
 	background-color: var(--mol_theme_back);
 	position: sticky;
 	top: 0;
@@ -1668,6 +1679,7 @@
 	border-style: solid;
 	border-width: 0;
 	border-color: var(--mol_theme_line);
+	min-width: 100px;
 }
 [bog_ui_table_row] {
 	border-style: solid;
@@ -1679,6 +1691,7 @@
 	padding-bottom: 0.5rem;
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
+	min-width: 100px;
 }
 [bog_ui_table_cell_number] {
 	padding-top: 0.5rem;
@@ -1686,6 +1699,17 @@
 	padding-left: 0.75rem;
 	padding-right: 0.75rem;
 	text-align: right;
+	min-width: 80px;
+}
+[bog_ui_table_select_all] {
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 3rem;
+}
+[bog_ui_table_select_row] {
+	flex-shrink: 0;
+	flex-grow: 0;
+	width: 3rem;
 }
 </style><style id="$mol_style_attach:$bog_ui_app_table">[bog_ui_app_table] {
 	padding: var(--mol_gap_block);
