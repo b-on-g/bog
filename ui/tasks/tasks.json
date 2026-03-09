@@ -1082,7 +1082,7 @@
 				"Шаг 3: Проверить что favicon отображается"
 			],
 			"dependencies": [],
-			"status": "pending"
+			"status": "done"
 		},
 		{
 			"id": "TASK-050",

@@ -1034,3 +1034,26 @@
 - All files output to `bog/ui/app/-/` before gh-deploy pushes to GitHub Pages
 
 **Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+
+---
+
+### TASK-049: Favicon for bog/ui/app — DONE
+**Date:** 2026-03-08
+**Status:** Fully implemented, built, Audit passed, committed & pushed.
+
+**Created files:**
+- `bog/ui/app/favicon.svg` — Minimalist SVG favicon: rounded rectangle with "B" letter, supports light/dark browser themes via `@media (prefers-color-scheme: light)` in SVG `<style>`
+
+**Modified files:**
+- `bog/ui/app/index.html` — Added `<link rel="icon" href="favicon.svg" type="image/svg+xml" />`
+- `bog/.gitignore` — Added `!ui/**/*.svg` to whitelist SVG files
+
+**Features:**
+- Dark mode (default): dark blue background (#1a1a2e), light text (#e0e0e0)
+- Light mode: light background (#f0f0f5), dark text (#1a1a2e)
+- Rounded corners (rx=6) matching design system aesthetics
+- Bold "B" letter centered in the icon (for "Bog")
+- Uses `prefers-color-scheme` media query inside SVG for automatic theme switching
+
+**Build:** `npm exec mam bog/ui/app` — no TS errors, `web.audit.js` contains "Audit passed"
+**Commit:** `8024e5d` pushed to origin/master
