@@ -39,3 +39,19 @@ jobs:
       if: github.ref == 'refs/heads/master'
       with:
         folder: 'bog/ui/app/-'
+
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: hyoo-ru/mam_build@master2
+      with:
+        package: 'bog'
+        modules: 'demo'
+
+    - uses: hyoo-ru/gh-deploy@v4.4.1
+      if: github.ref == 'refs/heads/master'
+      with:
+        folder: 'bog/demo/-'
+        target-folder: 'demo'
