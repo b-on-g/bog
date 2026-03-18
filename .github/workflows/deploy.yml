@@ -18,7 +18,7 @@ jobs:
     - uses: hyoo-ru/mam_build@master2
       with:
         package: 'bog'
-        modules: 'ui/app, demo'
+        modules: 'ui/app demo'
 
     - uses: b-on-g/mol-prerender-action@main
       with:
