@@ -32,3 +32,19 @@
 
 # Allow version component
 !version/
+
+# Allow qr source code
+!qr/
+!qr/**/
+!qr/**/*.tree
+!qr/**/*.ts
+!qr/**/*.css
+!qr/**/*.html
+!qr/**/*.svg
+!qr/**/*.json
+!qr/**/*.md
+# Re-ignore build output inside qr
+qr/**/-/
+qr/**/-view.tree/
+qr/**/-node/
+qr/**/-css/
