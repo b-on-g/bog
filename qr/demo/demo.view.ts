@@ -102,7 +102,7 @@ namespace $.$$ {
 				if( iconSrc ) {
 					const icon = new Image()
 					icon.onload = () => {
-						const r = size * 0.15
+						const r = size * 0.1
 						const cx = size / 2
 						const cy = size / 2
 
