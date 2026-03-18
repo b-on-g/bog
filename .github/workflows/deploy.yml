@@ -47,8 +47,7 @@ jobs:
 
     - uses: hyoo-ru/mam_build@master2
       with:
-        package: 'bog'
-        modules: 'demo'
+        package: 'bog/demo'
 
     - uses: hyoo-ru/gh-deploy@v4.4.1
       if: github.ref == 'refs/heads/master'
