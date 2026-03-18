@@ -1,16 +1,16 @@
 $bog_qr_demo $mol_example_small
 	title \QR Code
 	sub /
-		<= Simple $bog_qr
+		- <= Simple $bog_qr
 			uri \https://b-on-g.github.io/bog/
-		<= Gradient $bog_qr
+		- <= Gradient $bog_qr
 			uri \https://b-on-g.github.io/bog/
 			gradient_angle 135
 			gradient_stops /
 				\#ff6b6b
 				\#feca57
 				\#48dbfb
-		<= With_logo $bog_qr
+		- <= With_logo $bog_qr
 			uri \https://b-on-g.github.io/bog/
 			error_correction \H
 			module_radius 0.45

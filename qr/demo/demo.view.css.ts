@@ -1,7 +1,5 @@
 namespace $.$$ {
-
-	$mol_style_define( $bog_qr_demo, {
-
+	$mol_style_define($bog_qr_demo, {
 		Interactive: {
 			flex: {
 				direction: 'column',
@@ -33,7 +31,7 @@ namespace $.$$ {
 		},
 
 		Preview: {
-			maxWidth: '15rem',
+			maxWidth: '35rem',
 			align: {
 				self: 'center',
 			},
@@ -44,7 +42,5 @@ namespace $.$$ {
 				self: 'center',
 			},
 		},
-
-	} )
-
+	})
 }
