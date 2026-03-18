@@ -9,7 +9,20 @@ namespace $.$$ {
 		isDark(row: number, col: number): boolean
 	}
 
+	let grad_counter = 0
+
 	export class $bog_qr extends $.$bog_qr {
+
+		@$mol_mem
+		gradient_id() {
+			return 'qr-grad-' + ( ++grad_counter )
+		}
+
+		@$mol_mem
+		gradient_fill() {
+			return `url(#${ this.gradient_id() })`
+		}
+
 		@$mol_mem
 		grad_x1() {
 			const a = this.gradient_angle() * Math.PI / 180

@@ -21,6 +21,43 @@ $bog_qr_demo $mol_example_small
 				\var(--mol_theme_focus)
 			center /
 				<= Logo $mol_icon
+		<= Interactive $mol_list
+			rows /
+				<= Interactive_title $mol_view
+					sub /
+						\Interactive QR Generator
+				<= Url_input $mol_string
+					hint \Enter URL
+					value? <=> custom_uri? \https://mol.hyoo.ru
+				<= Preset_switch $mol_switch
+					value? <=> preset? \default
+					options *
+						default \Default
+						red_orange \Red-Orange
+						blue_purple \Blue-Purple
+						green_teal \Green-Teal
+				<= Icon_row $mol_view
+					sub /
+						<= Icon_upload $mol_button_minor
+							click? <=> icon_pick? null
+							sub /
+								\Upload Icon
+						<= Icon_clear $mol_button_minor
+							click? <=> icon_clear? null
+							sub /
+								\Clear
+				<= Preview $bog_qr
+					uri <= custom_uri
+					gradient_angle 135
+					error_correction <= preview_ec \M
+					gradient_stops <= preset_stops /
+						\var(--mol_theme_special)
+						\var(--mol_theme_focus)
+					center <= preview_center /
+				<= Download $mol_button_major
+					click? <=> download? null
+					sub /
+						\Download PNG
 	tags /
 		\qr
 		\svg

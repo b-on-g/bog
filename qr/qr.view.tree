@@ -6,6 +6,8 @@ $bog_qr $mol_svg_root
 	error_correction \M
 	quiet_zone 2
 	center /
+	gradient_id \qr-grad
+	gradient_fill \url(#qr-grad)
 	gradient_stops /
 		\var(--mol_theme_special)
 		\var(--mol_theme_focus)
@@ -24,7 +26,7 @@ $bog_qr $mol_svg_root
 					dom_name \linearGradient
 					attr *
 						^
-						id \qr-grad
+						id <= gradient_id
 						x1 <= grad_x1 \0
 						y1 <= grad_y1 \0
 						x2 <= grad_x2 \1
@@ -34,18 +36,18 @@ $bog_qr $mol_svg_root
 			geometry <= modules_d \
 			attr *
 				^
-				fill \url(#qr-grad)
+				fill <= gradient_fill
 		<= Rings $mol_svg_path
 			geometry <= rings_d \
 			attr *
 				^
-				fill \url(#qr-grad)
+				fill <= gradient_fill
 				fill-rule \evenodd
 		<= Centers $mol_svg_path
 			geometry <= centers_d \
 			attr *
 				^
-				fill \url(#qr-grad)
+				fill <= gradient_fill
 		<= Center_wrap $mol_svg
 			dom_name \foreignObject
 			attr *
