@@ -102,9 +102,22 @@ namespace $.$$ {
 				if( iconSrc ) {
 					const icon = new Image()
 					icon.onload = () => {
-						const iconSize = size * 0.22
-						const x = ( size - iconSize ) / 2
-						ctx.drawImage( icon, x, x, iconSize, iconSize )
+						const r = size * 0.15
+						const cx = size / 2
+						const cy = size / 2
+
+						ctx.save()
+						ctx.beginPath()
+						ctx.arc( cx, cy, r + 4, 0, Math.PI * 2 )
+						ctx.fillStyle = '#ffffff'
+						ctx.fill()
+
+						ctx.beginPath()
+						ctx.arc( cx, cy, r, 0, Math.PI * 2 )
+						ctx.clip()
+						const iconSize = r * 2
+						ctx.drawImage( icon, cx - r, cy - r, iconSize, iconSize )
+						ctx.restore()
 
 						const a = document.createElement( 'a' )
 						a.href = canvas.toDataURL( 'image/png' )
