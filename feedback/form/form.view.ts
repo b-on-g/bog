@@ -13,15 +13,6 @@ namespace $.$$ {
 			return this.topic().Title()?.val() ?? ''
 		}
 
-		descr( next?: string ) {
-			const content = next !== undefined
-				? this.topic().Descr( 'auto' )!
-				: this.topic().Descr()
-			if( !content ) return ''
-			if( next !== undefined ) content.text( next )
-			return content.text()
-		}
-
 		@ $mol_mem
 		is_owner() {
 			const my_lord = this.$.$giper_baza_auth.current().pass().lord().str
@@ -38,26 +29,30 @@ namespace $.$$ {
 			].join( '\n' )
 		}
 
-		/** Находит существующий entry текущего пользователя */
-		@ $mol_mem
-		entry_existing() {
-			const my_lord = this.$.$giper_baza_auth.current().pass().lord().str
-			return this.entry_list().find(
-				entry => entry.land().link().lord().str === my_lord
-			) ?? null
-		}
+		/** Кеш созданного entry чтобы не создавать повторно */
+		_entry_created: $bog_feedback_entry | null = null
 
-		/** Создаёт новый entry-land */
-		@ $mol_action
-		entry_create() {
+		/** Получить entry текущего пользователя (найти или создать при записи) */
+		entry_ensure() {
+			if( this._entry_created ) return this._entry_created
+
+			const my_lord = this.$.$giper_baza_auth.current().pass().lord().str
+			const existing = this.entry_list().find(
+				entry => entry.land().link().lord().str === my_lord
+			)
+			if( existing ) {
+				this._entry_created = existing
+				return existing
+			}
+
 			const preset: $giper_baza_rank_preset = [
 				[ null, $giper_baza_rank_post( 'late' ) ],
 			]
-
 			const land = this.glob().land_grab( preset )
 			const entry = land.Data( $bog_feedback_entry ) as $bog_feedback_entry
 
 			this.topic().Entries( 'auto' )!.add( land.link() )
+			this._entry_created = entry
 
 			return entry
 		}
@@ -76,22 +71,36 @@ namespace $.$$ {
 
 		entry_text( next?: string ) {
 			if( next !== undefined ) {
-				const entry = this.entry_existing() ?? this.entry_create()
+				const entry = this.entry_ensure()
 				entry.Text( 'auto' )!.text( next )
 				return next
 			}
-			const entry = this.entry_existing()
-			return entry?.Text()?.text() ?? ''
+			if( !this._entry_created ) {
+				const my_lord = this.$.$giper_baza_auth.current().pass().lord().str
+				const existing = this.entry_list().find(
+					entry => entry.land().link().lord().str === my_lord
+				)
+				if( !existing ) return ''
+				this._entry_created = existing
+			}
+			return this._entry_created?.Text()?.text() ?? ''
 		}
 
 		contact( next?: string ) {
 			if( next !== undefined ) {
-				const entry = this.entry_existing() ?? this.entry_create()
+				const entry = this.entry_ensure()
 				entry.Contact( 'auto' )!.val( next )
 				return next
 			}
-			const entry = this.entry_existing()
-			return entry?.Contact()?.val() ?? ''
+			if( !this._entry_created ) {
+				const my_lord = this.$.$giper_baza_auth.current().pass().lord().str
+				const existing = this.entry_list().find(
+					entry => entry.land().link().lord().str === my_lord
+				)
+				if( !existing ) return ''
+				this._entry_created = existing
+			}
+			return this._entry_created?.Contact()?.val() ?? ''
 		}
 
 		@ $mol_mem
