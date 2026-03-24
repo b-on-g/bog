@@ -1,0 +1,35 @@
+$bog_feedback_form $mol_page
+	topic $bog_feedback
+	Title $mol_string_button
+		value? <=> title? \
+		hint @ \Feedback topic title
+		enabled <= is_owner false
+	tools /
+		<= Status $giper_baza_status
+		<= Close null
+	body /
+		<= Descr $mol_textarea
+			hint @ \What kind of feedback are you looking for?
+			value? <=> descr? \
+			enabled <= is_owner false
+		<= Prompt $mol_text
+			text <= prompt \
+		<= Entry_my $mol_textarea
+			hint @ \Your feedback
+			value? <=> entry_text? \
+		<= Contact $mol_string
+			hint @ \Contact (optional)
+			value? <=> contact? \
+		<= Hints $mol_bar
+			sub /
+				<= Hint_auto $mol_hint
+					dictionary *
+						auto @ \Saved automatically
+		<= Entries $mol_section
+			title @ \All feedback
+			content <= entry_rows /
+				<= Entry_row*0 $mol_section
+					title <= entry_row_contact* \
+					content /
+						<= Entry_row_text*0 $mol_text
+							text <= entry_row_text* \

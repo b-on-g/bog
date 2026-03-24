@@ -4,6 +4,20 @@
 # Except these files
 !.gitignore
 !bog.meta.tree
+!demo/
+!demo/**/
+!demo/**/*.tree
+!demo/**/*.ts
+!demo/**/*.css
+!demo/**/*.html
+!demo/**/*.svg
+!demo/**/*.json
+!demo/**/*.md
+# Re-ignore build output inside demo
+demo/**/-/
+demo/**/-view.tree/
+demo/**/-node/
+demo/**/-css/
 !.gitattributes
 !README.md
 !LICENSE
@@ -48,3 +62,35 @@ qr/**/-/
 qr/**/-view.tree/
 qr/**/-node/
 qr/**/-css/
+
+# Allow feedback source code
+!feedback/
+!feedback/**/
+!feedback/**/*.tree
+!feedback/**/*.ts
+!feedback/**/*.css
+!feedback/**/*.html
+!feedback/**/*.svg
+!feedback/**/*.json
+!feedback/**/*.md
+# Re-ignore build output inside feedback
+feedback/**/-/
+feedback/**/-view.tree/
+feedback/**/-node/
+feedback/**/-css/
+
+# Allow WikiLive source code
+!wikilive/
+!wikilive/**/
+!wikilive/**/*.tree
+!wikilive/**/*.ts
+!wikilive/**/*.css
+!wikilive/**/*.html
+!wikilive/**/*.svg
+!wikilive/**/*.json
+!wikilive/**/*.md
+# Re-ignore build output inside wikilive
+wikilive/**/-/
+wikilive/**/-view.tree/
+wikilive/**/-node/
+wikilive/**/-css/
