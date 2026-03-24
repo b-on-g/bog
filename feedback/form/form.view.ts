@@ -97,7 +97,6 @@ namespace $.$$ {
 		@ $mol_mem
 		body() {
 			return [
-				...( this.is_owner() || this.descr() ) ? [ this.Descr() ] : [],
 				this.Prompt(),
 				this.Entry_my(),
 				this.Contact(),
