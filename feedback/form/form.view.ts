@@ -20,12 +20,10 @@ namespace $.$$ {
 			return this.my_lord() === OWNER_LORD
 		}
 
-		/** Только чтение */
 		entry_mine() {
 			return this.entries_dict().key(this.my_lord()) ?? null
 		}
 
-		/** Создание entry — только при первой записи */
 		entry_mine_or_create() {
 			return this.entries_dict().key(this.my_lord(), 'auto')
 		}
@@ -43,6 +41,7 @@ namespace $.$$ {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
 				if (entry) entry.Text('auto')!.text(next)
+				return next
 			}
 			const entry = this.entry_mine()
 			if (!entry) return ''
@@ -53,6 +52,7 @@ namespace $.$$ {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
 				if (entry) entry.Contact('auto')!.val(next)
+				return next
 			}
 			const entry = this.entry_mine()
 			if (!entry) return ''
