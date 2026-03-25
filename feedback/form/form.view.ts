@@ -1,6 +1,6 @@
 namespace $.$$ {
 	const LAND_ID = 'iexkmPYx_9RQxWRZF'
-	const OWNER_LORDS = ['Pawt3l7U_skvMQP3r', 'G4l4UZr3_ibnzXhgQ']
+	const OWNER_LORDS = ['30rPfnwR_eBFtt8H6', 'G4l4UZr3_ibnzXhgQ']
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
 	export class $bog_feedback_form extends $.$bog_feedback_form {
