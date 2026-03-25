@@ -38,6 +38,14 @@ namespace $.$$ {
 			].join('\n')
 		}
 
+		has_entry() {
+			return !!this.entry_mine()
+		}
+
+		submit_title() {
+			return this.has_entry() ? 'Update feedback' : 'Send feedback'
+		}
+
 		@$mol_action
 		submit() {
 			const text = this.draft_text()
