@@ -42,7 +42,7 @@ namespace $.$$ {
 		draft_text(next?: string) {
 			if (next !== undefined) return next
 			const entry = this.entry_mine()
-			return entry?.Text()?.text() ?? ''
+			return entry?.Text()?.val() ?? ''
 		}
 
 		@$mol_mem
@@ -68,8 +68,8 @@ namespace $.$$ {
 			if (!text) return
 			const entry = this.entry_mine_or_create()
 			if (!entry) return
-			entry.Text('auto')!.text(text)
-			console.log('written text:', entry.Text()?.text())
+			entry.Text('auto')!.val(text)
+			console.log('written text:', entry.Text()?.val())
 			if (contact) entry.Contact('auto')!.val(contact)
 			console.log('written contact:', entry.Contact()?.val())
 		}
@@ -97,7 +97,7 @@ namespace $.$$ {
 			const lord = this.all_lords()[index]
 			if (!lord) return ''
 			const entry = this.entries_dict().key(lord)
-			const text = entry?.Text()?.text() ?? ''
+			const text = entry?.Text()?.val() ?? ''
 			console.log('entry_row_text', index, { lord, text })
 			return text
 		}
