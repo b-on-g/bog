@@ -1,6 +1,6 @@
 namespace $.$$ {
 	const LAND_ID = 'TiKq9q8X_9p8WA2PU'
-	const OWNER_LORD = 'Q4zRr2UW_0m2uzoRR'
+	const OWNER_LORDS = ['Q4zRr2UW_0m2uzoRR', 'W9NwdbGh_rw599iGj']
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
 	export class $bog_feedback_form extends $.$bog_feedback_form {
@@ -17,7 +17,7 @@ namespace $.$$ {
 		}
 
 		is_owner() {
-			return this.my_lord() === OWNER_LORD
+			return OWNER_LORDS.includes(this.my_lord())
 		}
 
 		entry_mine() {
