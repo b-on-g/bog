@@ -38,7 +38,6 @@ namespace $.$$ {
 			].join('\n')
 		}
 
-		@ $mol_mem
 		entry_text(next?: string) {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
@@ -50,7 +49,6 @@ namespace $.$$ {
 			return entry.Text()?.text() ?? ''
 		}
 
-		@ $mol_mem
 		contact(next?: string) {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
