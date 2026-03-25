@@ -4,8 +4,19 @@ namespace $.$$ {
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
 	export class $bog_feedback_form extends $.$bog_feedback_form {
+
+		/** ЭКСПЕРИМЕНТ: свежий ленд вместо pre-bundled */
+		@$mol_mem
+		fresh_land() {
+			console.log('[feedback] creating fresh land via land_grab')
+			return this.$.$giper_baza_glob.land_grab([
+				[null, $giper_baza_rank_post('late')],
+			])
+		}
+
 		land() {
-			return this.$.$giper_baza_glob.Land(new $giper_baza_link(LAND_ID))
+			return this.fresh_land()
+			// return this.$.$giper_baza_glob.Land(new $giper_baza_link(LAND_ID))
 		}
 
 		entries_dict() {
@@ -24,6 +35,7 @@ namespace $.$$ {
 			return this.entries_dict().key(this.my_lord()) ?? null
 		}
 
+		@$mol_action
 		entry_mine_or_create() {
 			return this.entries_dict().key(this.my_lord(), 'auto')
 		}
@@ -37,6 +49,7 @@ namespace $.$$ {
 			].join('\n')
 		}
 
+		@ $mol_mem
 		entry_text(next?: string) {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
@@ -48,6 +61,7 @@ namespace $.$$ {
 			return entry.Text()?.text() ?? ''
 		}
 
+		@ $mol_mem
 		contact(next?: string) {
 			if (next !== undefined) {
 				const entry = this.entry_mine_or_create()
@@ -66,7 +80,6 @@ namespace $.$$ {
 				this.Entry_my(),
 				this.Contact(),
 				this.Hint_auto(),
-				...(this.is_owner() ? [this.Entries()] : []),
 			]
 		}
 
