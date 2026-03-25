@@ -1,5 +1,5 @@
 namespace $.$$ {
-	const LAND_ID = 'TiKq9q8X_9p8WA2PU'
+	const LAND_ID = 'iexkmPYx_9RQxWRZF'
 	const OWNER_LORDS = ['Q4zRr2UW_0m2uzoRR', 'W9NwdbGh_rw599iGj']
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
@@ -60,6 +60,7 @@ namespace $.$$ {
 			return this.has_entry() ? 'Update feedback' : 'Send feedback'
 		}
 
+		@$mol_action
 		submit() {
 			const text = this.draft_text()
 			const contact = this.draft_contact()
