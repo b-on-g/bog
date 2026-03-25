@@ -38,26 +38,15 @@ namespace $.$$ {
 			].join('\n')
 		}
 
-		entry_text(next?: string) {
-			if (next !== undefined) {
-				const entry = this.entry_mine_or_create()
-				if (entry) entry.Text('auto')!.text(next)
-				return next
-			}
-			const entry = this.entry_mine()
-			if (!entry) return ''
-			return entry.Text()?.text() ?? ''
-		}
-
-		contact(next?: string) {
-			if (next !== undefined) {
-				const entry = this.entry_mine_or_create()
-				if (entry) entry.Contact('auto')!.val(next)
-				return next
-			}
-			const entry = this.entry_mine()
-			if (!entry) return ''
-			return entry.Contact()?.val() ?? ''
+		@$mol_action
+		submit() {
+			const text = this.draft_text()
+			const contact = this.draft_contact()
+			if (!text) return
+			const entry = this.entry_mine_or_create()
+			if (!entry) return
+			entry.Text('auto')!.text(text)
+			if (contact) entry.Contact('auto')!.val(contact)
 		}
 
 		body() {
@@ -65,8 +54,8 @@ namespace $.$$ {
 				this.Status(),
 				this.Prompt(),
 				this.Entry_my(),
-				this.Contact(),
-				this.Hint_auto(),
+				this.Contact_field(),
+				this.Submit(),
 				...(this.is_owner() ? [this.Entries()] : []),
 			]
 		}

@@ -8,13 +8,13 @@ $bog_feedback_form $mol_page
 			text <= prompt \
 		<= Entry_my $mol_textarea
 			hint @ \Your feedback
-			value? <=> entry_text? \
-		<= Contact $mol_string
+			value? <=> draft_text? \
+		<= Contact_field $mol_string
 			hint @ \Contact (optional)
-			value? <=> contact? \
-		<= Hint_auto $mol_hint
-			dictionary *
-				auto @ \Saved automatically
+			value? <=> draft_contact? \
+		<= Submit $mol_button_major
+			title @ \Send feedback
+			click? <=> submit? null
 		<= Entries $mol_section
 			title @ \All feedback
 			content <= entry_rows /

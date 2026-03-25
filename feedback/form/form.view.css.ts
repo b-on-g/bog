@@ -16,5 +16,11 @@ namespace $ {
 				bottom: $mol_gap.block,
 			},
 		},
+
+		Submit: {
+			margin: {
+				top: $mol_gap.block,
+			},
+		},
 	})
 }
