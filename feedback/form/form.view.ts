@@ -4,33 +4,32 @@ namespace $.$$ {
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
 	export class $bog_feedback_form extends $.$bog_feedback_form {
-
-		@$mol_mem
 		land() {
 			return this.$.$giper_baza_glob.Land(new $giper_baza_link(LAND_ID))
 		}
 
-		@$mol_mem
 		entries_dict() {
 			return this.land().Data(Entries_dict)
 		}
 
-		@$mol_mem
 		my_lord() {
 			return this.$.$giper_baza_auth.current().pass().lord().str
 		}
 
-		@$mol_mem
 		is_owner() {
 			return this.my_lord() === OWNER_LORD
 		}
 
-		@$mol_mem
+		/** Только чтение */
 		entry_mine() {
+			return this.entries_dict().key(this.my_lord()) ?? null
+		}
+
+		/** Создание entry — только при первой записи */
+		entry_mine_or_create() {
 			return this.entries_dict().key(this.my_lord(), 'auto')
 		}
 
-		@$mol_mem
 		prompt() {
 			return [
 				'**Tell us what you think:**',
@@ -40,29 +39,29 @@ namespace $.$$ {
 			].join('\n')
 		}
 
-		@$mol_mem
 		entry_text(next?: string) {
+			if (next !== undefined) {
+				const entry = this.entry_mine_or_create()
+				if (entry) entry.Text('auto')!.text(next)
+			}
 			const entry = this.entry_mine()
 			if (!entry) return ''
-			if (next !== undefined) {
-				entry.Text('auto')!.text(next)
-			}
 			return entry.Text()?.text() ?? ''
 		}
 
-		@$mol_mem
 		contact(next?: string) {
+			if (next !== undefined) {
+				const entry = this.entry_mine_or_create()
+				if (entry) entry.Contact('auto')!.val(next)
+			}
 			const entry = this.entry_mine()
 			if (!entry) return ''
-			if (next !== undefined) {
-				entry.Contact('auto')!.val(next)
-			}
 			return entry.Contact()?.val() ?? ''
 		}
 
-		@$mol_mem
 		body() {
 			return [
+				this.Status(),
 				this.Prompt(),
 				this.Entry_my(),
 				this.Contact(),
@@ -71,12 +70,10 @@ namespace $.$$ {
 			]
 		}
 
-		@$mol_mem
 		all_lords() {
 			return this.entries_dict().keys() ?? []
 		}
 
-		@$mol_mem
 		entry_rows() {
 			return this.all_lords().map((_: any, i: number) => this.Entry_row(i))
 		}
