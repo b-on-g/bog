@@ -2,7 +2,6 @@ $bog_feedback_demo $mol_example_small
 	title \Feedback
 	sub /
 		<= Preview $bog_feedback_form
-			topic <= topic $bog_feedback
 	tags /
 		\feedback
 		\form

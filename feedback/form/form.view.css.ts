@@ -7,12 +7,6 @@ namespace $ {
 
 		margin: [0, 'auto'],
 
-		Descr: {
-			flex: {
-				grow: 0,
-			},
-		},
-
 		Prompt: {
 			padding: $mol_gap.block,
 		},
@@ -21,10 +15,6 @@ namespace $ {
 			margin: {
 				bottom: $mol_gap.block,
 			},
-		},
-
-		Entries: {
-			// TODO: стили для секции отзывов (только для владельца)
 		},
 	})
 }
