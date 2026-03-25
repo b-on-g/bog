@@ -38,12 +38,14 @@ namespace $.$$ {
 			].join('\n')
 		}
 
+		@$mol_mem
 		draft_text(next?: string) {
 			if (next !== undefined) return next
 			const entry = this.entry_mine()
 			return entry?.Text()?.text() ?? ''
 		}
 
+		@$mol_mem
 		draft_contact(next?: string) {
 			if (next !== undefined) return next
 			const entry = this.entry_mine()
