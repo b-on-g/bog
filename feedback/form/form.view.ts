@@ -38,6 +38,18 @@ namespace $.$$ {
 			].join('\n')
 		}
 
+		draft_text(next?: string) {
+			if (next !== undefined) return next
+			const entry = this.entry_mine()
+			return entry?.Text()?.text() ?? ''
+		}
+
+		draft_contact(next?: string) {
+			if (next !== undefined) return next
+			const entry = this.entry_mine()
+			return entry?.Contact()?.val() ?? ''
+		}
+
 		has_entry() {
 			return !!this.entry_mine()
 		}
