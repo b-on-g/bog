@@ -60,7 +60,6 @@ namespace $.$$ {
 			return this.has_entry() ? 'Update feedback' : 'Send feedback'
 		}
 
-		@$mol_action
 		submit() {
 			const text = this.draft_text()
 			const contact = this.draft_contact()
