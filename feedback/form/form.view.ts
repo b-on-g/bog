@@ -25,70 +25,51 @@ namespace $.$$ {
 			].join( '\n' )
 		}
 
-		/** Мой lord id */
 		my_lord() {
 			return this.$.$giper_baza_auth.current().pass().lord().str
 		}
 
-		/** Все entries в этом land */
 		@ $mol_mem
 		entry_list() {
 			const links = this.topic().Entries()?.items() ?? []
 			return links
 				.filter( ( link ): link is $giper_baza_link => link !== null )
-				.map( link => {
-					return this.topic().land().Pawn( $bog_feedback_entry ).Head( link )
-				} )
+				.map( link => this.topic().land().Pawn( $bog_feedback_entry ).Head( link ) )
 		}
 
-		/** Мой entry — ищем по lord или создаём */
-		_my_entry: $bog_feedback_entry | null = null
-
+		/** Мой entry — находит или создаёт один раз */
+		@ $mol_mem
 		entry_mine() {
-			if( this._my_entry ) return this._my_entry
-
 			const my_lord = this.my_lord()
-			const existing = this.entry_list().find( entry => {
-				return entry.Contact()?.val() === my_lord
-					|| entry.land().link().lord().str === my_lord
-			} )
+			const existing = this.entry_list().find(
+				entry => entry.Author()?.val() === my_lord
+			)
+			if( existing ) return existing
 
-			if( existing ) {
-				this._my_entry = existing
-				return existing
-			}
-
-			return null
-		}
-
-		@ $mol_action
-		entry_create() {
 			const land = this.topic().land()
 			const self = land.self_make()
 			const entry = land.Pawn( $bog_feedback_entry ).Head( self )
 
+			entry.Author( 'auto' )!.val( my_lord )
 			this.topic().Entries( 'auto' )!.add( self )
-			this._my_entry = entry
 
 			return entry
 		}
 
 		entry_text( next?: string ) {
+			const entry = this.entry_mine()
 			if( next !== undefined ) {
-				const entry = this.entry_mine() ?? this.entry_create()
 				entry.Text( 'auto' )!.text( next )
-				return next
 			}
-			return this.entry_mine()?.Text()?.text() ?? ''
+			return entry.Text()?.text() ?? ''
 		}
 
 		contact( next?: string ) {
+			const entry = this.entry_mine()
 			if( next !== undefined ) {
-				const entry = this.entry_mine() ?? this.entry_create()
 				entry.Contact( 'auto' )!.val( next )
-				return next
 			}
-			return this.entry_mine()?.Contact()?.val() ?? ''
+			return entry.Contact()?.val() ?? ''
 		}
 
 		@ $mol_mem

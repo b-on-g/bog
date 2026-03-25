@@ -1,5 +1,6 @@
 namespace $ {
 	$mol_style_define($bog_feedback_form, {
+		color: $mol_theme.text,
 		flex: {
 			basis: '40rem',
 		},

@@ -7,10 +7,11 @@ namespace $ {
 		Entries: $giper_baza_list_link,
 	}) {}
 
-	/** Отдельный отзыв. Живёт в своём Land. */
+	/** Отдельный отзыв. Pawn в land топика. */
 	export class $bog_feedback_entry extends $giper_baza_dict.with({
 		Text: $giper_baza_text,
 		Contact: $giper_baza_atom_text,
+		Author: $giper_baza_atom_text,
 	}) {}
 
 }
