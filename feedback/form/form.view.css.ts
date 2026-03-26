@@ -11,15 +11,40 @@ namespace $ {
 			padding: $mol_gap.block,
 		},
 
-		Entry_my: {
+		Contact_field: {
 			margin: {
-				bottom: $mol_gap.block,
+				top: $mol_gap.space,
 			},
 		},
 
 		Submit: {
 			margin: {
 				top: $mol_gap.block,
+			},
+		},
+
+		Entries: {
+			margin: {
+				top: $mol_gap.block,
+			},
+			Content: {
+				gap: $mol_gap.block,
+			},
+		},
+
+		Entry_row: {
+			background: {
+				color: $mol_theme.card,
+			},
+			border: {
+				radius: $mol_gap.round,
+			},
+			padding: $mol_gap.block,
+			boxShadow: `0 0 0 1px ${$mol_theme.line}`,
+			Head: {
+				font: {
+					size: '1rem',
+				},
 			},
 		},
 	})

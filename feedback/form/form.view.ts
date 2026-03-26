@@ -1,6 +1,13 @@
 namespace $.$$ {
 	const LAND_ID = 'Yv6cfn0R_FhyKACZ3'
-	const OWNER_LORDS = ['30rPfnwR_eBFtt8H6', 'G4l4UZr3_ibnzXhgQ', 'BJ7CAnEP_XYEV6Z67', 'yu093r0P_aTtfK2iV']
+	const OWNER_LORDS = [
+		'GGZYntZ4_Q4XRUU01',
+		'30rPfnwR_eBFtt8H6',
+		'G4l4UZr3_ibnzXhgQ',
+		'BJ7CAnEP_XYEV6Z67',
+		'yu093r0P_aTtfK2iV',
+		'ru2hfLLC_HYZLTNnf',
+	]
 
 	const Entries_dict = $giper_baza_dict_to($bog_feedback_entry)
 
