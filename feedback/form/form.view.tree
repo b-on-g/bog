@@ -21,5 +21,5 @@ $bog_feedback_form $mol_page
 				<= Entry_row*0 $mol_section
 					title <= entry_row_contact* \
 					content /
-						<= Entry_row_text*0 $mol_text
+						<= Entry_row_text* $mol_text
 							text <= entry_row_text* \
