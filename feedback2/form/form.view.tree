@@ -1,0 +1,29 @@
+$bog_feedback2_form $mol_page
+	feedback_id \
+	registry_link \xueNKaHy_J2JzYrxC
+	title @ \Feedback ( one per user )
+	tools /
+		<= Status $giper_baza_status
+		<= Close null
+	body /
+		<= Prompt $mol_text
+			text <= prompt \
+		<= Entry_my $mol_textarea
+			hint @ \Your feedback
+			value? <=> draft_text? \
+		<= Contact_field $mol_string
+			hint @ \Contact (optional)
+			value? <=> draft_contact? \
+		<= Submit $mol_button_major
+			title <= submit_title \
+			click? <=> submit? null
+		<= Entries $mol_section
+			title @ \All feedback
+			content <= entry_rows /
+				<= Entry_row*0 $mol_section
+					title <= entry_row_contact* \
+					content /
+						<= Entry_row_text* $mol_text
+							text <= entry_row_text* \
+	Not_configured $mol_status
+		message @ \Form not yet configured

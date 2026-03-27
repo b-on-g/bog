@@ -95,3 +95,37 @@ wikilive/**/-/
 wikilive/**/-view.tree/
 wikilive/**/-node/
 wikilive/**/-css/
+
+
+# Allow lk source code
+!lk/
+!lk/**/
+!lk/**/*.tree
+!lk/**/*.ts
+!lk/**/*.css
+!lk/**/*.html
+!lk/**/*.svg
+!lk/**/*.json
+!lk/**/*.md
+# Re-ignore build output inside lk
+lk/**/-/
+lk/**/-view.tree/
+lk/**/-node/
+lk/**/-css/
+
+# Allow feedback source code
+!feedback2/
+!feedback2/**/
+!feedback2/**/*.tree
+!feedback2/**/*.ts
+!feedback2/**/*.baza
+!feedback2/**/*.css
+!feedback2/**/*.html
+!feedback2/**/*.svg
+!feedback2/**/*.json
+!feedback2/**/*.md
+# Re-ignore build output inside feedback
+feedback2/**/-/
+feedback2/**/-view.tree/
+feedback2/**/-node/
+feedback2/**/-css/
