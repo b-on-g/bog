@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://b-on-g.github.io/bog/sitemap.xml
