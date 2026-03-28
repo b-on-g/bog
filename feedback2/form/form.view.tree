@@ -3,7 +3,6 @@ $bog_feedback2_form $mol_page
 	registry_link \xueNKaHy_J2JzYrxC
 	title @ \Feedback ( one per user )
 	tools /
-		<= Status $giper_baza_status
 		<= Close null
 	body /
 		<= Prompt $mol_text
