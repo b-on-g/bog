@@ -122,7 +122,7 @@ namespace $.$$ {
 			if (link && this.is_owner()) {
 				this.$.$mol_state_arg.value('land', link)
 			}
-			return [this.Status()]
+			return [this.Close()]
 		}
 
 		body() {
