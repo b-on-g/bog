@@ -5,7 +5,6 @@ $bog_feedback2_demo2 $mol_example_small
 	sub /
 		<= Preview $bog_feedback2_form
 			feedback_id \demo
-			registry_link <= registry_link \xueNKaHy_J2JzYrxC
 	tags /
 		\feedback
 		\form

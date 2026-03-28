@@ -19,11 +19,6 @@ namespace $.$$ {
 			return this.my_pass().lord().str
 		}
 
-		can_manage_registry() {
-			const rank = this.registry_land().pass_rank(this.my_pass())
-			return $giper_baza_rank_tier_of(rank) >= $giper_baza_rank_tier.rule
-		}
-
 		/** Ссылка на feedback land: из URL (приоритет) или из реестра */
 		feedback_land_link(): string | null {
 			const from_arg = this.$.$mol_state_arg.value('land')
@@ -34,8 +29,7 @@ namespace $.$$ {
 		land() {
 			const link = this.feedback_land_link()
 			if (link) return this.$.$giper_baza_glob.Land(new $giper_baza_link(link))
-			if (this.can_manage_registry()) return this.land_ensure()
-			return null as any
+			return this.land_ensure()
 		}
 
 		@$mol_action
@@ -51,19 +45,12 @@ namespace $.$$ {
 		}
 
 		is_owner() {
-			const rank = this.land().pass_rank(this.my_pass())
+			const rank = this.registry_land().pass_rank(this.my_pass())
 			return $giper_baza_rank_tier_of(rank) >= $giper_baza_rank_tier.rule
 		}
 
-		/** Пришёл по прямой ссылке с ?land= в URL */
-		has_direct_link() {
-			return !!this.$.$mol_state_arg.value('land')
-		}
-
 		is_configured() {
-			if (this.$.$mol_state_arg.value('land')) return true
-			if (!this.registry_link()) return false
-			return !!this.feedback_land_link() || this.can_manage_registry()
+			return !!this.registry_link()
 		}
 
 		entry_mine() {
@@ -117,14 +104,6 @@ namespace $.$$ {
 			if (contact) entry.Contact('auto')!.val(contact)
 		}
 
-		tools() {
-			const link = this.feedback_land_link()
-			if (link && this.is_owner()) {
-				this.$.$mol_state_arg.value('land', link)
-			}
-			return [this.Close()]
-		}
-
 		body() {
 			if (!this.is_configured()) return [this.Not_configured()]
 			return [
@@ -132,7 +111,7 @@ namespace $.$$ {
 				this.Entry_my(),
 				this.Contact_field(),
 				this.Submit(),
-				...(this.is_owner() || this.has_direct_link() ? [this.Entries()] : []),
+				...(this.is_owner() ? [this.Entries()] : []),
 			]
 		}
 

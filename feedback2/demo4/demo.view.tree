@@ -4,8 +4,7 @@ $bog_feedback2_demo4 $mol_example_small
 		<= Theme $mol_theme_auto
 	sub /
 		<= Preview $bog_feedback2_form
-			feedback_id \demo4
-			registry_link <= registry_link \xueNKaHy_J2JzYrxC
+			feedback_id \demo6
 	tags /
 		\feedback
 		\form
