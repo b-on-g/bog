@@ -121,14 +121,11 @@ namespace $.$$ {
 			if (contact) entry.Contact('auto')!.val(contact)
 		}
 
-		tools() {
+		auto() {
 			const link = this.feedback_land_link()
 			if (link && this.is_owner()) {
 				this.$.$mol_state_arg.value('land', link)
 			}
-			return [
-				this.Status(),
-			]
 		}
 
 		body() {
