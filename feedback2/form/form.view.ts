@@ -1,10 +1,8 @@
 namespace $.$$ {
-
 	const Entries_dict = $giper_baza_dict_to($bog_feedback2_entry)
 	const Registry_dict = $giper_baza_dict_to($giper_baza_atom_text)
 
 	export class $bog_feedback2_form extends $.$bog_feedback2_form {
-
 		registry_land() {
 			return this.$.$giper_baza_glob.Land(new $giper_baza_link(this.registry_link()))
 		}
@@ -42,9 +40,7 @@ namespace $.$$ {
 
 		@$mol_action
 		land_ensure() {
-			const land = this.$.$giper_baza_glob.land_grab([
-				[null, $giper_baza_rank_post('just')],
-			])
+			const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_post('just')]])
 			const link = land.link().str
 			this.registry_dict().key(this.feedback_id(), 'auto')!.val(link)
 			return land
@@ -121,11 +117,12 @@ namespace $.$$ {
 			if (contact) entry.Contact('auto')!.val(contact)
 		}
 
-		auto() {
+		tools() {
 			const link = this.feedback_land_link()
 			if (link && this.is_owner()) {
 				this.$.$mol_state_arg.value('land', link)
 			}
+			return [this.Status()]
 		}
 
 		body() {
