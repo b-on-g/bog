@@ -1,0 +1,14 @@
+$bog_demo_sum $mol_app_quine
+	title \a + b
+	paths /
+		\../sum.view.tree
+		\../sum.view.ts
+	body /
+		<= A $mol_number
+			value? <=> a? 1
+		<= B $mol_number
+			value? <=> b? 2
+		<= Result $mol_view
+			sub /
+				<= result \
+		<= Text
