@@ -28,5 +28,4 @@ $bog_feedback2_form $mol_page
 	Not_configured $mol_status
 		message @ \Form not yet configured
 	Waiting $mol_paragraph
-		sub /
-			@ \Waiting…
+		title <= waiting_title @ \Waiting…

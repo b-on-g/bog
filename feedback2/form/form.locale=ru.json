@@ -4,5 +4,5 @@
 	"$bog_feedback2_form_Contact_field_hint": "Контакт (необязательно)",
 	"$bog_feedback2_form_Entries_title": "Все отзывы",
 	"$bog_feedback2_form_Not_configured_message": "Форма ещё не настроена",
-	"$bog_feedback2_form_Waiting_sub_0": "Загрузка…"
+	"$bog_feedback2_form_waiting_title": "Загрузка…"
 }
