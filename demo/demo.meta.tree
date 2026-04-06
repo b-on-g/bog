@@ -2,4 +2,4 @@ include \/mol/app/demo
 
 include \/bog/qr/demo
 include \/bog/feedback/demo
-include \/bog/demo/sum
+include \/bog/feedback2/demo

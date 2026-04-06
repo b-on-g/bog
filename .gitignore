@@ -80,22 +80,6 @@ feedback/**/-view.tree/
 feedback/**/-node/
 feedback/**/-css/
 
-# Allow WikiLive source code
-!wikilive/
-!wikilive/**/
-!wikilive/**/*.tree
-!wikilive/**/*.ts
-!wikilive/**/*.css
-!wikilive/**/*.html
-!wikilive/**/*.svg
-!wikilive/**/*.json
-!wikilive/**/*.md
-# Re-ignore build output inside wikilive
-wikilive/**/-/
-wikilive/**/-view.tree/
-wikilive/**/-node/
-wikilive/**/-css/
-
 
 # Allow lk source code
 !lk/
@@ -129,3 +113,4 @@ feedback2/**/-/
 feedback2/**/-view.tree/
 feedback2/**/-node/
 feedback2/**/-css/
+
