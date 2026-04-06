@@ -29,6 +29,9 @@ namespace $.$$ {
 		land() {
 			const link = this.feedback_land_link()
 			if (link) return this.$.$giper_baza_glob.Land(new $giper_baza_link(link))
+			// Only registry owner can auto-create feedback land
+			// Others must wait for registry sync from network
+			if (!this.is_owner()) return null
 			return this.land_ensure()
 		}
 
@@ -42,7 +45,7 @@ namespace $.$$ {
 		}
 
 		entries_dict() {
-			return this.land().Data(Entries_dict)
+			return this.land()?.Data(Entries_dict) ?? null
 		}
 
 		is_owner() {
@@ -55,12 +58,12 @@ namespace $.$$ {
 		}
 
 		entry_mine() {
-			return this.entries_dict().key(this.my_lord()) ?? null
+			return this.entries_dict()?.key(this.my_lord()) ?? null
 		}
 
 		@$mol_action
 		entry_mine_or_create() {
-			return this.entries_dict().key(this.my_lord(), 'auto')
+			return this.entries_dict()?.key(this.my_lord(), 'auto') ?? null
 		}
 
 		prompt() {
@@ -107,6 +110,7 @@ namespace $.$$ {
 
 		body() {
 			if (!this.is_configured()) return [this.Not_configured()]
+			if (!this.land()) return [this.Waiting()]
 			return [
 				this.Prompt(),
 				this.Entry_my(),
@@ -117,7 +121,7 @@ namespace $.$$ {
 		}
 
 		all_lords() {
-			return this.entries_dict().keys() ?? []
+			return this.entries_dict()?.keys() ?? []
 		}
 
 		entry_rows() {
@@ -127,14 +131,14 @@ namespace $.$$ {
 		entry_row_text(index: number) {
 			const lord = this.all_lords()[index]
 			if (!lord) return ''
-			const entry = this.entries_dict().key(lord)
+			const entry = this.entries_dict()?.key(lord)
 			return entry?.Text()?.val() ?? ''
 		}
 
 		entry_row_contact(index: number) {
 			const lord = this.all_lords()[index]
 			if (!lord) return ''
-			const entry = this.entries_dict().key(lord)
+			const entry = this.entries_dict()?.key(lord)
 			return entry?.Contact()?.val() ?? 'Anonymous'
 		}
 	}

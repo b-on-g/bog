@@ -1,4 +1,5 @@
 $bog_feedback2_form $mol_page
+	Head null
 	feedback_id \
 	registry_link \4o4ds4yH_SXDxOCPR
 	title @ \Feedback ( one per user )
@@ -26,3 +27,6 @@ $bog_feedback2_form $mol_page
 							text <= entry_row_text* \
 	Not_configured $mol_status
 		message @ \Form not yet configured
+	Waiting $mol_paragraph
+		sub /
+			@ \Waiting…
