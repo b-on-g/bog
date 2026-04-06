@@ -36,7 +36,8 @@ namespace $.$$ {
 		land_ensure() {
 			const land = this.$.$giper_baza_glob.land_grab([[null, $giper_baza_rank_post('just')]])
 			const link = land.link().str
-			this.registry_dict().key(this.feedback_id(), 'auto')!.val(link)
+			const entry = this.registry_dict().key(this.feedback_id(), 'auto')
+			if( entry ) entry.val(link)
 			return land
 		}
 
