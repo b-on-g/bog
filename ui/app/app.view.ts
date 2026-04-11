@@ -155,6 +155,12 @@ namespace $.$$ {
 			return null
 		}
 
+		@ $mol_action
+		nav_divider( next?: any ) {
+			if( next !== undefined ) this.component( 'divider' )
+			return null
+		}
+
 		@ $mol_mem
 		page_title() {
 			const titles: Record<string, string> = {
@@ -167,6 +173,7 @@ namespace $.$$ {
 				toast: 'Toast',
 				command: 'Command Palette',
 				table: 'Data Table',
+				divider: 'Divider',
 			}
 			return titles[ this.component() ] ?? 'Components Overview'
 		}
@@ -192,6 +199,7 @@ namespace $.$$ {
 				case 'toast': content = this.Toast_page(); break
 				case 'command': content = this.Command_page(); break
 				case 'table': content = this.Table_page(); break
+				case 'divider': content = this.Divider_page(); break
 				default: content = this.Overview_page()
 			}
 			return [
