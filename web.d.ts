@@ -4981,7 +4981,6 @@ declare namespace $ {
 declare namespace $ {
 
 	export class $bog_ui_divider extends $mol_view {
-		dom_name( ): string
 	}
 	
 }

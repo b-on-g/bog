@@ -1028,7 +1028,6 @@ $bog_ui_app_overview_card $mol_button_minor
 				<= card_description
 
 $bog_ui_divider $mol_view
-	dom_name \hr
 
 $bog_ui_app_divider $mol_page
 	title \Divider

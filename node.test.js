@@ -12612,11 +12612,7 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_ui_divider) = class $bog_ui_divider extends ($.$mol_view) {
-		dom_name(){
-			return "hr";
-		}
-	};
+	($.$bog_ui_divider) = class $bog_ui_divider extends ($.$mol_view) {};
 
 
 ;
@@ -12627,9 +12623,15 @@ var $;
 var $;
 (function ($) {
     $mol_style_define($bog_ui_divider, {
-        margin: $mol_gap.block,
-        gap: '1.5rem',
-        width: '100%'
+        margin: $mol_gap.page,
+        gap: $mol_gap.page,
+        width: '100%',
+        border: {
+            bottom: {
+                width: '2px',
+                style: 'solid',
+            },
+        },
     });
 })($ || ($ = {}));
 
