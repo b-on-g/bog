@@ -12272,7 +12272,7 @@ var $;
             bottom: $mol_gap.page,
             top: $mol_gap.page,
         },
-        width: '80%',
+        width: '100%',
         border: {
             bottom: {
                 width: '2px',
