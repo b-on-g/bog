@@ -18,6 +18,7 @@ $bog_ui_app $mol_book2
 	Command_page $bog_ui_app_command
 	Table_page $bog_ui_app_table
 	Overview_page $bog_ui_app_overview
+	Divider_page $bog_ui_app_divider
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock
@@ -72,6 +73,11 @@ $bog_ui_app $mol_book2
 					label \Data Table
 					active <= table_active false
 					click? <=> nav_table? null
+				<= Divider_nav $bog_ui_sidebar_item
+					Icon <= Divider_icon $mol_icon_minus
+					label \Divider
+					active <= divider_active false
+					click? <=> nav_divider? null
 		<= Content_page $mol_page
 			title <= page_title \Components
 			tools /
