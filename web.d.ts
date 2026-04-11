@@ -1594,6 +1594,15 @@ declare namespace $ {
 
 //# sourceMappingURL=table.view.tree.d.ts.map
 declare namespace $ {
+
+	export class $mol_icon_minus extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=minus.view.tree.d.ts.map
+declare namespace $ {
     function $mol_support_css_overflow_anchor(this: $): boolean;
 }
 
@@ -4971,6 +4980,33 @@ declare namespace $ {
 
 declare namespace $ {
 
+	export class $bog_ui_divider extends $mol_view {
+		dom_name( ): string
+	}
+	
+}
+
+//# sourceMappingURL=divider.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__sub_bog_ui_app_divider_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_ui_app_divider extends $mol_page {
+		description( ): string
+		Description( ): $mol_view
+		Divider( ): $bog_ui_divider
+		title( ): string
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=divider.view.tree.d.ts.map
+declare namespace $ {
+
 	type $bog_ui_sidebar_item__Icon_bog_ui_app_1 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['Overview_icon'] >
 		,
@@ -5171,37 +5207,57 @@ declare namespace $ {
 		,
 		ReturnType< $bog_ui_sidebar_item['click'] >
 	>
-	type $bog_ui_sidebar__mode_bog_ui_app_41 = $mol_type_enforce<
+	type $bog_ui_sidebar_item__Icon_bog_ui_app_41 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['Divider_icon'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['Icon'] >
+	>
+	type $bog_ui_sidebar_item__label_bog_ui_app_42 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_ui_sidebar_item['label'] >
+	>
+	type $bog_ui_sidebar_item__active_bog_ui_app_43 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['divider_active'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['active'] >
+	>
+	type $bog_ui_sidebar_item__click_bog_ui_app_44 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['nav_divider'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['click'] >
+	>
+	type $bog_ui_sidebar__mode_bog_ui_app_45 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['sidebar_mode'] >
 		,
 		ReturnType< $bog_ui_sidebar['mode'] >
 	>
-	type $bog_ui_sidebar__items_bog_ui_app_42 = $mol_type_enforce<
+	type $bog_ui_sidebar__items_bog_ui_app_46 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_ui_sidebar['items'] >
 	>
-	type $mol_view__sub_bog_ui_app_43 = $mol_type_enforce<
+	type $mol_view__sub_bog_ui_app_47 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_page__title_bog_ui_app_44 = $mol_type_enforce<
+	type $mol_page__title_bog_ui_app_48 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['page_title'] >
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__tools_bog_ui_app_45 = $mol_type_enforce<
+	type $mol_page__tools_bog_ui_app_49 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_page__body_bog_ui_app_46 = $mol_type_enforce<
+	type $mol_page__body_bog_ui_app_50 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $bog_ui_command__showed_bog_ui_app_47 = $mol_type_enforce<
+	type $bog_ui_command__showed_bog_ui_app_51 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['command_showed'] >
 		,
 		ReturnType< $bog_ui_command['showed'] >
@@ -5250,6 +5306,10 @@ declare namespace $ {
 		table_active( ): boolean
 		nav_table( next?: any ): any
 		Table_nav( ): $bog_ui_sidebar_item
+		Divider_icon( ): $mol_icon_minus
+		divider_active( ): boolean
+		nav_divider( next?: any ): any
+		Divider_nav( ): $bog_ui_sidebar_item
 		Nav( ): $bog_ui_sidebar
 		page_title( ): string
 		Theme_toggle( ): $mol_lights_toggle
@@ -5272,6 +5332,7 @@ declare namespace $ {
 		Command_page( ): $bog_ui_app_command
 		Table_page( ): $bog_ui_app_table
 		Overview_page( ): $bog_ui_app_overview
+		Divider_page( ): $bog_ui_app_divider
 		pages( ): readonly(any)[]
 	}
 	
@@ -5306,6 +5367,7 @@ declare namespace $.$$ {
         nav_toast(next?: any): null;
         nav_command(next?: any): null;
         nav_table(next?: any): null;
+        nav_divider(next?: any): null;
         page_title(): string;
         page_text(): string;
         pages(): any[];

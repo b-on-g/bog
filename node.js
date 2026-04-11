@@ -6040,6 +6040,17 @@ var $;
 "use strict";
 
 ;
+	($.$mol_icon_minus) = class $mol_icon_minus extends ($.$mol_icon) {
+		path(){
+			return "M19,13H5V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+;
 	($.$mol_list) = class $mol_list extends ($.$mol_view) {
 		gap_before(){
 			return 0;
@@ -12610,6 +12621,45 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_ui_divider) = class $bog_ui_divider extends ($.$mol_view) {
+		dom_name(){
+			return "hr";
+		}
+	};
+
+
+;
+"use strict";
+
+;
+	($.$bog_ui_app_divider) = class $bog_ui_app_divider extends ($.$mol_page) {
+		description(){
+			return "Horizontal line to separate content.";
+		}
+		Description(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.description())]);
+			return obj;
+		}
+		Divider(){
+			const obj = new this.$.$bog_ui_divider();
+			return obj;
+		}
+		title(){
+			return "Divider";
+		}
+		body(){
+			return [(this.Description()), (this.Divider())];
+		}
+	};
+	($mol_mem(($.$bog_ui_app_divider.prototype), "Description"));
+	($mol_mem(($.$bog_ui_app_divider.prototype), "Divider"));
+
+
+;
+"use strict";
+
+;
 	($.$bog_ui_app) = class $bog_ui_app extends ($.$mol_book2) {
 		Theme(){
 			const obj = new this.$.$mol_theme_auto();
@@ -12813,6 +12863,25 @@ var $;
 			(obj.click) = (next) => ((this.nav_table(next)));
 			return obj;
 		}
+		Divider_icon(){
+			const obj = new this.$.$mol_icon_minus();
+			return obj;
+		}
+		divider_active(){
+			return false;
+		}
+		nav_divider(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Divider_nav(){
+			const obj = new this.$.$bog_ui_sidebar_item();
+			(obj.Icon) = () => ((this.Divider_icon()));
+			(obj.label) = () => ("Divider");
+			(obj.active) = () => ((this.divider_active()));
+			(obj.click) = (next) => ((this.nav_divider(next)));
+			return obj;
+		}
 		Nav(){
 			const obj = new this.$.$bog_ui_sidebar();
 			(obj.mode) = (next) => ((this.sidebar_mode(next)));
@@ -12826,7 +12895,8 @@ var $;
 				(this.Sheet_nav()), 
 				(this.Toast_nav()), 
 				(this.Command_nav()), 
-				(this.Table_nav())
+				(this.Table_nav()), 
+				(this.Divider_nav())
 			]);
 			return obj;
 		}
@@ -12907,6 +12977,10 @@ var $;
 			const obj = new this.$.$bog_ui_app_overview();
 			return obj;
 		}
+		Divider_page(){
+			const obj = new this.$.$bog_ui_app_divider();
+			return obj;
+		}
 		pages(){
 			return [(this.Nav()), (this.Content_page())];
 		}
@@ -12944,6 +13018,9 @@ var $;
 	($mol_mem(($.$bog_ui_app.prototype), "Table_icon"));
 	($mol_mem(($.$bog_ui_app.prototype), "nav_table"));
 	($mol_mem(($.$bog_ui_app.prototype), "Table_nav"));
+	($mol_mem(($.$bog_ui_app.prototype), "Divider_icon"));
+	($mol_mem(($.$bog_ui_app.prototype), "nav_divider"));
+	($mol_mem(($.$bog_ui_app.prototype), "Divider_nav"));
 	($mol_mem(($.$bog_ui_app.prototype), "Nav"));
 	($mol_mem(($.$bog_ui_app.prototype), "Theme_toggle"));
 	($mol_mem(($.$bog_ui_app.prototype), "Page_body"));
@@ -12960,6 +13037,7 @@ var $;
 	($mol_mem(($.$bog_ui_app.prototype), "Command_page"));
 	($mol_mem(($.$bog_ui_app.prototype), "Table_page"));
 	($mol_mem(($.$bog_ui_app.prototype), "Overview_page"));
+	($mol_mem(($.$bog_ui_app.prototype), "Divider_page"));
 
 
 ;
@@ -13092,6 +13170,11 @@ var $;
                     this.component('table');
                 return null;
             }
+            nav_divider(next) {
+                if (next !== undefined)
+                    this.component('divider');
+                return null;
+            }
             page_title() {
                 const titles = {
                     badge: 'Badge',
@@ -13103,6 +13186,7 @@ var $;
                     toast: 'Toast',
                     command: 'Command Palette',
                     table: 'Data Table',
+                    divider: 'Divider',
                 };
                 return titles[this.component()] ?? 'Components Overview';
             }
@@ -13142,6 +13226,9 @@ var $;
                         break;
                     case 'table':
                         content = this.Table_page();
+                        break;
+                    case 'divider':
+                        content = this.Divider_page();
                         break;
                     default: content = this.Overview_page();
                 }
@@ -13220,6 +13307,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_ui_app.prototype, "nav_table", null);
+        __decorate([
+            $mol_action
+        ], $bog_ui_app.prototype, "nav_divider", null);
         __decorate([
             $mol_mem
         ], $bog_ui_app.prototype, "page_title", null);
