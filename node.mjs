@@ -12632,6 +12632,17 @@ var $;
 "use strict";
 
 ;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_ui_divider, {
+        margin: $mol_gap.block,
+        gap: '1.5rem',
+        width: '100%'
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_ui_app_divider) = class $bog_ui_app_divider extends ($.$mol_page) {
 		description(){
 			return "Horizontal line to separate content.";
