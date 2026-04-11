@@ -1,8 +1,10 @@
 namespace $ {
 	$mol_style_define($bog_ui_divider, {
-		margin: $mol_gap.page,
-		gap: $mol_gap.page,
-		width: '100%',
+		margin: {
+			bottom: $mol_gap.page,
+			top: $mol_gap.page,
+		},
+		width: '80%',
 		border: {
 			bottom: {
 				width: '2px',
