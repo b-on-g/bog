@@ -4350,22 +4350,27 @@ declare namespace $ {
 //# sourceMappingURL=box.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_grid_row__minimal_height_bog_ui_table_1 = $mol_type_enforce<
+	type $mol_string__value_bog_ui_table_1 = $mol_type_enforce<
+		ReturnType< $bog_ui_table['cell_value'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_grid_row__minimal_height_bog_ui_table_2 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['row_height'] >
 		,
 		ReturnType< $mol_grid_row['minimal_height'] >
 	>
-	type $mol_grid_row__minimal_width_bog_ui_table_2 = $mol_type_enforce<
+	type $mol_grid_row__minimal_width_bog_ui_table_3 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['minimal_width'] >
 		,
 		ReturnType< $mol_grid_row['minimal_width'] >
 	>
-	type $mol_grid_row__cells_bog_ui_table_3 = $mol_type_enforce<
+	type $mol_grid_row__cells_bog_ui_table_4 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['cells'] >
 		,
 		ReturnType< $mol_grid_row['cells'] >
 	>
-	type $mol_grid_row__attr_bog_ui_table_4 = $mol_type_enforce<
+	type $mol_grid_row__attr_bog_ui_table_5 = $mol_type_enforce<
 		({ 
 			'bog_ui_table_row_even': ReturnType< $bog_ui_table['row_even'] >,
 			'bog_ui_table_row_selected': ReturnType< $bog_ui_table['row_selected'] >,
@@ -4373,30 +4378,30 @@ declare namespace $ {
 		,
 		ReturnType< $mol_grid_row['attr'] >
 	>
-	type $mol_button_minor__click_bog_ui_table_5 = $mol_type_enforce<
+	type $mol_button_minor__click_bog_ui_table_6 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['col_head_click'] >
 		,
 		ReturnType< $mol_button_minor['click'] >
 	>
-	type $mol_button_minor__sub_bog_ui_table_6 = $mol_type_enforce<
+	type $mol_button_minor__sub_bog_ui_table_7 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button_minor['sub'] >
 	>
-	type $mol_check_box__checked_bog_ui_table_7 = $mol_type_enforce<
+	type $mol_check_box__checked_bog_ui_table_8 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['all_selected'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_check_box__checked_bog_ui_table_8 = $mol_type_enforce<
+	type $mol_check_box__checked_bog_ui_table_9 = $mol_type_enforce<
 		ReturnType< $bog_ui_table['row_checked'] >
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
-	type $mol_string__value_bog_ui_table_9 = $mol_type_enforce<
-		ReturnType< $bog_ui_table['cell_value'] >
+	type $mol_grid_cell__sub_bog_ui_table_10 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $mol_string['value'] >
+		ReturnType< $mol_grid_cell['sub'] >
 	>
 	export class $bog_ui_table extends $mol_grid {
 		cells( id: any): readonly($mol_view)[]
@@ -4407,6 +4412,7 @@ declare namespace $ {
 		all_selected( next?: boolean ): boolean
 		row_checked( id: any, next?: boolean ): boolean
 		cell_value( id: any, next?: string ): string
+		Cell_string( id: any): $mol_string
 		columns( ): readonly(any)[]
 		data( ): readonly(any)[]
 		sort_column( next?: string ): string
@@ -4417,7 +4423,7 @@ declare namespace $ {
 		Head_button( id: any): $mol_button_minor
 		Select_all( ): $mol_check_box
 		Select_row( id: any): $mol_check_box
-		Cell_input( id: any): $mol_string
+		Cell_input( id: any): $mol_grid_cell
 	}
 	
 }

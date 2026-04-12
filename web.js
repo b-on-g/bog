@@ -11166,6 +11166,11 @@ var $;
 			if(next !== undefined) return next;
 			return "";
 		}
+		Cell_string(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.cell_value(id, next)));
+			return obj;
+		}
 		columns(){
 			return [];
 		}
@@ -11216,8 +11221,8 @@ var $;
 			return obj;
 		}
 		Cell_input(id){
-			const obj = new this.$.$mol_string();
-			(obj.value) = (next) => ((this.cell_value(id, next)));
+			const obj = new this.$.$mol_grid_cell();
+			(obj.sub) = () => ([(this.Cell_string(id))]);
 			return obj;
 		}
 	};
@@ -11225,6 +11230,7 @@ var $;
 	($mol_mem(($.$bog_ui_table.prototype), "all_selected"));
 	($mol_mem_key(($.$bog_ui_table.prototype), "row_checked"));
 	($mol_mem_key(($.$bog_ui_table.prototype), "cell_value"));
+	($mol_mem_key(($.$bog_ui_table.prototype), "Cell_string"));
 	($mol_mem(($.$bog_ui_table.prototype), "sort_column"));
 	($mol_mem(($.$bog_ui_table.prototype), "sort_dir"));
 	($mol_mem(($.$bog_ui_table.prototype), "selected"));
