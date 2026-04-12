@@ -17,9 +17,10 @@ namespace $.$$ {
 		}
 
 		cells( id: string[] ) {
-			const base = super.cells( id )
-			if( !this.selectable() ) return base
-			return [ this.Select_row( id[0] ) , ...base.slice( 1 ) ]
+			return this.col_ids().map( col_id => {
+				if( col_id === '__select' ) return this.Select_row( id[0] )
+				return this.Cell({ row: id, col: col_id })
+			}) as readonly $mol_view[]
 		}
 
 		@ $mol_mem_key
