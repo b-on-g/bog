@@ -44,25 +44,11 @@ namespace $ {
 			},
 		},
 
-		Cell_text: {
-			padding: {
-				top: '0.5rem',
-				bottom: '0.5rem',
-				left: '0.75rem',
-				right: '0.75rem',
+		Cell_input: {
+			flex: {
+				grow: 1,
 			},
 			minWidth: '100px',
-		},
-
-		Cell_number: {
-			padding: {
-				top: '0.5rem',
-				bottom: '0.5rem',
-				left: '0.75rem',
-				right: '0.75rem',
-			},
-			textAlign: 'right',
-			minWidth: '80px',
 		},
 
 		Select_all: {

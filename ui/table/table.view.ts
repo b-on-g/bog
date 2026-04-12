@@ -19,8 +19,15 @@ namespace $.$$ {
 		cells( id: string[] ) {
 			return this.col_ids().map( col_id => {
 				if( col_id === '__select' ) return this.Select_row( id[0] )
-				return this.Cell({ row: id, col: col_id })
+				return this.Cell_input({ row: id, col: col_id })
 			}) as readonly $mol_view[]
+		}
+
+		@ $mol_mem_key
+		cell_value( id: { row: string[], col: string }, next?: string ) {
+			if( next !== undefined ) return next
+			const val = this.record( id.row[ id.row.length - 1 ] )[ id.col ]
+			return val == null ? '' : String( val )
 		}
 
 		@ $mol_mem_key
