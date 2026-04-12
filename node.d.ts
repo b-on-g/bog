@@ -4393,6 +4393,11 @@ declare namespace $ {
 		,
 		ReturnType< $mol_check_box['checked'] >
 	>
+	type $mol_string__value_bog_ui_table_9 = $mol_type_enforce<
+		ReturnType< $bog_ui_table['cell_value'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
 	export class $bog_ui_table extends $mol_grid {
 		cells( id: any): readonly($mol_view)[]
 		row_even( id: any): boolean
@@ -4401,6 +4406,7 @@ declare namespace $ {
 		head_button_content( id: any): readonly(any)[]
 		all_selected( next?: boolean ): boolean
 		row_checked( id: any, next?: boolean ): boolean
+		cell_value( id: any, next?: string ): string
 		columns( ): readonly(any)[]
 		data( ): readonly(any)[]
 		sort_column( next?: string ): string
@@ -4411,6 +4417,7 @@ declare namespace $ {
 		Head_button( id: any): $mol_button_minor
 		Select_all( ): $mol_check_box
 		Select_row( id: any): $mol_check_box
+		Cell_input( id: any): $mol_string
 	}
 	
 }
@@ -4421,6 +4428,10 @@ declare namespace $.$$ {
         col_ids(): readonly string[];
         col_head_content(colId: string): $mol_button_minor[];
         cells(id: string[]): readonly $mol_view[];
+        cell_value(id: {
+            row: string[];
+            col: string;
+        }, next?: string): string;
         row_checked(rowId: string, next?: boolean): boolean;
         all_selected(next?: boolean): boolean;
         row_selected(rowId: string[]): boolean;

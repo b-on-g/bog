@@ -11162,6 +11162,10 @@ var $;
 			if(next !== undefined) return next;
 			return false;
 		}
+		cell_value(id, next){
+			if(next !== undefined) return next;
+			return "";
+		}
 		columns(){
 			return [];
 		}
@@ -11211,10 +11215,16 @@ var $;
 			(obj.checked) = (next) => ((this.row_checked(id, next)));
 			return obj;
 		}
+		Cell_input(id){
+			const obj = new this.$.$mol_string();
+			(obj.value) = (next) => ((this.cell_value(id, next)));
+			return obj;
+		}
 	};
 	($mol_mem_key(($.$bog_ui_table.prototype), "col_head_click"));
 	($mol_mem(($.$bog_ui_table.prototype), "all_selected"));
 	($mol_mem_key(($.$bog_ui_table.prototype), "row_checked"));
+	($mol_mem_key(($.$bog_ui_table.prototype), "cell_value"));
 	($mol_mem(($.$bog_ui_table.prototype), "sort_column"));
 	($mol_mem(($.$bog_ui_table.prototype), "sort_dir"));
 	($mol_mem(($.$bog_ui_table.prototype), "selected"));
@@ -11222,6 +11232,7 @@ var $;
 	($mol_mem_key(($.$bog_ui_table.prototype), "Head_button"));
 	($mol_mem(($.$bog_ui_table.prototype), "Select_all"));
 	($mol_mem_key(($.$bog_ui_table.prototype), "Select_row"));
+	($mol_mem_key(($.$bog_ui_table.prototype), "Cell_input"));
 
 
 ;
@@ -11252,8 +11263,14 @@ var $;
                 return this.col_ids().map(col_id => {
                     if (col_id === '__select')
                         return this.Select_row(id[0]);
-                    return this.Cell({ row: id, col: col_id });
+                    return this.Cell_input({ row: id, col: col_id });
                 });
+            }
+            cell_value(id, next) {
+                if (next !== undefined)
+                    return next;
+                const val = this.record(id.row[id.row.length - 1])[id.col];
+                return val == null ? '' : String(val);
             }
             row_checked(rowId, next) {
                 if (next !== undefined) {
@@ -11348,6 +11365,9 @@ var $;
         ], $bog_ui_table.prototype, "col_ids", null);
         __decorate([
             $mol_mem_key
+        ], $bog_ui_table.prototype, "cell_value", null);
+        __decorate([
+            $mol_mem_key
         ], $bog_ui_table.prototype, "row_checked", null);
         __decorate([
             $mol_mem
@@ -11414,24 +11434,11 @@ var $;
                 color: $mol_theme.line,
             },
         },
-        Cell_text: {
-            padding: {
-                top: '0.5rem',
-                bottom: '0.5rem',
-                left: '0.75rem',
-                right: '0.75rem',
+        Cell_input: {
+            flex: {
+                grow: 1,
             },
             minWidth: '100px',
-        },
-        Cell_number: {
-            padding: {
-                top: '0.5rem',
-                bottom: '0.5rem',
-                left: '0.75rem',
-                right: '0.75rem',
-            },
-            textAlign: 'right',
-            minWidth: '80px',
         },
         Select_all: {
             flex: {

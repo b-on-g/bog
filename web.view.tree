@@ -854,6 +854,9 @@ $bog_ui_table $mol_grid
 		checked? <=> all_selected? false
 	Select_row* $mol_check_box
 		checked? <=> row_checked*? false
+	cell_value*? \
+	Cell_input* $mol_string
+		value? <=> cell_value*? \
 
 $bog_ui_app_table $mol_page
 	title \Data Table
