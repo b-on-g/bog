@@ -116,7 +116,7 @@ namespace $.$$ {
 				this.Entry_my(),
 				this.Contact_field(),
 				this.Submit(),
-				...(this.is_owner() ? [this.Entries()] : []),
+				this.Entries(),
 			]
 		}
 
