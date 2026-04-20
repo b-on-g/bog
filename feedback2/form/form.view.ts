@@ -128,18 +128,83 @@ namespace $.$$ {
 			return this.all_lords().map((_: any, i: number) => this.Entry_row(i))
 		}
 
-		entry_row_text(index: number) {
+		private entry_by_index(index: number) {
 			const lord = this.all_lords()[index]
-			if (!lord) return ''
-			const entry = this.entries_dict()?.key(lord)
-			return entry?.Text()?.val() ?? ''
+			if (!lord) return null
+			return this.entries_dict()?.key(lord) ?? null
+		}
+
+		private entry_by_index_or_create(index: number) {
+			const lord = this.all_lords()[index]
+			if (!lord) return null
+			return this.entries_dict()?.key(lord, 'auto') ?? null
+		}
+
+		entry_row_text(index: number) {
+			return this.entry_by_index(index)?.Text()?.val() ?? ''
 		}
 
 		entry_row_contact(index: number) {
-			const lord = this.all_lords()[index]
-			if (!lord) return ''
-			const entry = this.entries_dict()?.key(lord)
-			return entry?.Contact()?.val() ?? 'Anonymous'
+			return this.entry_by_index(index)?.Contact()?.val() ?? 'Anonymous'
+		}
+
+		entry_row_has_reply(index: number) {
+			return !!this.entry_by_index(index)?.Reply()?.val()
+		}
+
+		entry_row_reply_text(index: number) {
+			return this.entry_by_index(index)?.Reply()?.val() ?? ''
+		}
+
+		@$mol_mem_key
+		entry_row_reply_form_open(index: number, next?: boolean): boolean {
+			return next ?? false
+		}
+
+		@$mol_mem_key
+		entry_row_reply_draft(index: number, next?: string): string {
+			if (next !== undefined) return next
+			return this.entry_by_index(index)?.Reply()?.val() ?? ''
+		}
+
+		entry_row_reply_submit_title(index: number) {
+			return this.entry_row_has_reply(index) ? 'Update reply' : 'Send reply'
+		}
+
+		entry_row_reply_toggle_title(index: number) {
+			if (this.entry_row_has_reply(index)) return 'Edit reply'
+			return this.entry_row_reply_form_open(index) ? 'Cancel' : 'Reply'
+		}
+
+		@$mol_action
+		entry_row_reply_toggle(index: number) {
+			const open = this.entry_row_reply_form_open(index)
+			this.entry_row_reply_form_open(index, !open)
+		}
+
+		@$mol_action
+		entry_row_reply_submit(index: number) {
+			if (!this.is_owner()) return
+			const text = this.entry_row_reply_draft(index).trim()
+			if (!text) return
+			const entry = this.entry_by_index_or_create(index)
+			if (!entry) return
+			entry.Reply('auto')!.val(text)
+			entry.Reply_author('auto')!.val(this.my_lord())
+			entry.Reply_created('auto')!.val(Date.now())
+			this.entry_row_reply_form_open(index, false)
+		}
+
+		entry_row_reply_sub(index: number): readonly any[] {
+			const items: any[] = []
+			const has_reply = this.entry_row_has_reply(index)
+			if (has_reply) items.push(this.Entry_row_reply_display(index))
+			if (!this.is_owner()) return items
+			if (this.entry_row_reply_form_open(index)) {
+				items.push(this.Entry_row_reply_form(index))
+			}
+			items.push(this.Entry_row_reply_toggle(index))
+			return items
 		}
 	}
 }

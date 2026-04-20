@@ -59,5 +59,57 @@ namespace $ {
 				},
 			},
 		},
+
+		Entry_row_reply_wrap: {
+			flex: {
+				direction: 'column',
+			},
+			gap: $mol_gap.space,
+			margin: {
+				top: $mol_gap.space,
+			},
+		},
+
+		Entry_row_reply_display: {
+			flex: {
+				direction: 'column',
+			},
+			gap: $mol_gap.space,
+			padding: $mol_gap.block,
+			background: {
+				color: $mol_theme.back,
+			},
+			border: {
+				radius: $mol_gap.round,
+			},
+		},
+
+		Entry_row_reply_header: {
+			font: {
+				weight: 700,
+				size: '0.95rem',
+			},
+			opacity: 0.8,
+		},
+
+		Entry_row_reply_text: {
+			font: {
+				size: '0.95rem',
+			},
+			whiteSpace: 'pre-wrap',
+		},
+
+		Entry_row_reply_form: {
+			flex: {
+				direction: 'column',
+			},
+			gap: $mol_gap.space,
+		},
+
+		Entry_row_reply_toggle: {
+			align: {
+				self: 'flex-start',
+			},
+		},
 	})
 }
