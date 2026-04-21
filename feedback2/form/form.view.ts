@@ -121,7 +121,13 @@ namespace $.$$ {
 		}
 
 		all_lords() {
-			return this.entries_dict()?.keys() ?? []
+			const raw = this.entries_dict()?.keys() ?? []
+			const lords = Array.from(raw).map(l => String(l))
+			const mine = this.my_lord()
+			if (!mine) return lords
+			const idx = lords.indexOf(mine)
+			if (idx <= 0) return lords
+			return [mine, ...lords.slice(0, idx), ...lords.slice(idx + 1)]
 		}
 
 		entry_rows() {
