@@ -108,16 +108,25 @@ namespace $ {
 			const mount = $bog_ui_router_path.base()
 			if( !a.pathname.startsWith( mount ) ) return
 
+			// $mol_link emits `<a href="…/#!key=val">`. Convert hash segment to pathname.
+			// Non-routed hash (e.g. `#section` for scroll) — let the browser handle.
+			let segment: string
+			if( a.hash.startsWith( '#!' ) ) {
+				segment = a.hash.slice( 2 )
+			} else if( a.hash ) {
+				return
+			} else {
+				segment = decodeURIComponent( a.pathname ).slice( mount.length )
+			}
+
 			e.preventDefault()
 
-			const target = a.pathname + a.search + a.hash
-			if( target === $mol_dom.location.pathname + $mol_dom.location.search + $mol_dom.location.hash ) return
+			const target = mount + segment + a.search
+			const current = $mol_dom.location.pathname + $mol_dom.location.search
+			if( target === current ) return
 
 			$mol_dom.history.pushState( null , '' , target )
-			$bog_ui_router_path.href(
-				$mol_dom.location.origin + mount + '#!' +
-				decodeURIComponent( a.pathname ).slice( mount.length )
-			)
+			$bog_ui_router_path.href( $mol_dom.location.origin + mount + '#!' + segment )
 		} , true )
 
 	} )()
