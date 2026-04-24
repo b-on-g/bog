@@ -53,7 +53,11 @@ namespace $ {
 
 	// Skip activation on localhost / dev servers — pathname routing requires a SPA-aware
 	// server (404.html fallback) which local MAM dev doesn't provide. Hash routing stays.
+	// Also skip in Service Worker / Node contexts where there's no `document`.
 	;( function activate() {
+
+		if( typeof window === 'undefined' ) return
+		if( typeof document === 'undefined' ) return
 
 		const is_local = /^(localhost$|127\.|\[::1\]|0\.0\.0\.0)/.test( $mol_dom.location.hostname )
 		if( is_local ) return
