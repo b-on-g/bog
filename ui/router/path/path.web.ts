@@ -51,71 +51,75 @@ namespace $ {
 
 	}
 
-	// Install as the default $mol_state_arg so all $mol_link / view code picks up our class.
-	;( $ as any ).$mol_state_arg = $bog_ui_router_path
+	// Skip activation on localhost / dev servers — pathname routing requires a SPA-aware
+	// server (404.html fallback) which local MAM dev doesn't provide. Hash routing stays.
+	;( function activate() {
 
-	// Inject <base href> so relative URLs (Giper Baza `?BAZA:file=...`, assets) resolve
-	// against the mount directory, not the current (possibly deep) pathname.
-	;( function install_base() {
+		const is_local = /^(localhost$|127\.|\[::1\]|0\.0\.0\.0)/.test( $mol_dom.location.hostname )
+		if( is_local ) return
+
+		// Install as the default $mol_state_arg so all $mol_link / view code picks up our class.
+		;( $ as any ).$mol_state_arg = $bog_ui_router_path
+
+		// Inject <base href> so relative URLs (Giper Baza `?BAZA:file=...`, assets) resolve
+		// against the mount directory, not the current (possibly deep) pathname.
 		const href = $bog_ui_router_path.base()
 		const doc = $mol_dom.document
-		let base = doc.querySelector( 'base' ) as HTMLBaseElement | null
-		if( !base ) {
-			base = doc.createElement( 'base' )
-			doc.head.insertBefore( base , doc.head.firstChild )
+		let base_el = doc.querySelector( 'base' ) as HTMLBaseElement | null
+		if( !base_el ) {
+			base_el = doc.createElement( 'base' )
+			doc.head.insertBefore( base_el , doc.head.firstChild )
 		}
-		base.setAttribute( 'href' , href )
-	} )()
+		base_el.setAttribute( 'href' , href )
 
-	// Decode path encoded by 404.html (`/base/?/foo=bar/baz=qux` -> `/base/foo=bar/baz=qux`).
-	;( function restore_spa_path() {
+		// Decode path encoded by 404.html (`/base/?/foo=bar/baz=qux` -> `/base/foo=bar/baz=qux`).
 		const s = $mol_dom.location.search
 		if( s.length > 1 && s.charAt( 1 ) === '/' ) {
 			const decoded = s.slice( 2 ).split( '&' ).map( p => p.replace( /~and~/g , '&' ) ).join( '?' )
 			const parts = decoded.split( '?' )
 			const path_segment = parts[ 0 ]
 			const query = parts[ 1 ] ? '?' + parts[ 1 ] : ''
-			const base = $bog_ui_router_path.base()
-			$mol_dom.history.replaceState( null , '' , base + path_segment + query + $mol_dom.location.hash )
+			$mol_dom.history.replaceState( null , '' , href + path_segment + query + $mol_dom.location.hash )
 		}
+
+		// Back/forward button support.
+		self.addEventListener( 'popstate' , () => {
+			$bog_ui_router_path.href(
+				$mol_dom.location.origin + $bog_ui_router_path.base() + '#!' +
+				decodeURIComponent( $mol_dom.location.pathname ).slice( $bog_ui_router_path.base().length )
+			)
+		} )
+
+		// Intercept same-origin link clicks so $mol_link navigations don't reload the page.
+		self.addEventListener( 'click' , ( e: MouseEvent ) => {
+			if( e.defaultPrevented ) return
+			if( e.button !== 0 ) return
+			if( e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) return
+
+			let el = e.target as HTMLElement | null
+			while( el && el.tagName !== 'A' ) el = el.parentElement
+			if( !el ) return
+
+			const a = el as HTMLAnchorElement
+			if( a.hasAttribute( 'download' ) ) return
+			if( a.target && a.target !== '' && a.target !== '_self' ) return
+			if( a.origin !== $mol_dom.location.origin ) return
+
+			const mount = $bog_ui_router_path.base()
+			if( !a.pathname.startsWith( mount ) ) return
+
+			e.preventDefault()
+
+			const target = a.pathname + a.search + a.hash
+			if( target === $mol_dom.location.pathname + $mol_dom.location.search + $mol_dom.location.hash ) return
+
+			$mol_dom.history.pushState( null , '' , target )
+			$bog_ui_router_path.href(
+				$mol_dom.location.origin + mount + '#!' +
+				decodeURIComponent( a.pathname ).slice( mount.length )
+			)
+		} , true )
+
 	} )()
-
-	// Back/forward button support.
-	self.addEventListener( 'popstate' , () => {
-		$bog_ui_router_path.href(
-			$mol_dom.location.origin + $bog_ui_router_path.base() + '#!' +
-			decodeURIComponent( $mol_dom.location.pathname ).slice( $bog_ui_router_path.base().length )
-		)
-	} )
-
-	// Intercept same-origin link clicks so $mol_link navigations don't reload the page.
-	self.addEventListener( 'click' , ( e: MouseEvent ) => {
-		if( e.defaultPrevented ) return
-		if( e.button !== 0 ) return
-		if( e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) return
-
-		let el = e.target as HTMLElement | null
-		while( el && el.tagName !== 'A' ) el = el.parentElement
-		if( !el ) return
-
-		const a = el as HTMLAnchorElement
-		if( a.hasAttribute( 'download' ) ) return
-		if( a.target && a.target !== '' && a.target !== '_self' ) return
-		if( a.origin !== $mol_dom.location.origin ) return
-
-		const base = $bog_ui_router_path.base()
-		if( !a.pathname.startsWith( base ) ) return
-
-		e.preventDefault()
-
-		const href = a.pathname + a.search + a.hash
-		if( href === $mol_dom.location.pathname + $mol_dom.location.search + $mol_dom.location.hash ) return
-
-		$mol_dom.history.pushState( null , '' , href )
-		$bog_ui_router_path.href(
-			$mol_dom.location.origin + base + '#!' +
-			decodeURIComponent( a.pathname ).slice( base.length )
-		)
-	} , true )
 
 }
