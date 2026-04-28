@@ -49,90 +49,85 @@ namespace $ {
 			this.href( $mol_dom.location.origin + this.base() + '#!' + segment )
 		}
 
-	}
+		/**
+		 * Opt-in: install path-based routing for the current page.
+		 * Apps that want path routing must call this explicitly (e.g. in their `app.view.ts`).
+		 * No-op on localhost (dev) and in Service Worker / Node contexts.
+		 */
+		static activate(): void {
 
-	// Skip activation on localhost / dev servers — pathname routing requires a SPA-aware
-	// server (404.html fallback) which local MAM dev doesn't provide. Hash routing stays.
-	// Also skip in Service Worker / Node contexts where there's no `document`.
-	;( function activate() {
+			if( typeof window === 'undefined' ) return
+			if( typeof document === 'undefined' ) return
+			if( ( $ as any ).$mol_state_arg === $bog_ui_router_path ) return
 
-		if( typeof window === 'undefined' ) return
-		if( typeof document === 'undefined' ) return
+			const is_local = /^(localhost$|127\.|\[::1\]|0\.0\.0\.0)/.test( $mol_dom.location.hostname )
+			if( is_local ) return
 
-		const is_local = /^(localhost$|127\.|\[::1\]|0\.0\.0\.0)/.test( $mol_dom.location.hostname )
-		if( is_local ) return
+			;( $ as any ).$mol_state_arg = $bog_ui_router_path
 
-		// Install as the default $mol_state_arg so all $mol_link / view code picks up our class.
-		;( $ as any ).$mol_state_arg = $bog_ui_router_path
+			const href = $bog_ui_router_path.base()
+			const doc = $mol_dom.document
+			let base_el = doc.querySelector( 'base' ) as HTMLBaseElement | null
+			if( !base_el ) {
+				base_el = doc.createElement( 'base' )
+				doc.head.insertBefore( base_el , doc.head.firstChild )
+			}
+			base_el.setAttribute( 'href' , href )
 
-		// Inject <base href> so relative URLs (Giper Baza `?BAZA:file=...`, assets) resolve
-		// against the mount directory, not the current (possibly deep) pathname.
-		const href = $bog_ui_router_path.base()
-		const doc = $mol_dom.document
-		let base_el = doc.querySelector( 'base' ) as HTMLBaseElement | null
-		if( !base_el ) {
-			base_el = doc.createElement( 'base' )
-			doc.head.insertBefore( base_el , doc.head.firstChild )
-		}
-		base_el.setAttribute( 'href' , href )
-
-		// Decode path encoded by 404.html (`/base/?/foo=bar/baz=qux` -> `/base/foo=bar/baz=qux`).
-		const s = $mol_dom.location.search
-		if( s.length > 1 && s.charAt( 1 ) === '/' ) {
-			const decoded = s.slice( 2 ).split( '&' ).map( p => p.replace( /~and~/g , '&' ) ).join( '?' )
-			const parts = decoded.split( '?' )
-			const path_segment = parts[ 0 ]
-			const query = parts[ 1 ] ? '?' + parts[ 1 ] : ''
-			$mol_dom.history.replaceState( null , '' , href + path_segment + query + $mol_dom.location.hash )
-		}
-
-		// Back/forward button support.
-		self.addEventListener( 'popstate' , () => {
-			$bog_ui_router_path.href(
-				$mol_dom.location.origin + $bog_ui_router_path.base() + '#!' +
-				decodeURIComponent( $mol_dom.location.pathname ).slice( $bog_ui_router_path.base().length )
-			)
-		} )
-
-		// Intercept same-origin link clicks so $mol_link navigations don't reload the page.
-		self.addEventListener( 'click' , ( e: MouseEvent ) => {
-			if( e.defaultPrevented ) return
-			if( e.button !== 0 ) return
-			if( e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) return
-
-			let el = e.target as HTMLElement | null
-			while( el && el.tagName !== 'A' ) el = el.parentElement
-			if( !el ) return
-
-			const a = el as HTMLAnchorElement
-			if( a.hasAttribute( 'download' ) ) return
-			if( a.target && a.target !== '' && a.target !== '_self' ) return
-			if( a.origin !== $mol_dom.location.origin ) return
-
-			const mount = $bog_ui_router_path.base()
-			if( !a.pathname.startsWith( mount ) ) return
-
-			// $mol_link emits `<a href="…/#!key=val">`. Convert hash segment to pathname.
-			// Non-routed hash (e.g. `#section` for scroll) — let the browser handle.
-			let segment: string
-			if( a.hash.startsWith( '#!' ) ) {
-				segment = a.hash.slice( 2 )
-			} else if( a.hash ) {
-				return
-			} else {
-				segment = decodeURIComponent( a.pathname ).slice( mount.length )
+			const s = $mol_dom.location.search
+			if( s.length > 1 && s.charAt( 1 ) === '/' ) {
+				const decoded = s.slice( 2 ).split( '&' ).map( p => p.replace( /~and~/g , '&' ) ).join( '?' )
+				const parts = decoded.split( '?' )
+				const path_segment = parts[ 0 ]
+				const query = parts[ 1 ] ? '?' + parts[ 1 ] : ''
+				$mol_dom.history.replaceState( null , '' , href + path_segment + query + $mol_dom.location.hash )
 			}
 
-			e.preventDefault()
+			self.addEventListener( 'popstate' , () => {
+				$bog_ui_router_path.href(
+					$mol_dom.location.origin + $bog_ui_router_path.base() + '#!' +
+					decodeURIComponent( $mol_dom.location.pathname ).slice( $bog_ui_router_path.base().length )
+				)
+			} )
 
-			const target = mount + segment + a.search
-			const current = $mol_dom.location.pathname + $mol_dom.location.search
-			if( target === current ) return
+			self.addEventListener( 'click' , ( e: MouseEvent ) => {
+				if( e.defaultPrevented ) return
+				if( e.button !== 0 ) return
+				if( e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) return
 
-			$mol_dom.history.pushState( null , '' , target )
-			$bog_ui_router_path.href( $mol_dom.location.origin + mount + '#!' + segment )
-		} , true )
+				let el = e.target as HTMLElement | null
+				while( el && el.tagName !== 'A' ) el = el.parentElement
+				if( !el ) return
 
-	} )()
+				const a = el as HTMLAnchorElement
+				if( a.hasAttribute( 'download' ) ) return
+				if( a.target && a.target !== '' && a.target !== '_self' ) return
+				if( a.origin !== $mol_dom.location.origin ) return
+
+				const mount = $bog_ui_router_path.base()
+				if( !a.pathname.startsWith( mount ) ) return
+
+				let segment: string
+				if( a.hash.startsWith( '#!' ) ) {
+					segment = a.hash.slice( 2 )
+				} else if( a.hash ) {
+					return
+				} else {
+					segment = decodeURIComponent( a.pathname ).slice( mount.length )
+				}
+
+				e.preventDefault()
+
+				const target = mount + segment + a.search
+				const current = $mol_dom.location.pathname + $mol_dom.location.search
+				if( target === current ) return
+
+				$mol_dom.history.pushState( null , '' , target )
+				$bog_ui_router_path.href( $mol_dom.location.origin + mount + '#!' + segment )
+			} , true )
+
+		}
+
+	}
 
 }
