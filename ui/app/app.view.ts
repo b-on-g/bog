@@ -95,6 +95,11 @@ namespace $.$$ {
 			return this.component() === 'table'
 		}
 
+		@ $mol_mem
+		tooltip_active() {
+			return this.component() === 'tooltip'
+		}
+
 		@ $mol_action
 		nav_overview( next?: any ) {
 			if( next !== undefined ) this.component( '' )
@@ -161,6 +166,12 @@ namespace $.$$ {
 			return null
 		}
 
+		@ $mol_action
+		nav_tooltip( next?: any ) {
+			if( next !== undefined ) this.component( 'tooltip' )
+			return null
+		}
+
 		@ $mol_mem
 		page_title() {
 			const titles: Record<string, string> = {
@@ -174,6 +185,7 @@ namespace $.$$ {
 				command: 'Command Palette',
 				table: 'Data Table',
 				divider: 'Divider',
+				tooltip: 'Tooltip',
 			}
 			return titles[ this.component() ] ?? 'Components Overview'
 		}
@@ -200,6 +212,7 @@ namespace $.$$ {
 				case 'command': content = this.Command_page(); break
 				case 'table': content = this.Table_page(); break
 				case 'divider': content = this.Divider_page(); break
+				case 'tooltip': content = this.Tooltip_page(); break
 				default: content = this.Overview_page()
 			}
 			return [
