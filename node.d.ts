@@ -793,6 +793,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    /** Replaces properties of `Base` record by properties from `Over`. */
     type $mol_type_override<Base, Over> = Omit<Base, keyof Over> & Over;
 }
 
@@ -1721,6 +1722,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    /** Returns error type, that don't match to normal value. */
     type $mol_type_error<Message, Info = {}> = Message & {
         $mol_type_error: Info;
     };
