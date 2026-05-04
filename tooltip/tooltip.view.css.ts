@@ -6,14 +6,19 @@ namespace $.$$ {
 		const doc = $mol_dom_context.document
 		const move_title = (el: any) => {
 			if (!el || el.nodeType !== 1) return
-			const t = el.getAttribute && el.getAttribute('title')
-			if (t) {
-				el.setAttribute('data-mol-tip', t)
-				el.removeAttribute('title')
+			// Поднимаемся вверх по дереву и переносим title с любого предка —
+			// hover может прилететь от вложенного <input> / <svg>, а title-атрибут
+			// часто стоит на корне кнопки.
+			let node: HTMLElement | null = el
+			while (node) {
+				const t = node.getAttribute && node.getAttribute('title')
+				if (t) {
+					node.setAttribute('data-mol-tip', t)
+					node.removeAttribute('title')
+				}
+				node = node.parentElement
 			}
 		}
-		// Захватываем на ранней фазе все mouseover'ы, не зависим от того, какой
-		// компонент стрельнул.
 		doc.addEventListener('mouseover', (e: any) => move_title(e.target), true)
 		doc.addEventListener('focusin',   (e: any) => move_title(e.target), true)
 	}
