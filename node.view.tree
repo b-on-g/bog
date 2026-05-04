@@ -21,6 +21,10 @@ $mol_theme_auto $mol_plugin
 	light \$mol_theme_light
 	attr * mol_theme <= theme <= dark \$mol_theme_dark
 
+$bog_tooltip_plugin $mol_plugin
+
+$bog_ui_tooltip $bog_tooltip_plugin
+
 $mol_svg $mol_view
 	dom_name \svg
 	dom_name_space \http://www.w3.org/2000/svg
@@ -118,6 +122,8 @@ $mol_icon_console $mol_icon path \M20,19V7H4V19H20M20,3A2,2 0 0,1 22,5V19A2,2 0 
 $mol_icon_table $mol_icon path \M5,4H19A2,2 0 0,1 21,6V18A2,2 0 0,1 19,20H5A2,2 0 0,1 3,18V6A2,2 0 0,1 5,4M5,8V12H11V8H5M13,8V12H19V8H13M5,14V18H11V14H5M13,14V18H19V14H13Z
 
 $mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
+
+$mol_icon_message $mol_icon path \M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z
 
 $mol_list $mol_view
 	render_visible_only true
@@ -1042,10 +1048,70 @@ $bog_ui_app_divider $mol_page
 				<= description \Horizontal line to separate content.
 		<= Divider $bog_ui_divider
 
+$mol_icon_upload $mol_icon path \M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z
+
+$mol_button_open $mol_button_minor
+	sub /
+		<= Icon $mol_icon_upload
+		<= Native $mol_button_open_native
+			files? <=> files_handled? <=> files? /File
+			accept <= accept \
+			multiple <= multiple true
+
+$mol_button_open_native $mol_view
+	dom_name \input
+	files? /File
+	attr *
+		type \file
+		accept <= accept \
+		multiple <= multiple true
+	event *
+		change?next <=> picked?next null
+
+$bog_ui_app_tooltip $mol_page
+	title \Tooltip
+	body /
+		<= Description $mol_view
+			sub /
+				<= description \Instant CSS-tooltip plugin. Plug it once into the root view's `plugins /`, then any element with `title=` or any $mol component with `hint` shows a custom bubble without the native ~700ms browser delay.
+		<= Usage_title $mol_view
+			sub /
+				<= usage_title \Usage
+		<= Usage_code $mol_view
+			sub /
+				<= usage_code \plugins /\n    <= Tip $bog_ui_tooltip
+		<= Demo_title $mol_view
+			sub /
+				<= demo_title \Demo
+		<= Demo_hint $mol_view
+			sub /
+				<= demo_hint \Hover any of the elements below — the bubble appears immediately.
+		<= Demo $mol_view
+			sub /
+				<= Btn_simple $mol_button_minor
+					hint \Hello, I am a tooltip
+					sub / \Simple
+				<= Btn_long $mol_button_minor
+					hint \A longer hint that explains in detail what this control will do when activated.
+					sub / \Long text
+				<= Btn_icon $mol_button_minor
+					hint \Settings
+					sub /
+						<= Btn_icon_glyph $mol_icon_cog
+				<= Btn_input $mol_button_open
+					hint \Pick a file from disk
+					accept \image/*
+					files? <=> demo_files? /File
+				<= Inline_text $mol_view
+					attr *
+						title \Plain HTML title attribute on a span
+					sub / \Hover this text
+
 $bog_ui_app $mol_book2
 	plugins /
 		^
 		<= Theme $mol_theme_auto
+		<= Tip $bog_ui_tooltip
 	event *
 		^
 		keydown? <=> global_keydown? null
@@ -1063,6 +1129,7 @@ $bog_ui_app $mol_book2
 	Table_page $bog_ui_app_table
 	Overview_page $bog_ui_app_overview
 	Divider_page $bog_ui_app_divider
+	Tooltip_page $bog_ui_app_tooltip
 	pages /
 		<= Nav $bog_ui_sidebar
 			mode? <=> sidebar_mode? \dock
@@ -1122,6 +1189,11 @@ $bog_ui_app $mol_book2
 					label \Divider
 					active <= divider_active false
 					click? <=> nav_divider? null
+				<= Tooltip_nav $bog_ui_sidebar_item
+					Icon <= Tooltip_icon $mol_icon_message
+					label \Tooltip
+					active <= tooltip_active false
+					click? <=> nav_tooltip? null
 		<= Content_page $mol_page
 			title <= page_title \Components
 			tools /

@@ -4359,6 +4359,84 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_tooltip_plugin) = class $bog_tooltip_plugin extends ($.$mol_plugin) {};
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        // Глобальный быстрый CSS-tooltip для любого $mol-компонента с `hint`/`title`.
+        // Перехватываем mouseover на весь документ: переносим title -> data-mol-tip,
+        // чтобы нативный tooltip с задержкой 700ms не показывался.
+        if (typeof $mol_dom_context !== 'undefined' && $mol_dom_context.document) {
+            const doc = $mol_dom_context.document;
+            const move_title = (el) => {
+                if (!el || el.nodeType !== 1)
+                    return;
+                // Поднимаемся вверх по дереву и переносим title с любого предка —
+                // hover может прилететь от вложенного <input> / <svg>, а title-атрибут
+                // часто стоит на корне кнопки.
+                let node = el;
+                while (node) {
+                    const t = node.getAttribute && node.getAttribute('title');
+                    if (t) {
+                        node.setAttribute('data-mol-tip', t);
+                        node.removeAttribute('title');
+                    }
+                    node = node.parentElement;
+                }
+            };
+            doc.addEventListener('mouseover', (e) => move_title(e.target), true);
+            doc.addEventListener('focusin', (e) => move_title(e.target), true);
+        }
+        $mol_style_attach('bog/tooltip/tooltip.view.css', `
+		[data-mol-tip] {
+			position: relative;
+		}
+		[data-mol-tip]:hover::after,
+		[data-mol-tip]:focus-visible::after {
+			content: attr(data-mol-tip);
+			position: absolute;
+			z-index: 1000;
+			top: calc(100% + 4px);
+			left: 50%;
+			transform: translateX(-50%);
+			background: var(--mol_theme_card);
+			color: var(--mol_theme_text);
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.75rem;
+			line-height: 1.2;
+			white-space: nowrap;
+			max-width: min(80vw, 24rem);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+			pointer-events: none;
+			animation: bog-tooltip-in 0.08s ease-out;
+		}
+		@keyframes bog-tooltip-in {
+			from { opacity: 0; transform: translate(-50%, -2px); }
+			to   { opacity: 1; transform: translate(-50%, 0); }
+		}
+	`);
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$bog_ui_tooltip) = class $bog_ui_tooltip extends ($.$bog_tooltip_plugin) {};
+
+
+;
+"use strict";
+
+
+;
 	($.$mol_svg) = class $mol_svg extends ($.$mol_view) {
 		dom_name(){
 			return "svg";
@@ -4978,6 +5056,18 @@ var $;
 	($.$mol_icon_minus) = class $mol_icon_minus extends ($.$mol_icon) {
 		path(){
 			return "M19,13H5V11H19V13Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_message) = class $mol_icon_message extends ($.$mol_icon) {
+		path(){
+			return "M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4C22,2.89 21.1,2 20,2Z";
 		}
 	};
 
@@ -12797,9 +12887,267 @@ var $;
 
 
 ;
+	($.$mol_icon_upload) = class $mol_icon_upload extends ($.$mol_icon) {
+		path(){
+			return "M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_button_open) = class $mol_button_open extends ($.$mol_button_minor) {
+		Icon(){
+			const obj = new this.$.$mol_icon_upload();
+			return obj;
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		files_handled(next){
+			return (this.files(next));
+		}
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		Native(){
+			const obj = new this.$.$mol_button_open_native();
+			(obj.files) = (next) => ((this.files_handled(next)));
+			(obj.accept) = () => ((this.accept()));
+			(obj.multiple) = () => ((this.multiple()));
+			return obj;
+		}
+		sub(){
+			return [(this.Icon()), (this.Native())];
+		}
+	};
+	($mol_mem(($.$mol_button_open.prototype), "Icon"));
+	($mol_mem(($.$mol_button_open.prototype), "files"));
+	($mol_mem(($.$mol_button_open.prototype), "Native"));
+	($.$mol_button_open_native) = class $mol_button_open_native extends ($.$mol_view) {
+		accept(){
+			return "";
+		}
+		multiple(){
+			return true;
+		}
+		picked(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		dom_name(){
+			return "input";
+		}
+		files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		attr(){
+			return {
+				"type": "file", 
+				"accept": (this.accept()), 
+				"multiple": (this.multiple())
+			};
+		}
+		event(){
+			return {"change": (next) => (this.picked(next))};
+		}
+	};
+	($mol_mem(($.$mol_button_open_native.prototype), "picked"));
+	($mol_mem(($.$mol_button_open_native.prototype), "files"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $mol_button_open extends $.$mol_button_open {
+            files_handled(next) {
+                try {
+                    const files = this.files(next);
+                    this.status([null]);
+                    return files;
+                }
+                catch (error) {
+                    // Calling actions from catch section, if throwing promise breaks idempotency
+                    Promise.resolve().then(() => this.status([error]));
+                    $mol_fail_hidden(error);
+                }
+            }
+        }
+        $$.$mol_button_open = $mol_button_open;
+        /**
+         * File open button
+         * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+         */
+        class $mol_button_open_native extends $.$mol_button_open_native {
+            dom_node() {
+                return super.dom_node();
+            }
+            picked() {
+                const files = this.dom_node().files;
+                if (!files || !files.length)
+                    return;
+                this.files([...files]);
+            }
+        }
+        $$.$mol_button_open_native = $mol_button_open_native;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/button/open/open.view.css", "[mol_button_open_native] {\n\tposition: absolute;\n\tleft: 0;\n\ttop: -100%;\n\twidth: 100%;\n\theight: 200%;\n\tcursor: pointer;\n\topacity: 0;\n}\n");
+})($ || ($ = {}));
+
+;
+	($.$bog_ui_app_tooltip) = class $bog_ui_app_tooltip extends ($.$mol_page) {
+		description(){
+			return "Instant CSS-tooltip plugin. Plug it once into the root view's `plugins /`, then any element with `title=` or any $mol component with `hint` shows a custom bubble without the native ~700ms browser delay.";
+		}
+		Description(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.description())]);
+			return obj;
+		}
+		usage_title(){
+			return "Usage";
+		}
+		Usage_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.usage_title())]);
+			return obj;
+		}
+		usage_code(){
+			return "plugins /\\n    <= Tip $bog_ui_tooltip";
+		}
+		Usage_code(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.usage_code())]);
+			return obj;
+		}
+		demo_title(){
+			return "Demo";
+		}
+		Demo_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.demo_title())]);
+			return obj;
+		}
+		demo_hint(){
+			return "Hover any of the elements below — the bubble appears immediately.";
+		}
+		Demo_hint(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.demo_hint())]);
+			return obj;
+		}
+		Btn_simple(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ("Hello, I am a tooltip");
+			(obj.sub) = () => (["Simple"]);
+			return obj;
+		}
+		Btn_long(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ("A longer hint that explains in detail what this control will do when activated.");
+			(obj.sub) = () => (["Long text"]);
+			return obj;
+		}
+		Btn_icon_glyph(){
+			const obj = new this.$.$mol_icon_cog();
+			return obj;
+		}
+		Btn_icon(){
+			const obj = new this.$.$mol_button_minor();
+			(obj.hint) = () => ("Settings");
+			(obj.sub) = () => ([(this.Btn_icon_glyph())]);
+			return obj;
+		}
+		demo_files(next){
+			if(next !== undefined) return next;
+			return [];
+		}
+		Btn_input(){
+			const obj = new this.$.$mol_button_open();
+			(obj.hint) = () => ("Pick a file from disk");
+			(obj.accept) = () => ("image/*");
+			(obj.files) = (next) => ((this.demo_files(next)));
+			return obj;
+		}
+		Inline_text(){
+			const obj = new this.$.$mol_view();
+			(obj.attr) = () => ({"title": "Plain HTML title attribute on a span"});
+			(obj.sub) = () => (["Hover this text"]);
+			return obj;
+		}
+		Demo(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Btn_simple()), 
+				(this.Btn_long()), 
+				(this.Btn_icon()), 
+				(this.Btn_input()), 
+				(this.Inline_text())
+			]);
+			return obj;
+		}
+		title(){
+			return "Tooltip";
+		}
+		body(){
+			return [
+				(this.Description()), 
+				(this.Usage_title()), 
+				(this.Usage_code()), 
+				(this.Demo_title()), 
+				(this.Demo_hint()), 
+				(this.Demo())
+			];
+		}
+	};
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Description"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Usage_title"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Usage_code"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Demo_title"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Demo_hint"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Btn_simple"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Btn_long"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Btn_icon_glyph"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Btn_icon"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "demo_files"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Btn_input"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Inline_text"));
+	($mol_mem(($.$bog_ui_app_tooltip.prototype), "Demo"));
+
+
+;
+"use strict";
+
+
+;
 	($.$bog_ui_app) = class $bog_ui_app extends ($.$mol_book2) {
 		Theme(){
 			const obj = new this.$.$mol_theme_auto();
+			return obj;
+		}
+		Tip(){
+			const obj = new this.$.$bog_ui_tooltip();
 			return obj;
 		}
 		global_keydown(next){
@@ -13019,6 +13367,25 @@ var $;
 			(obj.click) = (next) => ((this.nav_divider(next)));
 			return obj;
 		}
+		Tooltip_icon(){
+			const obj = new this.$.$mol_icon_message();
+			return obj;
+		}
+		tooltip_active(){
+			return false;
+		}
+		nav_tooltip(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Tooltip_nav(){
+			const obj = new this.$.$bog_ui_sidebar_item();
+			(obj.Icon) = () => ((this.Tooltip_icon()));
+			(obj.label) = () => ("Tooltip");
+			(obj.active) = () => ((this.tooltip_active()));
+			(obj.click) = (next) => ((this.nav_tooltip(next)));
+			return obj;
+		}
 		Nav(){
 			const obj = new this.$.$bog_ui_sidebar();
 			(obj.mode) = (next) => ((this.sidebar_mode(next)));
@@ -13033,7 +13400,8 @@ var $;
 				(this.Toast_nav()), 
 				(this.Command_nav()), 
 				(this.Table_nav()), 
-				(this.Divider_nav())
+				(this.Divider_nav()), 
+				(this.Tooltip_nav())
 			]);
 			return obj;
 		}
@@ -13060,7 +13428,11 @@ var $;
 			return obj;
 		}
 		plugins(){
-			return [...(super.plugins()), (this.Theme())];
+			return [
+				...(super.plugins()), 
+				(this.Theme()), 
+				(this.Tip())
+			];
 		}
 		event(){
 			return {...(super.event()), "keydown": (next) => (this.global_keydown(next))};
@@ -13118,11 +13490,16 @@ var $;
 			const obj = new this.$.$bog_ui_app_divider();
 			return obj;
 		}
+		Tooltip_page(){
+			const obj = new this.$.$bog_ui_app_tooltip();
+			return obj;
+		}
 		pages(){
 			return [(this.Nav()), (this.Content_page())];
 		}
 	};
 	($mol_mem(($.$bog_ui_app.prototype), "Theme"));
+	($mol_mem(($.$bog_ui_app.prototype), "Tip"));
 	($mol_mem(($.$bog_ui_app.prototype), "global_keydown"));
 	($mol_mem(($.$bog_ui_app.prototype), "sidebar_mode"));
 	($mol_mem(($.$bog_ui_app.prototype), "Overview_icon"));
@@ -13158,6 +13535,9 @@ var $;
 	($mol_mem(($.$bog_ui_app.prototype), "Divider_icon"));
 	($mol_mem(($.$bog_ui_app.prototype), "nav_divider"));
 	($mol_mem(($.$bog_ui_app.prototype), "Divider_nav"));
+	($mol_mem(($.$bog_ui_app.prototype), "Tooltip_icon"));
+	($mol_mem(($.$bog_ui_app.prototype), "nav_tooltip"));
+	($mol_mem(($.$bog_ui_app.prototype), "Tooltip_nav"));
 	($mol_mem(($.$bog_ui_app.prototype), "Nav"));
 	($mol_mem(($.$bog_ui_app.prototype), "Theme_toggle"));
 	($mol_mem(($.$bog_ui_app.prototype), "Page_body"));
@@ -13175,6 +13555,7 @@ var $;
 	($mol_mem(($.$bog_ui_app.prototype), "Table_page"));
 	($mol_mem(($.$bog_ui_app.prototype), "Overview_page"));
 	($mol_mem(($.$bog_ui_app.prototype), "Divider_page"));
+	($mol_mem(($.$bog_ui_app.prototype), "Tooltip_page"));
 
 
 ;
@@ -13258,6 +13639,9 @@ var $;
             table_active() {
                 return this.component() === 'table';
             }
+            tooltip_active() {
+                return this.component() === 'tooltip';
+            }
             nav_overview(next) {
                 if (next !== undefined)
                     this.component('');
@@ -13313,6 +13697,11 @@ var $;
                     this.component('divider');
                 return null;
             }
+            nav_tooltip(next) {
+                if (next !== undefined)
+                    this.component('tooltip');
+                return null;
+            }
             page_title() {
                 const titles = {
                     badge: 'Badge',
@@ -13325,6 +13714,7 @@ var $;
                     command: 'Command Palette',
                     table: 'Data Table',
                     divider: 'Divider',
+                    tooltip: 'Tooltip',
                 };
                 return titles[this.component()] ?? 'Components Overview';
             }
@@ -13367,6 +13757,9 @@ var $;
                         break;
                     case 'divider':
                         content = this.Divider_page();
+                        break;
+                    case 'tooltip':
+                        content = this.Tooltip_page();
                         break;
                     default: content = this.Overview_page();
                 }
@@ -13416,6 +13809,9 @@ var $;
             $mol_mem
         ], $bog_ui_app.prototype, "table_active", null);
         __decorate([
+            $mol_mem
+        ], $bog_ui_app.prototype, "tooltip_active", null);
+        __decorate([
             $mol_action
         ], $bog_ui_app.prototype, "nav_overview", null);
         __decorate([
@@ -13448,6 +13844,9 @@ var $;
         __decorate([
             $mol_action
         ], $bog_ui_app.prototype, "nav_divider", null);
+        __decorate([
+            $mol_action
+        ], $bog_ui_app.prototype, "nav_tooltip", null);
         __decorate([
             $mol_mem
         ], $bog_ui_app.prototype, "page_title", null);

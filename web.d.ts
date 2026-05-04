@@ -1880,6 +1880,25 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+
+	export class $bog_tooltip_plugin extends $mol_plugin {
+	}
+	
+}
+
+//# sourceMappingURL=tooltip.view.tree.d.ts.map
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $bog_ui_tooltip extends $bog_tooltip_plugin {
+	}
+	
+}
+
+//# sourceMappingURL=tooltip.view.tree.d.ts.map
+declare namespace $ {
     /** State of time moment */
     class $mol_state_time extends $mol_object {
         static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
@@ -2187,6 +2206,15 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=minus.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_message extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=message.view.tree.d.ts.map
 declare namespace $ {
     function $mol_support_css_overflow_anchor(this: $): boolean;
 }
@@ -5690,6 +5718,193 @@ declare namespace $ {
 //# sourceMappingURL=divider.view.tree.d.ts.map
 declare namespace $ {
 
+	export class $mol_icon_upload extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=upload.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_button_open_native__files_mol_button_open_1 = $mol_type_enforce<
+		ReturnType< $mol_button_open['files_handled'] >
+		,
+		ReturnType< $mol_button_open_native['files'] >
+	>
+	type $mol_button_open_native__accept_mol_button_open_2 = $mol_type_enforce<
+		ReturnType< $mol_button_open['accept'] >
+		,
+		ReturnType< $mol_button_open_native['accept'] >
+	>
+	type $mol_button_open_native__multiple_mol_button_open_3 = $mol_type_enforce<
+		ReturnType< $mol_button_open['multiple'] >
+		,
+		ReturnType< $mol_button_open_native['multiple'] >
+	>
+	export class $mol_button_open extends $mol_button_minor {
+		Icon( ): $mol_icon_upload
+		files( next?: readonly(File)[] ): readonly(File)[]
+		files_handled( next?: ReturnType< $mol_button_open['files'] > ): ReturnType< $mol_button_open['files'] >
+		accept( ): string
+		multiple( ): boolean
+		Native( ): $mol_button_open_native
+		sub( ): readonly(any)[]
+	}
+	
+	export class $mol_button_open_native extends $mol_view {
+		accept( ): string
+		multiple( ): boolean
+		picked( next?: any ): any
+		dom_name( ): string
+		files( next?: readonly(File)[] ): readonly(File)[]
+		attr( ): ({ 
+			'type': string,
+			'accept': ReturnType< $mol_button_open_native['accept'] >,
+			'multiple': ReturnType< $mol_button_open_native['multiple'] >,
+		}) 
+		event( ): ({ 
+			change( next?: ReturnType< $mol_button_open_native['picked'] > ): ReturnType< $mol_button_open_native['picked'] >,
+		}) 
+	}
+	
+}
+
+//# sourceMappingURL=open.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $mol_button_open extends $.$mol_button_open {
+        files_handled(next?: readonly File[]): readonly File[];
+    }
+    /**
+     * File open button
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+     */
+    class $mol_button_open_native extends $.$mol_button_open_native {
+        dom_node(): HTMLInputElement;
+        picked(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_bog_ui_app_tooltip_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button_minor__hint_bog_ui_app_tooltip_6 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_bog_ui_app_tooltip_7 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__hint_bog_ui_app_tooltip_8 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_bog_ui_app_tooltip_9 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__hint_bog_ui_app_tooltip_10 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__sub_bog_ui_app_tooltip_11 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_open__hint_bog_ui_app_tooltip_12 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_open['hint'] >
+	>
+	type $mol_button_open__accept_bog_ui_app_tooltip_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_button_open['accept'] >
+	>
+	type $mol_button_open__files_bog_ui_app_tooltip_14 = $mol_type_enforce<
+		ReturnType< $bog_ui_app_tooltip['demo_files'] >
+		,
+		ReturnType< $mol_button_open['files'] >
+	>
+	type $mol_view__attr_bog_ui_app_tooltip_15 = $mol_type_enforce<
+		({ 
+			'title': string,
+		}) 
+		,
+		ReturnType< $mol_view['attr'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_ui_app_tooltip_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_ui_app_tooltip extends $mol_page {
+		description( ): string
+		Description( ): $mol_view
+		usage_title( ): string
+		Usage_title( ): $mol_view
+		usage_code( ): string
+		Usage_code( ): $mol_view
+		demo_title( ): string
+		Demo_title( ): $mol_view
+		demo_hint( ): string
+		Demo_hint( ): $mol_view
+		Btn_simple( ): $mol_button_minor
+		Btn_long( ): $mol_button_minor
+		Btn_icon_glyph( ): $mol_icon_cog
+		Btn_icon( ): $mol_button_minor
+		demo_files( next?: readonly(File)[] ): readonly(File)[]
+		Btn_input( ): $mol_button_open
+		Inline_text( ): $mol_view
+		Demo( ): $mol_view
+		title( ): string
+		body( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=tooltip.view.tree.d.ts.map
+declare namespace $ {
+
 	type $bog_ui_sidebar_item__Icon_bog_ui_app_1 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['Overview_icon'] >
 		,
@@ -5910,43 +6125,64 @@ declare namespace $ {
 		,
 		ReturnType< $bog_ui_sidebar_item['click'] >
 	>
-	type $bog_ui_sidebar__mode_bog_ui_app_45 = $mol_type_enforce<
+	type $bog_ui_sidebar_item__Icon_bog_ui_app_45 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['Tooltip_icon'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['Icon'] >
+	>
+	type $bog_ui_sidebar_item__label_bog_ui_app_46 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_ui_sidebar_item['label'] >
+	>
+	type $bog_ui_sidebar_item__active_bog_ui_app_47 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['tooltip_active'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['active'] >
+	>
+	type $bog_ui_sidebar_item__click_bog_ui_app_48 = $mol_type_enforce<
+		ReturnType< $bog_ui_app['nav_tooltip'] >
+		,
+		ReturnType< $bog_ui_sidebar_item['click'] >
+	>
+	type $bog_ui_sidebar__mode_bog_ui_app_49 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['sidebar_mode'] >
 		,
 		ReturnType< $bog_ui_sidebar['mode'] >
 	>
-	type $bog_ui_sidebar__items_bog_ui_app_46 = $mol_type_enforce<
+	type $bog_ui_sidebar__items_bog_ui_app_50 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_ui_sidebar['items'] >
 	>
-	type $mol_view__sub_bog_ui_app_47 = $mol_type_enforce<
+	type $mol_view__sub_bog_ui_app_51 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_page__title_bog_ui_app_48 = $mol_type_enforce<
+	type $mol_page__title_bog_ui_app_52 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['page_title'] >
 		,
 		ReturnType< $mol_page['title'] >
 	>
-	type $mol_page__tools_bog_ui_app_49 = $mol_type_enforce<
+	type $mol_page__tools_bog_ui_app_53 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['tools'] >
 	>
-	type $mol_page__body_bog_ui_app_50 = $mol_type_enforce<
+	type $mol_page__body_bog_ui_app_54 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_page['body'] >
 	>
-	type $bog_ui_command__showed_bog_ui_app_51 = $mol_type_enforce<
+	type $bog_ui_command__showed_bog_ui_app_55 = $mol_type_enforce<
 		ReturnType< $bog_ui_app['command_showed'] >
 		,
 		ReturnType< $bog_ui_command['showed'] >
 	>
 	export class $bog_ui_app extends $mol_book2 {
 		Theme( ): $mol_theme_auto
+		Tip( ): $bog_ui_tooltip
 		global_keydown( next?: any ): any
 		sidebar_mode( next?: string ): string
 		Overview_icon( ): $mol_icon_view_grid
@@ -5993,6 +6229,10 @@ declare namespace $ {
 		divider_active( ): boolean
 		nav_divider( next?: any ): any
 		Divider_nav( ): $bog_ui_sidebar_item
+		Tooltip_icon( ): $mol_icon_message
+		tooltip_active( ): boolean
+		nav_tooltip( next?: any ): any
+		Tooltip_nav( ): $bog_ui_sidebar_item
 		Nav( ): $bog_ui_sidebar
 		page_title( ): string
 		Theme_toggle( ): $mol_lights_toggle
@@ -6016,6 +6256,7 @@ declare namespace $ {
 		Table_page( ): $bog_ui_app_table
 		Overview_page( ): $bog_ui_app_overview
 		Divider_page( ): $bog_ui_app_divider
+		Tooltip_page( ): $bog_ui_app_tooltip
 		pages( ): readonly(any)[]
 	}
 	
@@ -6040,6 +6281,7 @@ declare namespace $.$$ {
         toast_active(): boolean;
         command_active(): boolean;
         table_active(): boolean;
+        tooltip_active(): boolean;
         nav_overview(next?: any): null;
         nav_badge(next?: any): null;
         nav_empty(next?: any): null;
@@ -6051,6 +6293,7 @@ declare namespace $.$$ {
         nav_command(next?: any): null;
         nav_table(next?: any): null;
         nav_divider(next?: any): null;
+        nav_tooltip(next?: any): null;
         page_title(): string;
         page_text(): string;
         pages(): any[];
