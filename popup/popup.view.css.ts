@@ -3,7 +3,7 @@ namespace $.$$ {
 	// flex-column root равно 0px — UI схлопывается. Распираем глобально.
 	$mol_style_attach('bog/popup/popup.view.css', `
 		html, body {
-			min-width: 24rem;
+			min-width: 20rem;
 			min-height: 32rem;
 		}
 	`)
