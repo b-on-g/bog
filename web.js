@@ -4400,25 +4400,29 @@ var $;
 		[data-mol-tip] {
 			position: relative;
 		}
-		[data-mol-tip]:hover::after,
-		[data-mol-tip]:focus-visible::after {
-			content: attr(data-mol-tip);
-			position: absolute;
-			z-index: 1000;
-			top: calc(100% + 4px);
-			left: 50%;
-			transform: translateX(-50%);
-			background: var(--mol_theme_card);
-			color: var(--mol_theme_text);
-			padding: 0.25rem 0.5rem;
-			border-radius: 0.25rem;
-			font-size: 0.75rem;
-			line-height: 1.2;
-			white-space: nowrap;
-			max-width: min(80vw, 24rem);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-			pointer-events: none;
-			animation: bog-tooltip-in 0.08s ease-out;
+		/* Только устройства с настоящим hover (десктоп с мышью).
+		   На touch-девайсах синтетический hover после tap не снимается и tooltip залипает —
+		   поэтому всё показывается ИСКЛЮЧИТЕЛЬНО внутри @media (hover: hover). */
+		@media (hover: hover) and (pointer: fine) {
+			[data-mol-tip]:hover::after {
+				content: attr(data-mol-tip);
+				position: absolute;
+				z-index: 1000;
+				top: calc(100% + 4px);
+				left: 50%;
+				transform: translateX(-50%);
+				background: var(--mol_theme_card);
+				color: var(--mol_theme_text);
+				padding: 0.25rem 0.5rem;
+				border-radius: 0.25rem;
+				font-size: 0.75rem;
+				line-height: 1.2;
+				white-space: nowrap;
+				max-width: min(80vw, 24rem);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+				pointer-events: none;
+				animation: bog-tooltip-in 0.08s ease-out;
+			}
 		}
 		@keyframes bog-tooltip-in {
 			from { opacity: 0; transform: translate(-50%, -2px); }
