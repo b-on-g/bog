@@ -28,6 +28,12 @@
 git clone https://github.com/hyoo-ru/mam.git ./mam && cd mam
 npm install && npm start
 ```
+прямо в этом же терминале и процессе запустим гипер базу 
+<img width="767" height="618" alt="image" src="https://github.com/user-attachments/assets/025919b1-8aa5-46d8-b2bf-e24247f8da76" />
+
+```bash
++ giper/baza/app/run port=9090
+```
 
 `mam` работает как монорепо-воркспейс из независимых модулей. Твоё приложение живёт в нём как пара файлов в собственном неймспейсе, а в бандл попадут только модули, до которых дотянулся твой код. Dev-сервер на `http://localhost:9080` собирает каждый бандл по запросу.
 
