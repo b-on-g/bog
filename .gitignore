@@ -116,19 +116,3 @@ feedback2/**/-view.tree/
 feedback2/**/-node/
 feedback2/**/-css/
 
-# Allow builderui source code
-!builderui/
-!builderui/**/
-!builderui/**/*.tree
-!builderui/**/*.ts
-!builderui/**/*.css
-!builderui/**/*.html
-!builderui/**/*.svg
-!builderui/**/*.json
-!builderui/**/*.md
-# Re-ignore build output inside builderui
-builderui/**/-/
-builderui/**/-view.tree/
-builderui/**/-node/
-builderui/**/-css/
-
