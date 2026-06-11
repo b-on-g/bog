@@ -29,15 +29,16 @@ $bog_builderui_studio $bog_builderui_div
 					checked? <=> dark? true
 					sub / \Dark
 		<= Preview $mol_scroll sub /
-			<= Buttons_card $bog_builderui_card sub /
-				<= Buttons_title $mol_view sub / \Buttons
-				<= Btns_row $mol_view sub /
-					<= Btn_primary $bog_builderui_button title \Primary
-					<= Btn_secondary $bog_builderui_button title \Secondary
-			<= Card_demo $bog_builderui_card sub /
-				<= Card_title $mol_view sub / \Card
-				<= Card_text $mol_view sub / \A small description text inside the card.
-			<= Field_card $bog_builderui_card sub /
-				<= Field_title $mol_view sub / \Field
-				<= Field_demo $bog_builderui_field
-					hint \Type something
+			<= Stack $mol_view sub /
+				<= Buttons_card $bog_builderui_card sub /
+					<= Buttons_title $mol_view sub / \Buttons
+					<= Btns_row $mol_view sub /
+						<= Btn_primary $bog_builderui_button title \Primary
+						<= Btn_secondary $bog_builderui_button title \Secondary
+				<= Card_demo $bog_builderui_card sub /
+					<= Card_title $mol_view sub / \Card
+					<= Card_text $mol_view sub / \A small description text inside the card.
+				<= Field_card $bog_builderui_card sub /
+					<= Field_title $mol_view sub / \Field
+					<= Field_demo $bog_builderui_field
+						hint \Type something

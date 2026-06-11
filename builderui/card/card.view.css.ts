@@ -1,14 +1,15 @@
+/** @see $bog_builderui */
 namespace $ {
 	$mol_style_define( $bog_builderui_card, {
 		background: {
-			color: 'var(--bog_builderui_card)',
+			color: $bog_builderui.card,
 		},
-		color: 'var(--bog_builderui_text)',
-		borderRadius: 'var(--bog_builderui_radius)',
+		color: $bog_builderui.text,
 		border: {
+			radius: $bog_builderui.radius,
 			width: '1px',
 			style: 'solid',
-			color: 'var(--bog_builderui_line)',
+			color: $bog_builderui.line,
 		},
 		padding: {
 			top: '1rem',
@@ -21,7 +22,7 @@ namespace $ {
 				x: 0,
 				y: '1px',
 				blur: '3px',
-				spread: '0',
+				spread: 0,
 				color: '#0000001a',
 			} ],
 		},

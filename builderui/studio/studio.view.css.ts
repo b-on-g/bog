@@ -1,8 +1,9 @@
+/** @see $bog_builderui */
 namespace $ {
 	$mol_style_define( $bog_builderui_studio, {
 		minHeight: '100vh',
 		background: {
-			color: 'var(--bog_builderui_back)',
+			color: $bog_builderui.back,
 		},
 		flex: {
 			direction: 'row',
@@ -18,13 +19,13 @@ namespace $ {
 			},
 			gap: '1rem',
 			background: {
-				color: 'var(--bog_builderui_card)',
+				color: $bog_builderui.card,
 			},
 			border: {
 				right: {
 					width: '1px',
 					style: 'solid',
-					color: 'var(--bog_builderui_line)',
+					color: $bog_builderui.line,
 				},
 			},
 			flex: {
@@ -33,11 +34,11 @@ namespace $ {
 		},
 		Title: {
 			font: {
-				family: 'var(--bog_builderui_font_head)',
+				family: $bog_builderui.font_head,
 				weight: 700,
 				size: '1.125rem',
 			},
-			color: 'var(--bog_builderui_text)',
+			color: $bog_builderui.text,
 			padding: {
 				bottom: '0.5rem',
 			},
@@ -45,7 +46,12 @@ namespace $ {
 		Preview: {
 			flex: {
 				grow: 1,
+			},
+		},
+		Stack: {
+			flex: {
 				direction: 'column',
+				grow: 1,
 			},
 			padding: {
 				top: '2rem',
@@ -54,6 +60,7 @@ namespace $ {
 				right: '2rem',
 			},
 			gap: '1rem',
+			maxWidth: '720px',
 		},
 		Btns_row: {
 			flex: {
@@ -63,30 +70,30 @@ namespace $ {
 		},
 		Buttons_title: {
 			font: {
-				family: 'var(--bog_builderui_font_head)',
+				family: $bog_builderui.font_head,
 				weight: 600,
 				size: '1rem',
 			},
-			color: 'var(--bog_builderui_shade)',
+			color: $bog_builderui.shade,
 		},
 		Card_title: {
 			font: {
-				family: 'var(--bog_builderui_font_head)',
+				family: $bog_builderui.font_head,
 				weight: 600,
 				size: '1rem',
 			},
-			color: 'var(--bog_builderui_text)',
+			color: $bog_builderui.text,
 		},
 		Card_text: {
-			color: 'var(--bog_builderui_shade)',
+			color: $bog_builderui.shade,
 		},
 		Field_title: {
 			font: {
-				family: 'var(--bog_builderui_font_head)',
+				family: $bog_builderui.font_head,
 				weight: 600,
 				size: '1rem',
 			},
-			color: 'var(--bog_builderui_text)',
+			color: $bog_builderui.text,
 		},
 	} )
 }
