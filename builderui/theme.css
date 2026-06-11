@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+	--bog_builderui_hue: 230deg;
+	--bog_builderui_hue_spread: 90deg;
+	--bog_builderui_radius: 8px;
+	--bog_builderui_font_body: 'Manrope', system-ui, sans-serif;
+	--bog_builderui_font_head: 'Manrope', system-ui, sans-serif;
+}
+
+:root,
+[bog_builderui_lights="dark"],
+:where([bog_builderui_lights="dark"]) [bog_builderui_lights] {
+	--bog_builderui_luma: -1;
+	--bog_builderui_back: oklch(20% .03 var(--bog_builderui_hue));
+	--bog_builderui_card: oklch(28% .05 var(--bog_builderui_hue) / .25);
+	--bog_builderui_field: oklch(15% .01 var(--bog_builderui_hue) / .25);
+	--bog_builderui_hover: oklch(70% 0 var(--bog_builderui_hue) / .1);
+	--bog_builderui_text: oklch(82% .01 var(--bog_builderui_hue));
+	--bog_builderui_shade: oklch(60% 0 var(--bog_builderui_hue));
+	--bog_builderui_line: oklch(60% 0 var(--bog_builderui_hue) / .25);
+	--bog_builderui_focus: oklch(80% .2 calc(var(--bog_builderui_hue) + 180deg));
+	--bog_builderui_control: oklch(70% .15 var(--bog_builderui_hue));
+	--bog_builderui_current: oklch(70% .2 calc(var(--bog_builderui_hue) - var(--bog_builderui_hue_spread)));
+	--bog_builderui_special: oklch(70% .2 calc(var(--bog_builderui_hue) + var(--bog_builderui_hue_spread)));
+}
+
+[bog_builderui_lights="light"],
+:where([bog_builderui_lights="light"]) [bog_builderui_lights] {
+	--bog_builderui_luma: 1;
+	--bog_builderui_back: oklch(98% .005 var(--bog_builderui_hue));
+	--bog_builderui_card: oklch(100% 0 var(--bog_builderui_hue) / .5);
+	--bog_builderui_field: oklch(96% .01 var(--bog_builderui_hue) / .75);
+	--bog_builderui_hover: oklch(50% 0 var(--bog_builderui_hue) / .08);
+	--bog_builderui_text: oklch(18% .005 var(--bog_builderui_hue));
+	--bog_builderui_shade: oklch(50% 0 var(--bog_builderui_hue));
+	--bog_builderui_line: oklch(88% .01 var(--bog_builderui_hue));
+	--bog_builderui_focus: oklch(55% .22 calc(var(--bog_builderui_hue) + 180deg));
+	--bog_builderui_control: oklch(45% .18 var(--bog_builderui_hue));
+	--bog_builderui_current: oklch(50% .2 calc(var(--bog_builderui_hue) - var(--bog_builderui_hue_spread)));
+	--bog_builderui_special: oklch(50% .2 calc(var(--bog_builderui_hue) + var(--bog_builderui_hue_spread)));
+}
