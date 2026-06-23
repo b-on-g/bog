@@ -116,3 +116,63 @@ feedback2/**/-view.tree/
 feedback2/**/-node/
 feedback2/**/-css/
 
+# Allow browser source code (puppeteer wrapper with fixed types)
+!browser/
+!browser/**/
+!browser/**/*.tree
+!browser/**/*.ts
+!browser/**/*.css
+!browser/**/*.html
+!browser/**/*.svg
+!browser/**/*.json
+!browser/**/*.md
+browser/**/-/
+browser/**/-view.tree/
+browser/**/-node/
+browser/**/-css/
+
+# Allow meta source code (SEO meta type + helpers + injector)
+!meta/
+!meta/**/
+!meta/**/*.tree
+!meta/**/*.ts
+!meta/**/*.css
+!meta/**/*.html
+!meta/**/*.svg
+!meta/**/*.json
+!meta/**/*.md
+meta/**/-/
+meta/**/-view.tree/
+meta/**/-node/
+meta/**/-css/
+
+# Allow seo source code (prerender for bots: sitemap, robots, llms, meta inject)
+!seo/
+!seo/**/
+!seo/**/*.tree
+!seo/**/*.ts
+!seo/**/*.css
+!seo/**/*.html
+!seo/**/*.svg
+!seo/**/*.json
+!seo/**/*.md
+seo/**/-/
+seo/**/-view.tree/
+seo/**/-node/
+seo/**/-css/
+
+# Allow sample source code (demo app + REST API + shared TS type)
+!sample/
+!sample/**/
+!sample/**/*.tree
+!sample/**/*.ts
+!sample/**/*.css
+!sample/**/*.html
+!sample/**/*.svg
+!sample/**/*.json
+!sample/**/*.md
+sample/**/-/
+sample/**/-view.tree/
+sample/**/-node/
+sample/**/-css/
+
