@@ -176,3 +176,25 @@ sample/**/-view.tree/
 sample/**/-node/
 sample/**/-css/
 
+# Allow forge scaffold output (full-features create-view-tree-lsp example)
+!forge/
+!forge/**/
+!forge/**/*.tree
+!forge/**/*.ts
+!forge/**/*.css
+!forge/**/*.html
+!forge/**/*.svg
+!forge/**/*.json
+!forge/**/*.md
+!forge/**/*.yml
+!forge/**/*.toml
+!forge/**/*.rs
+!forge/**/*.conf
+!forge/**/Dockerfile*
+!forge/.gitignore
+!forge/.gitattributes
+forge/**/-/
+forge/**/-view.tree/
+forge/**/-node/
+forge/**/-css/
+
