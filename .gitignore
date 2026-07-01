@@ -176,6 +176,21 @@ sample/**/-view.tree/
 sample/**/-node/
 sample/**/-css/
 
+# Allow langleak source code ($mol_test locale-leak repro)
+!langleak/
+!langleak/**/
+!langleak/**/*.tree
+!langleak/**/*.ts
+!langleak/**/*.css
+!langleak/**/*.html
+!langleak/**/*.svg
+!langleak/**/*.json
+!langleak/**/*.md
+langleak/**/-/
+langleak/**/-view.tree/
+langleak/**/-node/
+langleak/**/-css/
+
 # Allow forge scaffold output (full-features create-view-tree-lsp example)
 !forge/
 !forge/**/
