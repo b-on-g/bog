@@ -68,6 +68,7 @@ pack leaderboard git \https://github.com/b-on-g/leaderboard.git
 pack brl git \https://github.com/b-on-g/brl.git
 pack techradar git \https://github.com/b-on-g/techradar.git
 pack peek git \https://github.com/b-on-g/peek.git
+pack stschool git \https://github.com/b-on-g/stschool.git
 pack page git \https://github.com/b-on-g/page.git
 pack quest git \https://github.com/b-on-g/quest.git
 pack testops git \https://github.com/b-on-g/testops.git
