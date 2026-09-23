@@ -91,3 +91,4 @@ pack gamengine git \https://github.com/b-on-g/gamengine.git
 pack selection git \https://github.com/b-on-g/selection.git
 pack max git \https://github.com/b-on-g/max.git
 pack rash git \https://github.com/b-on-g/rash.git
+pack hub git \https://github.com/b-on-g/hub.git
