@@ -22,7 +22,7 @@
 
 Каждый пункт это отдельный маленький PR в `hyoo-ru/mam_mol`. Коммит `$mol_build: …` или `$mol_build_server: …`.
 
-### 1. Дев-сервер умирает от EOF на stdin (S)
+### 1. Дев-сервер умирает от EOF на stdin (S) — PR [#900](https://github.com/hyoo-ru/mam_mol/pull/900)
 
 `mol/build/server/server.node.ts`, метод `repl()`: `.on( 'close', () => process.exit(0) )`. Если stdin не терминал (CI, docker, запуск в фоне, `mam &`), stdin сразу закрыт и сервер выходит. Сейчас это обходится костылём `sleep | mam`.
 
