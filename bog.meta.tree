@@ -94,3 +94,4 @@ pack selection git \https://github.com/b-on-g/selection.git
 pack max git \https://github.com/b-on-g/max.git
 pack rash git \https://github.com/b-on-g/rash.git
 pack hub git \https://github.com/b-on-g/hub.git
+pack atelier git \https://github.com/b-on-g/atelier.git
