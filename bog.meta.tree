@@ -102,3 +102,4 @@ pack fragile git \https://github.com/b-on-g/fragile.git
 pack gipergram git \https://github.com/b-on-g/gipergram.git
 pack pair git \https://github.com/b-on-g/pair.git
 pack rsdemo git \https://github.com/b-on-g/rsdemo.git
+pack build2 git \https://github.com/b-on-g/build2.git
