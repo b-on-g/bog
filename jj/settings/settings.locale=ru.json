@@ -1,0 +1,16 @@
+{
+	"$bog_jj_settings_About_hint": "О блоге",
+	"$bog_jj_settings_Access_title": "Доступ",
+	"$bog_jj_settings_Account_title": "Ваш аккаунт",
+	"$bog_jj_settings_Avatar_title": "Аватар",
+	"$bog_jj_settings_Back_hint": "К блогу",
+	"$bog_jj_settings_Cover_drop": "Убрать",
+	"$bog_jj_settings_Cover_title": "Обложка",
+	"$bog_jj_settings_Pick": "Загрузить",
+	"$bog_jj_settings_Profile_title": "Профиль",
+	"$bog_jj_settings_Public_hint": "Здесь живут комментарии и лайки. Ссылку можно дать читателям, писать может любой.",
+	"$bog_jj_settings_Public_title": "Открытый ленд",
+	"$bog_jj_settings_Socials_hint": "Ссылки через запятую",
+	"$bog_jj_settings_Title_hint": "Название блога",
+	"$bog_jj_settings_title": "Настройки блога"
+}

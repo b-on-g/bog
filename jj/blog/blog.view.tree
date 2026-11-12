@@ -1,0 +1,79 @@
+$bog_jj_blog $mol_page
+	blog_link \
+	title @ \Blog
+	Posts_title @ \Posts
+	Subscribe @ \Subscribe
+	Subscribed @ \Subscribed
+	New_post @ \New post
+	Settings @ \Settings
+	Posts_empty @ \Nothing here yet
+	About_title @ \About the author
+	head /
+		<= Back $mol_link
+			arg *
+				blog null
+				post null
+				tag null
+				settings null
+			hint @ \To feed
+			sub / <= Back_icon $mol_icon_arrow_left
+		<= Title
+		<= Tools
+	tools /
+		<= Tools_content $mol_row
+			sub <= tools_rows /
+				<= Subscribe_button $mol_button_minor
+					hint <= subscribe_hint \
+					enabled <= subscribed_known true
+					click? <=> subscribe_toggle? null
+					sub /
+						<= Subscribe_icon $mol_icon_star
+						<= subscribe_text \
+				<= New $mol_button_minor
+					hint <= New_post
+					click? <=> new_post? null
+					sub / <= New_icon $mol_icon_plus
+				<= Settings_link $mol_link
+					hint <= Settings
+					arg *
+						blog <= blog_link
+						settings \
+						post null
+						tag null
+					sub / <= Settings_icon $mol_icon_cog
+	body /
+		<= Hero $mol_view
+			sub <= hero_rows /
+				<= Hero_cover $mol_view
+					style <= cover_style *
+				<= Hero_content $mol_row
+					sub <= hero_content_rows /
+						<= Hero_avatar $mol_view
+							style <= avatar_style *
+						<= Hero_info $mol_list
+							style <= hero_info_style *
+							rows <= hero_info_rows /
+								<= Blog_title $mol_view
+									sub / <= blog_title \
+								<= Blog_about $mol_paragraph
+									title <= blog_about \
+								<= Blog_meta $mol_paragraph
+									title <= meta_text \
+								<= Socials $mol_view
+									sub <= social_links /
+		<= Posts $mol_list
+			rows <= posts_rows /
+				<= Posts_head $mol_paragraph
+					title <= Posts_title
+				<= Cards $mol_list
+					rows <= cards /
+						<= Card* $bog_jj_card
+							post_link <= card_post* \
+							blog_link <= blog_link
+							tag_select? <=> tag_select? null
+				<= Posts_empty_view $mol_paragraph
+					title <= Posts_empty
+	Social_link* $mol_link
+		uri <= social_uri* \
+		target \_blank
+		title <= social_title* \
