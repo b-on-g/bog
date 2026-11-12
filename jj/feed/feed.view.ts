@@ -11,10 +11,6 @@ namespace $.$$ {
 			return next ?? false
 		}
 
-		not_creating() {
-			return !this.creating()
-		}
-
 		create_rows() {
 			return this.creating() ? [ this.Create_form() ] : [ this.Create() ]
 		}

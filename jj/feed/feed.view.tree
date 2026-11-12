@@ -9,7 +9,6 @@ $bog_jj_feed $mol_page
 	Create_hint @ \Create blog
 	head /
 		<= Title
-		<= Tools
 	body /
 		<= My_blogs $mol_list
 			rows /
