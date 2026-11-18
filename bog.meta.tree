@@ -114,3 +114,4 @@ pack microtodo git \https://github.com/b-on-g/microtodo.git
 pack ssr git \https://github.com/b-on-g/ssr.git
 pack id git \https://github.com/b-on-g/id.git
 pack passkey git \https://github.com/b-on-g/passkey.git
+pack collider git \https://github.com/b-on-g/collider.git
