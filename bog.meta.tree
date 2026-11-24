@@ -117,3 +117,4 @@ pack passkey git \https://github.com/b-on-g/passkey.git
 pack collider git \https://github.com/b-on-g/collider.git
 pack molefy git \https://github.com/b-on-g/molefy.git
 pack basket git \https://github.com/b-on-g/basket.git
+pack dock git \https://github.com/b-on-g/dock.git
