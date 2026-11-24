@@ -112,7 +112,7 @@ pack wire git \https://github.com/b-on-g/wire.git
 pack brelok git \https://github.com/b-on-g/brelok.git
 pack microtodo git \https://github.com/b-on-g/microtodo.git
 pack ssr git \https://github.com/b-on-g/ssr.git
-pack id git \https://github.com/b-on-g/id.git
+pack id git \https://github.com/Dev-cmyser/id.git
 pack passkey git \https://github.com/b-on-g/passkey.git
 pack collider git \https://github.com/b-on-g/collider.git
 pack molefy git \https://github.com/b-on-g/molefy.git
